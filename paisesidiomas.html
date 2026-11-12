@@ -1,0 +1,319 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>くにとことば · Países e idiomas</title>
+
+<style>
+:root {
+  --bg: #f7f3ec;
+  --paper: #fffdf9;
+  --accent: #7867a8;
+  --pink: #e7a1bd;
+  --pink2: #eac0da;
+  --pale: #ffeef4;
+  --ink: #51484d;
+  --line: #62575d;
+  --muted: #887b82;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 22px;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: Arial, "Noto Sans JP", sans-serif;
+}
+
+.page {
+  max-width: 1500px;
+  margin: auto;
+  padding: 22px;
+  background: var(--paper);
+  border: 3px solid var(--line);
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  border-bottom: 4px solid var(--pink);
+  padding-bottom: 14px;
+  margin-bottom: 20px;
+}
+
+h1 {
+  margin: 0;
+  color: #8e5871;
+  font-size: clamp(28px, 4vw, 42px);
+  letter-spacing: 2px;
+}
+
+.subtitle {
+  margin: 5px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  align-items: start;
+}
+
+.charts {
+  display: grid;
+  gap: 16px;
+}
+
+.sheet-section {
+  border: 2px solid var(--line);
+  background: white;
+  padding: 12px;
+}
+
+.section-title {
+  margin: -12px -12px 12px;
+  padding: 8px 12px;
+  background: var(--pink2);
+  font-size: 17px;
+  color: #59434e;
+}
+
+.jp {
+  font-family: "Noto Sans JP", "Yu Gothic", sans-serif;
+}
+
+.word-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+
+.word-table th,
+.word-table td {
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 10px 7px;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.word-table th {
+  background: var(--pale);
+  color: #80536a;
+  font-size: 13px;
+}
+
+.word-table td {
+  background: white;
+  font-size: 14px;
+}
+
+.word-table tbody tr:nth-child(odd) td {
+  background: #fff8fb;
+}
+
+.word-table .japanese {
+  font-family: "Noto Sans JP", "Yu Gothic", sans-serif;
+  font-size: 20px;
+  color: #5b4b53;
+}
+
+.word-table .romaji {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: .2px;
+}
+
+.word-table .spanish {
+  color: var(--ink);
+}
+
+@media(max-width: 900px) {
+  body { padding: 8px; }
+  .page { padding: 12px; }
+  .layout { grid-template-columns: 1fr; }
+}
+
+@media(max-width: 560px) {
+  .word-table th,
+  .word-table td {
+    padding: 8px 4px;
+    font-size: 12px;
+  }
+
+  .word-table .japanese {
+    font-size: 17px;
+  }
+
+  .word-table .romaji {
+    font-size: 10px;
+  }
+}
+
+@media print {
+  body { padding: 0; background: white; }
+  .page { border: 0; max-width: none; }
+  .layout { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sheet-section { break-inside: avoid; }
+}
+
+nav {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+nav a {
+  padding: 9px 14px;
+  border: 2px solid var(--pink);
+  border-radius: 7px;
+  text-decoration: none;
+  color: #80536a;
+  font-weight: bold;
+  background: var(--pale);
+}
+
+nav a.active {
+  background: var(--pink);
+  color: white;
+}
+
+@media print { nav { display: none; } }
+</style>
+</head>
+
+<body>
+<div class="page">
+
+<header>
+  <div>
+    <h1>くにとことば</h1>
+    <p class="subtitle">Países e idiomas</p>
+  </div>
+
+  <nav>
+    <a href="hiragana.html">Hiragana</a>
+    <a href="katakana.html">Katakana</a>
+    <a href="gramatica.html">Gramática</a>
+    <a href="particulas.html">Partículas</a>
+    <a href="expresiones.html">Expresiones</a>
+    <a href="palabras-hiragana.html">Palabras hiragana</a>
+    <a href="palabras-katakana.html">Palabras katakana</a>
+    <a class="active" href="paisesidiomas.html">Países e idiomas</a>
+    <a href="profesiones.html">Profesiones</a>
+    <a href="numeros.html">Números</a>
+    <a href="hiragana_practice.html">Práctica hiragana</a>
+    <a href="katakana_practice.html">Práctica katakana</a>
+    <a href="palabras.html">Práctica palabras</a>
+  </nav>
+</header>
+
+<p class="subtitle" style="margin:0 0 16px">Sufijo <span class="jp">じん</span> (-jin) ➜ nacionalidad · sufijo <span class="jp">ご</span> (-go) ➜ idioma</p>
+
+<main class="layout">
+
+<div class="charts">
+
+<section class="sheet-section">
+<h2 class="section-title">Países · くに</h2>
+
+<table class="word-table">
+<thead>
+<tr>
+  <th>Japonés</th>
+  <th>Romaji</th>
+  <th>Español</th>
+</tr>
+</thead>
+<tbody>
+<tr><td class="japanese">アメリカ</td><td class="romaji">amerika</td><td class="spanish">Estados unidos</td></tr>
+<tr><td class="japanese">イギリス</td><td class="romaji">igirisu</td><td class="spanish">Reino unido</td></tr>
+<tr><td class="japanese">イタリア</td><td class="romaji">itaria</td><td class="spanish">Italia</td></tr>
+<tr><td class="japanese">インド</td><td class="romaji">indo</td><td class="spanish">India</td></tr>
+<tr><td class="japanese">インドネシア</td><td class="romaji">indoneshia</td><td class="spanish">Indonesia</td></tr>
+<tr><td class="japanese">エジプト</td><td class="romaji">ejiputo</td><td class="spanish">Egipto</td></tr>
+<tr><td class="japanese">オーストラリア</td><td class="romaji">ōsutoraria</td><td class="spanish">Australia</td></tr>
+<tr><td class="japanese">オランダ</td><td class="romaji">oranda</td><td class="spanish">Países bajos</td></tr>
+<tr><td class="japanese">カナダ</td><td class="romaji">kanada</td><td class="spanish">Canadá</td></tr>
+<tr><td class="japanese">かんこく</td><td class="romaji">kankoku</td><td class="spanish">Corea del sur</td></tr>
+<tr><td class="japanese">スペイン</td><td class="romaji">supein</td><td class="spanish">España</td></tr>
+<tr><td class="japanese">タイ</td><td class="romaji">tai</td><td class="spanish">Tailandia</td></tr>
+<tr><td class="japanese">ちゅうごく</td><td class="romaji">chūgoku</td><td class="spanish">China</td></tr>
+<tr><td class="japanese">ドイツ</td><td class="romaji">doitsu</td><td class="spanish">Alemania</td></tr>
+<tr><td class="japanese">にほん</td><td class="romaji">nihon</td><td class="spanish">Japón</td></tr>
+<tr><td class="japanese">ハンガリー</td><td class="romaji">hangarī</td><td class="spanish">Hungría</td></tr>
+<tr><td class="japanese">フィリピン</td><td class="romaji">firipin</td><td class="spanish">Filipinas</td></tr>
+<tr><td class="japanese">ブラジル</td><td class="romaji">burajiru</td><td class="spanish">Brasil</td></tr>
+<tr><td class="japanese">フランス</td><td class="romaji">furansu</td><td class="spanish">Francia</td></tr>
+<tr><td class="japanese">ベトナム</td><td class="romaji">betonamu</td><td class="spanish">Vietnam</td></tr>
+<tr><td class="japanese">ポルトガル</td><td class="romaji">porutogaru</td><td class="spanish">Portugal</td></tr>
+<tr><td class="japanese">マレーシア</td><td class="romaji">marēshia</td><td class="spanish">Malasia</td></tr>
+<tr><td class="japanese">メキシコ</td><td class="romaji">mekishiko</td><td class="spanish">México</td></tr>
+<tr><td class="japanese">ロシア</td><td class="romaji">roshia</td><td class="spanish">Rusia</td></tr>
+</tbody>
+</table>
+</section>
+
+</div>
+
+<div class="charts">
+
+<section class="sheet-section">
+<h2 class="section-title">Idiomas · げんご</h2>
+
+<table class="word-table">
+<thead>
+<tr>
+  <th>Japonés</th>
+  <th>Romaji</th>
+  <th>Español</th>
+</tr>
+</thead>
+<tbody>
+<tr><td class="japanese">えいご</td><td class="romaji">eigo</td><td class="spanish">Inglés</td></tr>
+<tr><td class="japanese">えいご</td><td class="romaji">eigo</td><td class="spanish">Inglés</td></tr>
+<tr><td class="japanese">イタリアご</td><td class="romaji">itaria-go</td><td class="spanish">Italiano</td></tr>
+<tr><td class="japanese">ヒンディーご</td><td class="romaji">hindī-go</td><td class="spanish">Hindi</td></tr>
+<tr><td class="japanese">インドネシアご</td><td class="romaji">indoneshia-go</td><td class="spanish">Indonesio</td></tr>
+<tr><td class="japanese">アラビアご</td><td class="romaji">arabia-go</td><td class="spanish">Árabe</td></tr>
+<tr><td class="japanese">えいご</td><td class="romaji">eigo</td><td class="spanish">Inglés</td></tr>
+<tr><td class="japanese">オランダご</td><td class="romaji">oranda-go</td><td class="spanish">Neerlandés</td></tr>
+<tr><td class="japanese">えいご</td><td class="romaji">eigo</td><td class="spanish">Inglés</td></tr>
+<tr><td class="japanese">かんこくご</td><td class="romaji">kankoku-go</td><td class="spanish">Coreano</td></tr>
+<tr><td class="japanese">スペインご</td><td class="romaji">supein-go</td><td class="spanish">Español</td></tr>
+<tr><td class="japanese">タイご</td><td class="romaji">tai-go</td><td class="spanish">Tailandés</td></tr>
+<tr><td class="japanese">ちゅうごくご</td><td class="romaji">chūgoku-go</td><td class="spanish">Chino</td></tr>
+<tr><td class="japanese">ドイツご</td><td class="romaji">doitsu-go</td><td class="spanish">Alemán</td></tr>
+<tr><td class="japanese">にほんご</td><td class="romaji">nihongo</td><td class="spanish">Japonés</td></tr>
+<tr><td class="japanese">ハンガリーご</td><td class="romaji">hangarī-go</td><td class="spanish">Húngaro</td></tr>
+<tr><td class="japanese">フィリピノご</td><td class="romaji">firipino-go</td><td class="spanish">Filipino</td></tr>
+<tr><td class="japanese">ポルトガルご</td><td class="romaji">porutogaru-go</td><td class="spanish">Portugués</td></tr>
+<tr><td class="japanese">フランスご</td><td class="romaji">furansu-go</td><td class="spanish">Francés</td></tr>
+<tr><td class="japanese">ベトナムご</td><td class="romaji">betonamu-go</td><td class="spanish">Vietnamita</td></tr>
+<tr><td class="japanese">ポルトガルご</td><td class="romaji">porutogaru-go</td><td class="spanish">Portugués</td></tr>
+<tr><td class="japanese">マレーご</td><td class="romaji">marē-go</td><td class="spanish">Malayo</td></tr>
+<tr><td class="japanese">スペインご</td><td class="romaji">supein-go</td><td class="spanish">Español</td></tr>
+<tr><td class="japanese">ロシアご</td><td class="romaji">roshia-go</td><td class="spanish">Ruso</td></tr>
+</tbody>
+</table>
+</section>
+
+</div>
+
+</main>
+</div>
+
+</body>
+</html>

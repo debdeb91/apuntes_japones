@@ -1,0 +1,462 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>じょし · Partículas</title>
+
+<style>
+:root {
+  --bg: #f7f3ec;
+  --paper: #fffdf9;
+  --accent: #7867a8;
+  --pink: #e7a1bd;
+  --pink2: #eac0da;
+  --pale: #ffeef4;
+  --ink: #51484d;
+  --line: #62575d;
+  --muted: #887b82;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 22px;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: Arial, "Noto Sans JP", sans-serif;
+}
+
+.page {
+  max-width: 1500px;
+  margin: auto;
+  padding: 22px;
+  background: var(--paper);
+  border: 3px solid var(--line);
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  border-bottom: 4px solid var(--pink);
+  padding-bottom: 14px;
+  margin-bottom: 20px;
+}
+
+h1 {
+  margin: 0;
+  color: #8e5871;
+  font-size: clamp(28px, 4vw, 42px);
+  letter-spacing: 2px;
+}
+
+.subtitle {
+  margin: 5px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.jp {
+  font-family: "Noto Sans JP", "Yu Gothic", sans-serif;
+}
+
+.particles-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  align-items: start;
+}
+
+.particle-card {
+  border: 2px solid var(--line);
+  background: white;
+  overflow: hidden;
+}
+
+.particle-heading {
+  display: grid;
+  grid-template-columns: 105px minmax(0, 1fr);
+  min-height: 105px;
+  background: var(--pale);
+  border-bottom: 2px solid var(--line);
+}
+
+.particle-symbol {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--pink2);
+  border-right: 1px solid var(--line);
+  font-family: "Noto Sans JP", "Yu Gothic", sans-serif;
+  font-size: 45px;
+  font-weight: bold;
+  color: #59434e;
+}
+
+.particle-description {
+  display: flex;
+  align-items: center;
+  padding: 15px 17px;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.example {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.example-cell {
+  min-width: 0;
+  padding: 13px 11px;
+  border-right: 1px solid var(--line);
+}
+
+.example-cell:last-child {
+  border-right: none;
+}
+
+.example-label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: .5px;
+}
+
+.example-text {
+  font-size: 13px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.example-text.japanese {
+  font-family: "Noto Sans JP", "Yu Gothic", sans-serif;
+  font-size: 16px;
+  color: #5b4b53;
+}
+
+@media(max-width: 900px) {
+  body { padding: 8px; }
+  .page { padding: 12px; }
+  .particles-grid { grid-template-columns: 1fr; }
+}
+
+@media(max-width: 560px) {
+  .particle-heading {
+    grid-template-columns: 78px minmax(0, 1fr);
+    min-height: 90px;
+  }
+
+  .particle-symbol { font-size: 37px; }
+  .particle-description {
+    padding: 12px;
+    font-size: 13px;
+  }
+
+  .example-cell { padding: 10px 7px; }
+  .example-text { font-size: 11px; }
+  .example-text.japanese { font-size: 13px; }
+  .example-label { font-size: 9px; }
+}
+
+@media print {
+  body { padding: 0; background: white; }
+  .page { border: 0; max-width: none; }
+  .particles-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .particle-card { break-inside: avoid; }
+}
+
+nav {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+nav a {
+  padding: 9px 14px;
+  border: 2px solid var(--pink);
+  border-radius: 7px;
+  text-decoration: none;
+  color: #80536a;
+  font-weight: bold;
+  background: var(--pale);
+}
+
+nav a.active {
+  background: var(--pink);
+  color: white;
+}
+
+@media print { nav { display: none; } }
+</style>
+</head>
+
+<body>
+<div class="page">
+
+<header>
+  <div>
+    <h1>じょし</h1>
+    <p class="subtitle">Partículas</p>
+  </div>
+
+  <nav>
+    <a href="hiragana.html">Hiragana</a>
+    <a href="katakana.html">Katakana</a>
+    <a href="gramatica.html">Gramática</a>
+    <a class="active" href="particulas.html">Partículas</a>
+    <a href="expresiones.html">Expresiones</a>
+    <a href="palabras-hiragana.html">Palabras hiragana</a>
+    <a href="palabras-katakana.html">Palabras katakana</a>
+    <a href="paisesidiomas.html">Países e idiomas</a>
+    <a href="profesiones.html">Profesiones</a>
+    <a href="numeros.html">Números</a>
+    <a href="hiragana_practice.html">Práctica hiragana</a>
+    <a href="katakana_practice.html">Práctica katakana</a>
+    <a href="palabras.html">Práctica palabras</a>
+  </nav>
+</header>
+
+<main class="particles-grid">
+
+<section class="particle-card">
+  <div class="particle-heading">
+    <div class="particle-symbol">は</div>
+    <div class="particle-description">
+      Presenta el tema del que hablamos, sirve para saber de quién o qué. Suele coincidir con el sujeto.
+    </div>
+  </div>
+  <div class="example">
+    <div class="example-cell">
+      <span class="example-label">Japonés</span>
+      <div class="example-text japanese">わたしはスペインじんです。</div>
+    </div>
+    <div class="example-cell">
+      <span class="example-label">Romaji</span>
+      <div class="example-text">Watashi wa supein-jin desu.</div>
+    </div>
+    <div class="example-cell">
+      <span class="example-label">Español</span>
+      <div class="example-text">Soy española.</div>
+    </div>
+  </div>
+</section>
+
+<section class="particle-card">
+  <div class="particle-heading">
+    <div class="particle-symbol">か</div>
+    <div class="particle-description">
+      Interrogativa, se coloca al final de la oración, sustituye el signo de interrogación.
+    </div>
+  </div>
+  <div class="example">
+    <div class="example-cell">
+      <span class="example-label">Japonés</span>
+      <div class="example-text japanese">おなまえはなんですか。</div>
+    </div>
+    <div class="example-cell">
+      <span class="example-label">Romaji</span>
+      <div class="example-text">O-namae wa nan desu ka?</div>
+    </div>
+    <div class="example-cell">
+      <span class="example-label">Español</span>
+      <div class="example-text">¿Cómo te llamas?</div>
+    </div>
+  </div>
+</section>
+
+<section class="particle-card">
+  <div class="particle-heading">
+    <div class="particle-symbol">の</div>
+    <div class="particle-description">
+      De posesivo/relación/tipo, no de origen. [Esp. A de B; Jap. B の A]
+    </div>
+  </div>
+  <div class="example">
+    <div class="example-cell">
+      <span class="example-label">Japonés</span>
+      <div class="example-text japanese">わたしのなまえはマリアです。</div>
+    </div>
+    <div class="example-cell">
+      <span class="example-label">Romaji</span>
+      <div class="example-text">Watashi no namae wa Maria desu.</div>
+    </div>
+    <div class="example-cell">
+      <span class="example-label">Español</span>
+      <div class="example-text">Mi nombre es María.</div>
+    </div>
+  </div>
+</section>
+
+<section class="particle-card">
+  <div class="particle-heading">
+    <div class="particle-symbol">を</div>
+    <div class="particle-description">
+      Indica el complemento directo (sustantivo), se pronuncia como /o/, en respuestas cortas se omite.
+    </div>
+  </div>
+  <div class="example">
+    <div class="example-cell">
+      <span class="example-label">Japonés</span>
+      <div class="example-text japanese">おちゃをのみます。</div>
+    </div>
+    <div class="example-cell">
+      <span class="example-label">Romaji</span>
+      <div class="example-text">Ocha wo nomimasu.</div>
+    </div>
+    <div class="example-cell">
+      <span class="example-label">Español</span>
+      <div class="example-text">Bebo té.</div>
+    </div>
+  </div>
+</section>
+
+<section class="particle-card">
+  <div class="particle-heading">
+    <div class="particle-symbol">も</div>
+    <div class="particle-description">
+      Indica que algo o alguien comparte una característica o situación que ya se ha mencionado, se sustituye por は (también).
+    </div>
+  </div>
+  <div class="example">
+    <div class="example-cell">
+      <span class="example-label">Japonés</span>
+      <div class="example-text japanese">わたしもスペインじんです。</div>
+    </div>
+    <div class="example-cell">
+      <span class="example-label">Romaji</span>
+      <div class="example-text">Watashi mo supein-jin desu.</div>
+    </div>
+    <div class="example-cell">
+      <span class="example-label">Español</span>
+      <div class="example-text">Yo también soy española.</div>
+    </div>
+  </div>
+</section>
+
+<section class="particle-card">
+  <div class="particle-heading">
+    <div class="particle-symbol">に</div>
+    <div class="particle-description">
+      Indica donde vive o está algo, destino/dirección, momento concreto (horario).
+    </div>
+  </div>
+  <div class="example">
+    <div class="example-cell">
+      <span class="example-label">Japonés</span>
+      <div class="example-text japanese">あねはおおさかにすんでいます。</div>
+    </div>
+    <div class="example-cell">
+      <span class="example-label">Romaji</span>
+      <div class="example-text">Ane wa Ōsaka ni sunde imasu.</div>
+    </div>
+    <div class="example-cell">
+      <span class="example-label">Español</span>
+      <div class="example-text">Mi hermana mayor vive en Osaka.</div>
+    </div>
+  </div>
+</section>
+
+<section class="particle-card">
+  <div class="particle-heading">
+    <div class="particle-symbol">で</div>
+    <div class="particle-description">
+      Indica el lugar donde ocurre una acción.
+    </div>
+  </div>
+  <div class="example">
+    <div class="example-cell">
+      <span class="example-label">Japonés</span>
+      <div class="example-text japanese">がっこうでべんきょうします。</div>
+    </div>
+    <div class="example-cell">
+      <span class="example-label">Romaji</span>
+      <div class="example-text">Gakkō de benkyō shimasu.</div>
+    </div>
+    <div class="example-cell">
+      <span class="example-label">Español</span>
+      <div class="example-text">Estudio en la escuela.</div>
+    </div>
+  </div>
+</section>
+
+<section class="particle-card">
+  <div class="particle-heading">
+    <div class="particle-symbol">へ</div>
+    <div class="particle-description">
+      Indica dirección, se usa con verbos de movimiento.
+    </div>
+  </div>
+  <div class="example">
+    <div class="example-cell">
+      <span class="example-label">Japonés</span>
+      <div class="example-text japanese">にほんへいきます。</div>
+    </div>
+    <div class="example-cell">
+      <span class="example-label">Romaji</span>
+      <div class="example-text">Nihon e ikimasu.</div>
+    </div>
+    <div class="example-cell">
+      <span class="example-label">Español</span>
+      <div class="example-text">Voy a Japón.</div>
+    </div>
+  </div>
+</section>
+
+<section class="particle-card">
+  <div class="particle-heading">
+    <div class="particle-symbol">と</div>
+    <div class="particle-description">
+      Indica unión con sustantivos (y), o (con) cuando indica compañía.
+    </div>
+  </div>
+  <div class="example">
+    <div class="example-cell">
+      <span class="example-label">Japonés</span>
+      <div class="example-text japanese">ちちとははです。</div>
+    </div>
+    <div class="example-cell">
+      <span class="example-label">Romaji</span>
+      <div class="example-text">Chichi to haha desu.</div>
+    </div>
+    <div class="example-cell">
+      <span class="example-label">Español</span>
+      <div class="example-text">Mi padre y mi madre.</div>
+    </div>
+  </div>
+</section>
+
+<section class="particle-card">
+  <div class="particle-heading">
+    <div class="particle-symbol">が</div>
+    <div class="particle-description">
+      Indica el sujeto o introduce información nueva.
+    </div>
+  </div>
+  <div class="example">
+    <div class="example-cell">
+      <span class="example-label">Japonés</span>
+      <div class="example-text japanese">にほんごができます。</div>
+    </div>
+    <div class="example-cell">
+      <span class="example-label">Romaji</span>
+      <div class="example-text">Nihongo ga dekimasu.</div>
+    </div>
+    <div class="example-cell">
+      <span class="example-label">Español</span>
+      <div class="example-text">Sé japonés.</div>
+    </div>
+  </div>
+</section>
+
+</main>
+</div>
+</body>
+</html>

@@ -1,0 +1,411 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ひらがな · Hiragana</title>
+
+<style>
+:root {
+  --bg:#f7f3ec;
+  --paper:#fffdf9;
+  --pink:#e7a1bd;
+  --pink2:#eac0da;
+  --pale:#ffeef4;
+  --ink:#51484d;
+  --line:#62575d;
+  --muted:#887b82;
+}
+
+* { box-sizing:border-box; }
+
+body {
+  margin:0;
+  padding:22px;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:Arial,"Noto Sans JP",sans-serif;
+}
+
+.page {
+  max-width:1500px;
+  margin:auto;
+  padding:22px;
+  background:var(--paper);
+  border:3px solid var(--line);
+}
+
+header {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:16px;
+  flex-wrap:wrap;
+  border-bottom:4px solid var(--pink);
+  padding-bottom:14px;
+  margin-bottom:20px;
+}
+
+h1 {
+  margin:0;
+  color:#8e5871;
+  font-size:clamp(28px,4vw,42px);
+  letter-spacing:2px;
+}
+
+.subtitle {
+  margin:5px 0 0;
+  color:var(--muted);
+  font-size:14px;
+}
+
+nav {
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+nav a {
+  padding:9px 14px;
+  border:2px solid var(--pink);
+  border-radius:7px;
+  text-decoration:none;
+  color:#80536a;
+  font-weight:bold;
+  background:var(--pale);
+}
+
+nav a.active {
+  background:var(--pink);
+  color:white;
+}
+
+.layout {
+  display:grid;
+  grid-template-columns:minmax(280px,.9fr) minmax(500px,1.5fr);
+  gap:20px;
+  align-items:start;
+}
+
+.notes {
+  display:grid;
+  gap:12px;
+}
+
+.note,.sheet-section {
+  border:2px solid var(--line);
+  background:white;
+  padding:12px 14px;
+}
+
+.note h2,.section-title {
+  margin:-12px -14px 10px;
+  padding:8px 12px;
+  background:var(--pink2);
+  font-size:17px;
+  color:#59434e;
+}
+
+.note p,.note ul {
+  font-size:14px;
+  line-height:1.48;
+}
+
+.note p { margin:7px 0; }
+
+.note ul {
+  margin:6px 0;
+  padding-left:20px;
+}
+
+.example {
+  background:var(--pale);
+  padding:7px 9px;
+  margin-top:7px;
+  border-left:4px solid var(--pink);
+  font-size:14px;
+  line-height:1.55;
+}
+
+.jp {
+  font-family:"Noto Sans JP","Yu Gothic",sans-serif;
+}
+
+.charts {
+  display:grid;
+  gap:16px;
+}
+
+.sheet-section {
+  padding:12px;
+}
+
+.section-title {
+  margin:-12px -12px 12px;
+}
+
+.kana-grid {
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  border-top:1px solid var(--line);
+  border-left:1px solid var(--line);
+}
+
+.combo-grid {
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  border-top:1px solid var(--line);
+  border-left:1px solid var(--line);
+}
+
+.kana {
+  min-height:76px;
+  border-right:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  background:white;
+}
+
+.kana:nth-child(odd) {
+  background:#fff8fb;
+}
+
+.kana .char {
+  font-family:"Noto Sans JP","Yu Gothic",sans-serif;
+  font-size:32px;
+  line-height:1.15;
+  color:#5b4b53;
+}
+
+.kana .romaji {
+  font-size:12px;
+  color:var(--muted);
+  margin-top:4px;
+  font-weight:bold;
+  letter-spacing:.5px;
+}
+
+.kana.empty {
+  background:#faf7f7;
+}
+
+.combo-grid .kana {
+  min-height:72px;
+}
+
+.combo-grid .char {
+  font-size:29px;
+}
+
+.small-note {
+  font-size:12px;
+  color:var(--muted);
+  margin:8px 0 0;
+}
+
+@media(max-width:900px) {
+  body { padding:8px; }
+  .page { padding:12px; }
+  .layout { grid-template-columns:1fr; }
+  .notes {
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+
+@media(max-width:560px) {
+  .notes { grid-template-columns:1fr; }
+  .kana { min-height:62px; }
+  .kana .char { font-size:27px; }
+  .combo-grid .char { font-size:24px; }
+  .kana .romaji { font-size:10px; }
+}
+
+@media print {
+  body { padding:0;background:white; }
+  .page { border:0;max-width:none; }
+  .layout { grid-template-columns:.9fr 1.5fr; }
+  nav { display:none; }
+  .note,.sheet-section { break-inside:avoid; }
+}
+</style>
+</head>
+
+<body>
+<div class="page">
+
+<header>
+  <div>
+    <h1>ひらがな</h1>
+    <p class="subtitle">Silabario japonés</p>
+  </div>
+
+  <nav>
+    <a class="active" href="hiragana.html">Hiragana</a>
+    <a href="katakana.html">Katakana</a>
+    <a href="gramatica.html">Gramática</a>
+    <a href="particulas.html">Partículas</a>
+    <a href="expresiones.html">Expresiones</a>
+    <a href="palabras-hiragana.html">Palabras hiragana</a>
+    <a href="palabras-katakana.html">Palabras katakana</a>
+    <a href="paisesidiomas.html">Países e idiomas</a>
+    <a href="profesiones.html">Profesiones</a>
+    <a href="numeros.html">Números</a>
+    <a href="hiragana_practice.html">Práctica hiragana</a>
+    <a href="katakana_practice.html">Práctica katakana</a>
+    <a href="palabras.html">Práctica palabras</a>
+  </nav>
+</header>
+
+<div class="layout">
+
+<aside class="notes">
+
+<section class="note">
+<h2>Silabario</h2>
+<p>►Consonante + vocal.</p>
+<p>►46 símbolos.</p>
+<p>►Con formas redondeadas y curvas.</p>
+<p>►Se usa para la mayoría de palabras japonesas excepto kanji.</p>
+<p>►A, KA, SA, TA, NA, HA, MA, YA, RA, WA.</p>
+</section>
+
+<section class="note">
+<h2>Pronunciación y partículas</h2>
+<p><span class="jp">►は・ひ・へ・ほ</span> se pronuncian con una h aspirada, parecida a la j española suave: /ja/ /ji/ /je/ /jo/.</p>
+<p>►Si <span class="jp">は</span> es partícula, después de sustantivo, se pronuncia como /wa/.</p>
+<p><span class="jp">►ふ</span> no es fu española, es mezcla de fu/hu, fu de soplar sin dientes.</p>
+<p>►Si <span class="jp">へ</span> es partícula se pronuncia como /e/.</p>
+<p><span class="jp">►ら・り・る・れ・ろ</span> se pronuncia como R suave; pera, cara, loro...</p>
+<p><span class="jp">►を</span> se pronuncia como /o/ pero en rōmaji se escribe wo. Se usa como partícula, señala el Complemento Directo</p>
+<div class="example">
+<span class="jp">おさけ を のみます か。</span><br>
+osake wo nomimasu ka? - ¿Bebes alcohol?
+</div>
+</section>
+
+<section class="note">
+<h2>Alargaciones vocálicas</h2>
+<p>►Cuando se añade una vocal a una sílaba (sílaba + vocal).</p>
+<p>え + い = /ē/.</p>
+<p>お + う = /ō/.</p>
+<p>►La misma vocal repetida alarga el sonido.</p>
+<p>ああ = ā, いい = ī, etc.</p>
+<div class="example">
+<span class="jp">おかあさん</span> - okāsan<br>
+<span class="jp">おにいさん</span> - onīsan<br>
+<span class="jp">ふつう</span> - futsū<br>
+<span class="jp">せんせい</span> - sensē<br>
+<span class="jp">ありがとう</span> - arigatō
+</div>
+</section>
+
+<section class="note">
+<h2>Consonantes dobles</h2>
+<p>►Se utilizará <span class="jp">つ</span> antes de la consonante para doblarla, excepto en <span class="jp">な・に・ぬ・ね・の</span> que ya está <span class="jp">ん</span>.</p>
+<p>►Cuando <span class="jp">つ</span> se usa para doblar, se escribe con un tamaño más pequeño.</p>
+<p>►No se pronuncia como /tsu/, el sonido que hará será el de la sílaba siguiente.</p>
+<div class="example">
+<span class="jp">がっこう</span> - gakkō - escuela
+</div>
+</section>
+
+<section class="note">
+<h2>Tenten ゛ y maru ゜</h2>
+<p><span class="jp">►てんてん</span> - tenten - rayitas.</p>
+<p><span class="jp">►まる</span> - maru - círculo.</p>
+<div class="example">
+K → G<br>
+S → Z<br>
+T → D<br>
+H → B<br>
+H → P
+</div>
+<p>►Z: <span class="jp">ざ・じ・ず・ぜ・ぞ</span> /dsa/gi/dsu/dse/dso [/gi/ de Girona].</p>
+<p>►D: <span class="jp">だ・ぢ・づ・で・ど</span> /da/gi/dsu/de/do (se pronuncia como Z, se usa poco).</p>
+</section>
+
+<section class="note">
+<h2>Combinaciones や・ゆ・よ</h2>
+<p>►Sólo se usan con sílabas de i (<span class="jp">き、し、ち、に、ひ、み、り、ぎ、じ、ぢ、び、ぴ</span>).</p>
+<p><span class="jp">►や・ゆ・よ</span> se escribirán después de la sílaba y serán más pequeñas.</p>
+<p>►Usan el sonido de /i/.</p>
+<p>►DI → <span class="jp">ぢゃ・ぢゅ・ぢょ</span> - ja ju jo (se pronuncia igual que z(ji), se usa poco).</p>
+</section>
+
+</aside>
+
+<main class="charts">
+
+<section class="sheet-section">
+<h2 class="section-title">Hiragana básico</h2>
+<div class="kana-grid" id="basic"></div>
+</section>
+
+<section class="sheet-section">
+<h2 class="section-title">Dakuten y handakuten</h2>
+<div class="kana-grid" id="dakuten"></div>
+</section>
+
+<section class="sheet-section">
+<h2 class="section-title">Combinaciones pequeñas</h2>
+<div class="combo-grid" id="combos"></div>
+</section>
+
+</main>
+</div>
+</div>
+
+<script>
+const basic = [
+['あ','A'],['い','I'],['う','U'],['え','E'],['お','O'],
+['か','KA'],['き','KI'],['く','KU'],['け','KE'],['こ','KO'],
+['さ','SA'],['し','SHI'],['す','SU'],['せ','SE'],['そ','SO'],
+['た','TA'],['ち','CHI'],['つ','TSU'],['て','TE'],['と','TO'],
+['な','NA'],['に','NI'],['ぬ','NU'],['ね','NE'],['の','NO'],
+['は','HA'],['ひ','HI'],['ふ','FU'],['へ','HE'],['ほ','HO'],
+['ま','MA'],['み','MI'],['む','MU'],['め','ME'],['も','MO'],
+['や','YA'],['',''],['ゆ','YU'],['',''],['よ','YO'],
+['ら','RA'],['り','RI'],['る','RU'],['れ','RE'],['ろ','RO'],
+['わ','WA'],['',''],['を','WO'],['',''],['ん','N']
+];
+
+const dakuten = [
+['が','GA'],['ぎ','GI'],['ぐ','GU'],['げ','GE'],['ご','GO'],
+['ざ','ZA'],['じ','JI'],['ず','ZU'],['ぜ','ZE'],['ぞ','ZO'],
+['だ','DA'],['ぢ','JI'],['づ','ZU'],['で','DE'],['ど','DO'],
+['ば','BA'],['び','BI'],['ぶ','BU'],['べ','BE'],['ぼ','BO'],
+['ぱ','PA'],['ぴ','PI'],['ぷ','PU'],['ぺ','PE'],['ぽ','PO']
+];
+
+const combos = [
+['きゃ','KYA'],['きゅ','KYU'],['きょ','KYO'],['しゃ','SHA'],
+['しゅ','SHU'],['しょ','SHO'],['ちゃ','CHA'],['ちゅ','CHU'],
+['ちょ','CHO'],['にゃ','NYA'],['にゅ','NYU'],['にょ','NYO'],
+['ひゃ','HYA'],['ひゅ','HYU'],['ひょ','HYO'],['みゃ','MYA'],
+['みゅ','MYU'],['みょ','MYO'],['りゃ','RYA'],['りゅ','RYU'],
+['りょ','RYO'],['ぎゃ','GYA'],['ぎゅ','GYU'],['ぎょ','GYO'],
+['じゃ','JA'],['じゅ','JU'],['じょ','JO'],['ぢゃ','JA'],
+['ぢゅ','JU'],['ぢょ','JO'],['びゃ','BYA'],['びゅ','BYU'],
+['びょ','BYO'],['ぴゃ','PYA'],['ぴゅ','PYU'],['ぴょ','PYO']
+];
+
+function render(id,data) {
+  document.getElementById(id).innerHTML = data.map(([char,romaji]) => `
+    <div class="kana ${char ? '' : 'empty'}">
+      <div class="char">${char || '　'}</div>
+      <div class="romaji">${romaji || '　'}</div>
+    </div>
+  `).join('');
+}
+
+render('basic',basic);
+render('dakuten',dakuten);
+render('combos',combos);
+</script>
+
+</body>
+</html>

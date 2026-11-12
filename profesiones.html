@@ -1,0 +1,320 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>しょくぎょう · Profesiones</title>
+
+<style>
+:root {
+  --bg: #f7f3ec;
+  --paper: #fffdf9;
+  --accent: #7867a8;
+  --pink: #e7a1bd;
+  --pink2: #eac0da;
+  --pale: #ffeef4;
+  --ink: #51484d;
+  --line: #62575d;
+  --muted: #887b82;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 22px;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: Arial, "Noto Sans JP", sans-serif;
+}
+
+.page {
+  max-width: 1500px;
+  margin: auto;
+  padding: 22px;
+  background: var(--paper);
+  border: 3px solid var(--line);
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  border-bottom: 4px solid var(--pink);
+  padding-bottom: 14px;
+  margin-bottom: 20px;
+}
+
+h1 {
+  margin: 0;
+  color: #8e5871;
+  font-size: clamp(28px, 4vw, 42px);
+  letter-spacing: 2px;
+}
+
+.subtitle {
+  margin: 5px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  align-items: start;
+}
+
+.charts {
+  display: grid;
+  gap: 16px;
+}
+
+.sheet-section {
+  border: 2px solid var(--line);
+  background: white;
+  padding: 12px;
+}
+
+.section-title {
+  margin: -12px -12px 12px;
+  padding: 8px 12px;
+  background: var(--pink2);
+  font-size: 17px;
+  color: #59434e;
+}
+
+.jp {
+  font-family: "Noto Sans JP", "Yu Gothic", sans-serif;
+}
+
+.word-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+
+.word-table th,
+.word-table td {
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 10px 7px;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.word-table th {
+  background: var(--pale);
+  color: #80536a;
+  font-size: 13px;
+}
+
+.word-table td {
+  background: white;
+  font-size: 14px;
+}
+
+.word-table tbody tr:nth-child(odd) td {
+  background: #fff8fb;
+}
+
+.word-table .japanese {
+  font-family: "Noto Sans JP", "Yu Gothic", sans-serif;
+  font-size: 20px;
+  color: #5b4b53;
+}
+
+.word-table .romaji {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: .2px;
+}
+
+.word-table .spanish {
+  color: var(--ink);
+}
+
+@media(max-width: 900px) {
+  body { padding: 8px; }
+  .page { padding: 12px; }
+  .layout { grid-template-columns: 1fr; }
+}
+
+@media(max-width: 560px) {
+  .word-table th,
+  .word-table td {
+    padding: 8px 4px;
+    font-size: 12px;
+  }
+
+  .word-table .japanese {
+    font-size: 17px;
+  }
+
+  .word-table .romaji {
+    font-size: 10px;
+  }
+}
+
+@media print {
+  body { padding: 0; background: white; }
+  .page { border: 0; max-width: none; }
+  .layout { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sheet-section { break-inside: avoid; }
+}
+
+nav {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+nav a {
+  padding: 9px 14px;
+  border: 2px solid var(--pink);
+  border-radius: 7px;
+  text-decoration: none;
+  color: #80536a;
+  font-weight: bold;
+  background: var(--pale);
+}
+
+nav a.active {
+  background: var(--pink);
+  color: white;
+}
+
+@media print { nav { display: none; } }
+</style>
+</head>
+
+<body>
+<div class="page">
+
+<header>
+  <div>
+    <h1>しょくぎょう</h1>
+    <p class="subtitle">Profesiones</p>
+  </div>
+
+  <nav>
+    <a href="hiragana.html">Hiragana</a>
+    <a href="katakana.html">Katakana</a>
+    <a href="gramatica.html">Gramática</a>
+    <a href="particulas.html">Partículas</a>
+    <a href="expresiones.html">Expresiones</a>
+    <a href="palabras-hiragana.html">Palabras hiragana</a>
+    <a href="palabras-katakana.html">Palabras katakana</a>
+    <a href="paisesidiomas.html">Países e idiomas</a>
+    <a class="active" href="profesiones.html">Profesiones</a>
+    <a href="numeros.html">Números</a>
+    <a href="hiragana_practice.html">Práctica hiragana</a>
+    <a href="katakana_practice.html">Práctica katakana</a>
+    <a href="palabras.html">Práctica palabras</a>
+  </nav>
+</header>
+
+<main class="layout">
+
+<div class="charts">
+
+<section class="sheet-section">
+<h2 class="section-title">Profesiones · しょくぎょう (1)</h2>
+
+<table class="word-table">
+<thead>
+<tr>
+  <th>Japonés</th>
+  <th>Romaji</th>
+  <th>Español</th>
+</tr>
+</thead>
+<tbody>
+<tr><td class="japanese">いしゃ</td><td class="romaji">isha</td><td class="spanish">médico</td></tr>
+<tr><td class="japanese">かんごし</td><td class="romaji">kangoshi</td><td class="spanish">enfermera</td></tr>
+<tr><td class="japanese">ウエイター</td><td class="romaji">weitā</td><td class="spanish">camarero/a</td></tr>
+<tr><td class="japanese">うんてんしゅ</td><td class="romaji">untenshu</td><td class="spanish">chofer</td></tr>
+<tr><td class="japanese">えきいん</td><td class="romaji">ekiin</td><td class="spanish">funcionario de estación</td></tr>
+<tr><td class="japanese">エンジニア</td><td class="romaji">enjinia</td><td class="spanish">ingeniero</td></tr>
+<tr><td class="japanese">おんがくか</td><td class="romaji">ongakuka</td><td class="spanish">músico</td></tr>
+<tr><td class="japanese">かいけいし</td><td class="romaji">kaikeishi</td><td class="spanish">contable</td></tr>
+<tr><td class="japanese">がいこうかん</td><td class="romaji">gaikōkan</td><td class="spanish">diplomático</td></tr>
+<tr><td class="japanese">かいしゃいん</td><td class="romaji">kaishain</td><td class="spanish">empleado de empresa</td></tr>
+<tr><td class="japanese">がか</td><td class="romaji">gaka</td><td class="spanish">pintor</td></tr>
+<tr><td class="japanese">かがくしゃ</td><td class="romaji">kagakusha</td><td class="spanish">científico/a</td></tr>
+<tr><td class="japanese">がくせい</td><td class="romaji">gakusei</td><td class="spanish">estudiante</td></tr>
+<tr><td class="japanese">かしゅ</td><td class="romaji">kashu</td><td class="spanish">cantante</td></tr>
+<tr><td class="japanese">はいゆう</td><td class="romaji">haiyū</td><td class="spanish">actor</td></tr>
+<tr><td class="japanese">じょゆう</td><td class="romaji">joyū</td><td class="spanish">actriz</td></tr>
+<tr><td class="japanese">きょうし</td><td class="romaji">kyōshi</td><td class="spanish">maestro, profesor</td></tr>
+<tr><td class="japanese">ぎんこういん</td><td class="romaji">ginkōin</td><td class="spanish">empleado de banco</td></tr>
+<tr><td class="japanese">けいさつかん</td><td class="romaji">keisatsukan</td><td class="spanish">policía, comisario</td></tr>
+<tr><td class="japanese">げいじゅつか</td><td class="romaji">geijutsuka</td><td class="spanish">artista</td></tr>
+<tr><td class="japanese">けんきゅうしゃ</td><td class="romaji">kenkyūsha</td><td class="spanish">estudioso, investigador</td></tr>
+<tr><td class="japanese">けんちくか</td><td class="romaji">kenchikuka</td><td class="spanish">arquitecto</td></tr>
+<tr><td class="japanese">こうしゅ</td><td class="romaji">kōshu</td><td class="spanish">obrero/a</td></tr>
+<tr><td class="japanese">こうむいん</td><td class="romaji">kōmuin</td><td class="spanish">funcionario público</td></tr>
+<tr><td class="japanese">コンピューターかいしゃいん</td><td class="romaji">konpyūtā kaishain</td><td class="spanish">empleado de empresa informática</td></tr>
+<tr><td class="japanese">さいばんかん</td><td class="romaji">saibankan</td><td class="spanish">juez/jueza</td></tr>
+</tbody>
+</table>
+</section>
+
+</div>
+
+<div class="charts">
+
+<section class="sheet-section">
+<h2 class="section-title">Profesiones · しょくぎょう (2)</h2>
+
+<table class="word-table">
+<thead>
+<tr>
+  <th>Japonés</th>
+  <th>Romaji</th>
+  <th>Español</th>
+</tr>
+</thead>
+<tbody>
+<tr><td class="japanese">さっか</td><td class="romaji">sakka</td><td class="spanish">novelista</td></tr>
+<tr><td class="japanese">サラリーウーマン</td><td class="romaji">sararīūman</td><td class="spanish">mujer de negocios</td></tr>
+<tr><td class="japanese">サラリーマン</td><td class="romaji">sararīman</td><td class="spanish">hombre de negocios</td></tr>
+<tr><td class="japanese">しかい</td><td class="romaji">shikai</td><td class="spanish">dentista</td></tr>
+<tr><td class="japanese">ジャーナリスト/きしゃ</td><td class="romaji">jānarisuto</td><td class="spanish">periodista</td></tr>
+<tr><td class="japanese">しゃしんか</td><td class="romaji">shashinka</td><td class="spanish">fotógrafo/a</td></tr>
+<tr><td class="japanese">じゅうい</td><td class="romaji">jūi</td><td class="spanish">veterinario/a</td></tr>
+<tr><td class="japanese">しゅふ</td><td class="romaji">shufu</td><td class="spanish">ama de casa</td></tr>
+<tr><td class="japanese">しょうぼうし</td><td class="romaji">shōbōshi</td><td class="spanish">bombero/a</td></tr>
+<tr><td class="japanese">しょくにん</td><td class="romaji">shokunin</td><td class="spanish">artesano/a</td></tr>
+<tr><td class="japanese">スポーツせんしゅ</td><td class="romaji">supōtsu senshu</td><td class="spanish">deportista, atleta</td></tr>
+<tr><td class="japanese">せいじか</td><td class="romaji">seijika</td><td class="spanish">político</td></tr>
+<tr><td class="japanese">ちょうりし/りょうりにん</td><td class="romaji">chōrishi</td><td class="spanish">cocinero</td></tr>
+<tr><td class="japanese">デザイナー</td><td class="romaji">dezainā</td><td class="spanish">diseñador, modista</td></tr>
+<tr><td class="japanese">てんいん</td><td class="romaji">ten’in</td><td class="spanish">dependiente de tienda</td></tr>
+<tr><td class="japanese">のうみん</td><td class="romaji">nōmin</td><td class="spanish">agricultor/a</td></tr>
+<tr><td class="japanese">パイロット</td><td class="romaji">pairotto</td><td class="spanish">piloto</td></tr>
+<tr><td class="japanese">ひしょ</td><td class="romaji">hisho</td><td class="spanish">secretario/a</td></tr>
+<tr><td class="japanese">へいし</td><td class="romaji">heishi</td><td class="spanish">soldado</td></tr>
+<tr><td class="japanese">べんごし</td><td class="romaji">bengoshi</td><td class="spanish">abogado</td></tr>
+<tr><td class="japanese">ほんやくか</td><td class="romaji">hon’yakuka</td><td class="spanish">traductor/a</td></tr>
+<tr><td class="japanese">むしょくしゃ</td><td class="romaji">mushokusha</td><td class="spanish">desempleado/a</td></tr>
+<tr><td class="japanese">ゆうびんきょくいん</td><td class="romaji">yūbinkyokuin</td><td class="spanish">funcionario de correos</td></tr>
+<tr><td class="japanese">りようし</td><td class="romaji">riyōshi</td><td class="spanish">barbero</td></tr>
+<tr><td class="japanese">びようし</td><td class="romaji">biyōshi</td><td class="spanish">peluquero</td></tr>
+</tbody>
+</table>
+</section>
+
+</div>
+
+</main>
+
+</div>
+</body>
+</html>

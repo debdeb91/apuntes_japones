@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ひらがなのたんご · Palabras en hiragana</title>
+
+<style>
+:root {
+  --bg: #f7f3ec;
+  --paper: #fffdf9;
+  --accent: #7867a8;
+  --pink: #e7a1bd;
+  --pink2: #eac0da;
+  --pale: #ffeef4;
+  --ink: #51484d;
+  --line: #62575d;
+  --muted: #887b82;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 22px;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: Arial, "Noto Sans JP", sans-serif;
+}
+
+.page {
+  max-width: 1500px;
+  margin: auto;
+  padding: 22px;
+  background: var(--paper);
+  border: 3px solid var(--line);
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  border-bottom: 4px solid var(--pink);
+  padding-bottom: 14px;
+  margin-bottom: 20px;
+}
+
+h1 {
+  margin: 0;
+  color: #8e5871;
+  font-size: clamp(28px, 4vw, 42px);
+  letter-spacing: 2px;
+}
+
+.subtitle {
+  margin: 5px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.layout-old {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  align-items: start;
+}
+
+.charts {
+  display: grid;
+  gap: 16px;
+}
+
+.sheet-section {
+  border: 2px solid var(--line);
+  background: white;
+  padding: 12px;
+}
+
+.section-title {
+  margin: -12px -12px 12px;
+  padding: 8px 12px;
+  background: var(--pink2);
+  font-size: 17px;
+  color: #59434e;
+}
+
+.jp {
+  font-family: "Noto Sans JP", "Yu Gothic", sans-serif;
+}
+
+.word-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+
+.word-table th,
+.word-table td {
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 10px 7px;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.word-table th {
+  background: var(--pale);
+  color: #80536a;
+  font-size: 13px;
+}
+
+.word-table td {
+  background: white;
+  font-size: 14px;
+}
+
+.word-table tbody tr:nth-child(odd) td {
+  background: #fff8fb;
+}
+
+.word-table .japanese {
+  font-family: "Noto Sans JP", "Yu Gothic", sans-serif;
+  font-size: 20px;
+  color: #5b4b53;
+}
+
+.word-table .romaji {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: .2px;
+}
+
+.word-table .spanish {
+  color: var(--ink);
+}
+
+@media(max-width: 900px) {
+  body { padding: 8px; }
+  .page { padding: 12px; }
+  .layout { grid-template-columns: 1fr; }
+}
+
+@media(max-width: 560px) {
+  .word-table th,
+  .word-table td {
+    padding: 8px 4px;
+    font-size: 12px;
+  }
+
+  .word-table .japanese {
+    font-size: 17px;
+  }
+
+  .word-table .romaji {
+    font-size: 10px;
+  }
+}
+
+@media print {
+  body { padding: 0; background: white; }
+  .page { border: 0; max-width: none; }
+  .layout { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sheet-section { break-inside: avoid; }
+}
+
+nav {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+nav a {
+  padding: 9px 14px;
+  border: 2px solid var(--pink);
+  border-radius: 7px;
+  text-decoration: none;
+  color: #80536a;
+  font-weight: bold;
+  background: var(--pale);
+}
+
+nav a.active {
+  background: var(--pink);
+  color: white;
+}
+
+@media print { nav { display: none; } }
+
+.layout.single { grid-template-columns: minmax(0, 1fr); }
+.word-table.left td { text-align: left; }
+.word-table.left td.japanese { text-align: left; }
+.word-table td.group {
+  background: var(--pink2) !important;
+  color: #59434e;
+  font-weight: bold;
+  text-align: left;
+  padding: 7px 10px;
+}
+.word-table td.group .jp { font-size: 17px; margin-right: 6px; }
+
+html { scroll-behavior: smooth; }
+
+.layout {
+  display: grid;
+  grid-template-columns: 230px minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.index {
+  position: sticky;
+  top: 14px;
+  max-height: calc(100vh - 28px);
+  overflow: auto;
+  border: 2px solid var(--line);
+  background: white;
+  padding: 12px 14px;
+}
+
+.index h2 {
+  margin: -12px -14px 10px;
+  padding: 8px 12px;
+  background: var(--pink2);
+  font-size: 17px;
+  color: #59434e;
+}
+
+.index .count {
+  margin: 0 0 10px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.index .chips {
+  display: grid;
+  grid-template-columns: repeat(var(--n, 2), minmax(0, 1fr));
+  gap: 6px;
+}
+
+.index .chips a {
+  display: block;
+  padding: 7px 4px;
+  border: 2px solid var(--pink);
+  border-radius: 7px;
+  background: var(--pale);
+  color: #80536a;
+  font-weight: bold;
+  font-size: 14px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.index .chips a:hover,
+.index .chips a:focus-visible {
+  background: var(--pink);
+  color: white;
+}
+
+.index .chips small {
+  display: block;
+  font-size: 11px;
+  font-weight: normal;
+  opacity: .85;
+}
+
+.word-table.left td,
+.word-table.left td.japanese { text-align: left; }
+.word-table.left th { text-align: left; }
+.word-table td.group { scroll-margin-top: 14px; }
+
+@media(max-width: 900px) {
+  .layout { grid-template-columns: 1fr; }
+  .index { position: static; max-height: none; }
+  .index .chips { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+}
+
+@media print {
+  .index { display: none; }
+  .layout { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+
+<body>
+<div class="page">
+
+<header>
+  <div>
+    <h1>ひらがなのたんご</h1>
+    <p class="subtitle">Palabras en hiragana</p>
+  </div>
+
+  <nav>
+    <a href="hiragana.html">Hiragana</a>
+    <a href="katakana.html">Katakana</a>
+    <a href="gramatica.html">Gramática</a>
+    <a href="particulas.html">Partículas</a>
+    <a href="expresiones.html">Expresiones</a>
+    <a class="active" href="palabras-hiragana.html">Palabras hiragana</a>
+    <a href="palabras-katakana.html">Palabras katakana</a>
+    <a href="paisesidiomas.html">Países e idiomas</a>
+    <a href="profesiones.html">Profesiones</a>
+    <a href="numeros.html">Números</a>
+    <a href="hiragana_practice.html">Práctica hiragana</a>
+    <a href="katakana_practice.html">Práctica katakana</a>
+    <a href="palabras.html">Práctica palabras</a>
+  </nav>
+</header>
+
+<div class="layout">
+
+<aside class="index" aria-label="Índice">
+  <h2>Índice</h2>
+  <p class="count">307 palabras</p>
+  <div class="chips" style="--n:2">
+    <a href="#g0"><span class="jp">あ</span><small>A</small></a>
+    <a href="#g1"><span class="jp">か</span><small>K / G</small></a>
+    <a href="#g2"><span class="jp">さ</span><small>S / Z</small></a>
+    <a href="#g3"><span class="jp">た</span><small>T / D</small></a>
+    <a href="#g4"><span class="jp">な</span><small>N</small></a>
+    <a href="#g5"><span class="jp">は</span><small>H / B / P</small></a>
+    <a href="#g6"><span class="jp">ま</span><small>M</small></a>
+    <a href="#g7"><span class="jp">や</span><small>Y</small></a>
+    <a href="#g8"><span class="jp">ら</span><small>R</small></a>
+    <a href="#g9"><span class="jp">わ</span><small>W</small></a>
+  </div>
+</aside>
+
+<main>
+<section class="sheet-section">
+<h2 class="section-title">Palabras</h2>
+
+<table class="word-table left">
+<colgroup><col style="width:28%"><col style="width:24%"><col></colgroup>
+<thead>
+<tr><th>Hiragana</th><th>Rōmaji</th><th>Traducción</th></tr>
+</thead>
+<tbody>
+<tr><td class="group" id="g0" colspan="3"><span class="jp">あ</span> A</td></tr>
+<tr><td class="japanese">あい</td><td class="romaji">ai</td><td class="spanish">amor</td></tr>
+<tr><td class="japanese">あお</td><td class="romaji">ao</td><td class="spanish">azul (sustantivo)</td></tr>
+<tr><td class="japanese">あおい</td><td class="romaji">aoi</td><td class="spanish">azul (adjetivo)</td></tr>
+<tr><td class="japanese">あか</td><td class="romaji">aka</td><td class="spanish">rojo (sustantivo)</td></tr>
+<tr><td class="japanese">あかい</td><td class="romaji">akai</td><td class="spanish">rojo (adjetivo)</td></tr>
+<tr><td class="japanese">あき</td><td class="romaji">aki</td><td class="spanish">otoño</td></tr>
+<tr><td class="japanese">あさ</td><td class="romaji">asa</td><td class="spanish">mañana (parte del día)</td></tr>
+<tr><td class="japanese">あさごはん</td><td class="romaji">asagohan</td><td class="spanish">desayuno</td></tr>
+<tr><td class="japanese">あし</td><td class="romaji">ashi</td><td class="spanish">pierna/pie (no específico)</td></tr>
+<tr><td class="japanese">あそこ</td><td class="romaji">asoko</td><td class="spanish">allí</td></tr>
+<tr><td class="japanese">あたたかい</td><td class="romaji">atatakai</td><td class="spanish">calentito/cálido (adjetivo)</td></tr>
+<tr><td class="japanese">あつい</td><td class="romaji">atsui</td><td class="spanish">caluroso/cálido (adjetivo)</td></tr>
+<tr><td class="japanese">あなた</td><td class="romaji">anata</td><td class="spanish">tú</td></tr>
+<tr><td class="japanese">あなたたち</td><td class="romaji">anata tachi</td><td class="spanish">vosotros</td></tr>
+<tr><td class="japanese">あに</td><td class="romaji">ani</td><td class="spanish">hermano mayor</td></tr>
+<tr><td class="japanese">あにき</td><td class="romaji">aniki</td><td class="spanish">hermano mayor/superior/contexto yakuza</td></tr>
+<tr><td class="japanese">あね</td><td class="romaji">ane</td><td class="spanish">hermana mayor</td></tr>
+<tr><td class="japanese">あめ</td><td class="romaji">ame</td><td class="spanish">lluvia/caramelo</td></tr>
+<tr><td class="japanese">いいえ</td><td class="romaji">iie</td><td class="spanish">no</td></tr>
+<tr><td class="japanese">いいます</td><td class="romaji">iimasu</td><td class="spanish">decir</td></tr>
+<tr><td class="japanese">いえ</td><td class="romaji">ie</td><td class="spanish">casa</td></tr>
+<tr><td class="japanese">いきます</td><td class="romaji">ikimasu</td><td class="spanish">ir</td></tr>
+<tr><td class="japanese">いけ</td><td class="romaji">ike</td><td class="spanish">estanque</td></tr>
+<tr><td class="japanese">いし</td><td class="romaji">ishi</td><td class="spanish">piedra</td></tr>
+<tr><td class="japanese">いす</td><td class="romaji">isu</td><td class="spanish">silla</td></tr>
+<tr><td class="japanese">いと</td><td class="romaji">ito</td><td class="spanish">hilo</td></tr>
+<tr><td class="japanese">いぬ</td><td class="romaji">inu</td><td class="spanish">perro</td></tr>
+<tr><td class="japanese">いろ</td><td class="romaji">iro</td><td class="spanish">color</td></tr>
+<tr><td class="japanese">うえ</td><td class="romaji">ue</td><td class="spanish">arriba/encima</td></tr>
+<tr><td class="japanese">うし</td><td class="romaji">ushi</td><td class="spanish">vaca</td></tr>
+<tr><td class="japanese">うそ</td><td class="romaji">uso</td><td class="spanish">mentira</td></tr>
+<tr><td class="japanese">うた</td><td class="romaji">uta</td><td class="spanish">canción</td></tr>
+<tr><td class="japanese">うま</td><td class="romaji">uma</td><td class="spanish">caballo</td></tr>
+<tr><td class="japanese">えいが</td><td class="romaji">eiga</td><td class="spanish">película</td></tr>
+<tr><td class="japanese">えいがかん</td><td class="romaji">eigakan</td><td class="spanish">cine</td></tr>
+<tr><td class="japanese">えき</td><td class="romaji">eki</td><td class="spanish">estación (de tren/metro)</td></tr>
+<tr><td class="japanese">えらい</td><td class="romaji">erai</td><td class="spanish">admirable, importante</td></tr>
+<tr><td class="japanese">おかあさん</td><td class="romaji">okāsan</td><td class="spanish">mamá</td></tr>
+<tr><td class="japanese">おかし</td><td class="romaji">okashi</td><td class="spanish">dulce/golosina</td></tr>
+<tr><td class="japanese">おかね</td><td class="romaji">okane</td><td class="spanish">dinero</td></tr>
+<tr><td class="japanese">おきる</td><td class="romaji">okiru</td><td class="spanish">levantarse/despertarse</td></tr>
+<tr><td class="japanese">おこのみやき</td><td class="romaji">okonomiyaki</td><td class="spanish">okonomiyaki</td></tr>
+<tr><td class="japanese">おさけ</td><td class="romaji">osake</td><td class="spanish">alcohol</td></tr>
+<tr><td class="japanese">おそい</td><td class="romaji">osoi</td><td class="spanish">lento/tardío</td></tr>
+<tr><td class="japanese">おてあらい</td><td class="romaji">otearai</td><td class="spanish">aseo / baño</td></tr>
+<tr><td class="japanese">おと</td><td class="romaji">oto</td><td class="spanish">sonido</td></tr>
+<tr><td class="japanese">おとうと</td><td class="romaji">otōto</td><td class="spanish">hermano pequeño</td></tr>
+<tr><td class="japanese">おとこ</td><td class="romaji">otoko</td><td class="spanish">hombre</td></tr>
+<tr><td class="japanese">おなか</td><td class="romaji">onaka</td><td class="spanish">barriga/estómago</td></tr>
+<tr><td class="japanese">おに</td><td class="romaji">oni</td><td class="spanish">demonio</td></tr>
+<tr><td class="japanese">おにいさん</td><td class="romaji">onīsan</td><td class="spanish">hermano mayor</td></tr>
+<tr><td class="japanese">おばけ</td><td class="romaji">obake</td><td class="spanish">fantasma/monstruo</td></tr>
+<tr><td class="japanese">おんがく</td><td class="romaji">ongaku</td><td class="spanish">música</td></tr>
+<tr><td class="japanese">おんな</td><td class="romaji">onna</td><td class="spanish">mujer</td></tr>
+<tr><td class="group" id="g1" colspan="3"><span class="jp">か</span> K / G</td></tr>
+<tr><td class="japanese">かいしゃ</td><td class="romaji">kaisha</td><td class="spanish">empresa</td></tr>
+<tr><td class="japanese">かいしゃいん</td><td class="romaji">kaishain</td><td class="spanish">empleado/a de empresa</td></tr>
+<tr><td class="japanese">かいちょう</td><td class="romaji">kaichō</td><td class="spanish">delegado</td></tr>
+<tr><td class="japanese">かいます</td><td class="romaji">kaimasu</td><td class="spanish">comprar</td></tr>
+<tr><td class="japanese">かお</td><td class="romaji">kao</td><td class="spanish">cara</td></tr>
+<tr><td class="japanese">かき</td><td class="romaji">kaki</td><td class="spanish">caqui (fruta)/ostras</td></tr>
+<tr><td class="japanese">かきます</td><td class="romaji">kakimasu</td><td class="spanish">escribir</td></tr>
+<tr><td class="japanese">かさ</td><td class="romaji">kasa</td><td class="spanish">paraguas</td></tr>
+<tr><td class="japanese">かざん</td><td class="romaji">kazan</td><td class="spanish">volcán</td></tr>
+<tr><td class="japanese">かぞく</td><td class="romaji">kazoku</td><td class="spanish">familia</td></tr>
+<tr><td class="japanese">がっこう</td><td class="romaji">gakkō</td><td class="spanish">escuela</td></tr>
+<tr><td class="japanese">かっぱ</td><td class="romaji">kappa</td><td class="spanish">kappa</td></tr>
+<tr><td class="japanese">かぼちゃ</td><td class="romaji">kabocha</td><td class="spanish">calabaza</td></tr>
+<tr><td class="japanese">かみ</td><td class="romaji">kami</td><td class="spanish">papel/pelo</td></tr>
+<tr><td class="japanese">かん</td><td class="romaji">kan</td><td class="spanish">edificio</td></tr>
+<tr><td class="japanese">き</td><td class="romaji">ki</td><td class="spanish">árbol</td></tr>
+<tr><td class="japanese">ききます</td><td class="romaji">kikimasu</td><td class="spanish">escuchar/oír</td></tr>
+<tr><td class="japanese">きく</td><td class="romaji">kiku</td><td class="spanish">escuchar/preguntar</td></tr>
+<tr><td class="japanese">きた</td><td class="romaji">kita</td><td class="spanish">norte</td></tr>
+<tr><td class="japanese">きつね</td><td class="romaji">kitsune</td><td class="spanish">zorro</td></tr>
+<tr><td class="japanese">きのう</td><td class="romaji">kinō</td><td class="spanish">ayer</td></tr>
+<tr><td class="japanese">きゃく</td><td class="romaji">kyaku</td><td class="spanish">cliente, invitado</td></tr>
+<tr><td class="japanese">ぎゃく</td><td class="romaji">gyaku</td><td class="spanish">opuesto</td></tr>
+<tr><td class="japanese">ぎゅうどん</td><td class="romaji">gyūdon</td><td class="spanish">bol de arroz con ternera</td></tr>
+<tr><td class="japanese">ぎゅうにゅう</td><td class="romaji">gyūnyū</td><td class="spanish">leche de vaca</td></tr>
+<tr><td class="japanese">きゅうび</td><td class="romaji">kyūbi</td><td class="spanish">zorro de nueve colas</td></tr>
+<tr><td class="japanese">きゅうり</td><td class="romaji">kyūri</td><td class="spanish">pepino</td></tr>
+<tr><td class="japanese">きょう</td><td class="romaji">kyō</td><td class="spanish">hoy</td></tr>
+<tr><td class="japanese">ぎょうざ</td><td class="romaji">gyōza</td><td class="spanish">empanadilla japonesa</td></tr>
+<tr><td class="japanese">きょうし</td><td class="romaji">kyōshi</td><td class="spanish">profesor/a</td></tr>
+<tr><td class="japanese">きょうと</td><td class="romaji">kyōto</td><td class="spanish">Kioto</td></tr>
+<tr><td class="japanese">きりつ</td><td class="romaji">kiritsu</td><td class="spanish">¡de pie!</td></tr>
+<tr><td class="japanese">ぎん</td><td class="romaji">gin</td><td class="spanish">plata</td></tr>
+<tr><td class="japanese">くうき</td><td class="romaji">kūki</td><td class="spanish">aire</td></tr>
+<tr><td class="japanese">くちさけおんな</td><td class="romaji">kuchisake onna</td><td class="spanish">mujer de la boca cortada</td></tr>
+<tr><td class="japanese">くつ</td><td class="romaji">kutsu</td><td class="spanish">zapatos</td></tr>
+<tr><td class="japanese">くに</td><td class="romaji">kuni</td><td class="spanish">país</td></tr>
+<tr><td class="japanese">くろ</td><td class="romaji">kuro</td><td class="spanish">negro (sustantivo)</td></tr>
+<tr><td class="japanese">くろい</td><td class="romaji">kuroi</td><td class="spanish">negro (adjetivo)</td></tr>
+<tr><td class="japanese">ぐんじん</td><td class="romaji">gunjin</td><td class="spanish">soldado</td></tr>
+<tr><td class="japanese">け</td><td class="romaji">ke</td><td class="spanish">pelo</td></tr>
+<tr><td class="japanese">げき</td><td class="romaji">geki</td><td class="spanish">drama teatro</td></tr>
+<tr><td class="japanese">けしき</td><td class="romaji">keshiki</td><td class="spanish">paisaje</td></tr>
+<tr><td class="japanese">げんご</td><td class="romaji">gengo</td><td class="spanish">idioma</td></tr>
+<tr><td class="japanese">こい</td><td class="romaji">koi</td><td class="spanish">carpa/amor romántico</td></tr>
+<tr><td class="japanese">こうむいん</td><td class="romaji">kōmuin</td><td class="spanish">funcionario/a</td></tr>
+<tr><td class="japanese">こえ</td><td class="romaji">koe</td><td class="spanish">voz</td></tr>
+<tr><td class="japanese">ここ</td><td class="romaji">koko</td><td class="spanish">aquí</td></tr>
+<tr><td class="japanese">こだま</td><td class="romaji">kodama</td><td class="spanish">espíritu de los árboles</td></tr>
+<tr><td class="japanese">ことば</td><td class="romaji">kotoba</td><td class="spanish">palabra/idioma</td></tr>
+<tr><td class="japanese">こども</td><td class="romaji">kodomo</td><td class="spanish">niño/a</td></tr>
+<tr><td class="japanese">ことわざ</td><td class="romaji">kotowaza</td><td class="spanish">proverbio</td></tr>
+<tr><td class="japanese">ごみ</td><td class="romaji">gomi</td><td class="spanish">basura</td></tr>
+<tr><td class="group" id="g2" colspan="3"><span class="jp">さ</span> S / Z</td></tr>
+<tr><td class="japanese">さいふ</td><td class="romaji">saifu</td><td class="spanish">cartera</td></tr>
+<tr><td class="japanese">さかな</td><td class="romaji">sakana</td><td class="spanish">pescado/pez</td></tr>
+<tr><td class="japanese">さくら</td><td class="romaji">sakura</td><td class="spanish">flor de cerezo</td></tr>
+<tr><td class="japanese">さけ</td><td class="romaji">sake</td><td class="spanish">sake</td></tr>
+<tr><td class="japanese">ざしきわらし</td><td class="romaji">zashiki warashi</td><td class="spanish">espíritu infantil del hogar</td></tr>
+<tr><td class="japanese">ざっし</td><td class="romaji">zasshi</td><td class="spanish">revista</td></tr>
+<tr><td class="japanese">さっぽろ</td><td class="romaji">sapporo</td><td class="spanish">Sapporo</td></tr>
+<tr><td class="japanese">さむい</td><td class="romaji">samui</td><td class="spanish">frío</td></tr>
+<tr><td class="japanese">さんびゃく</td><td class="romaji">sanbyaku</td><td class="spanish">trescientos</td></tr>
+<tr><td class="japanese">さんぽ</td><td class="romaji">sanpo</td><td class="spanish">paseo</td></tr>
+<tr><td class="japanese">しお</td><td class="romaji">shio</td><td class="spanish">sal</td></tr>
+<tr><td class="japanese">じこしょうかい</td><td class="romaji">jikoshōkai</td><td class="spanish">presentación personal</td></tr>
+<tr><td class="japanese">しごと</td><td class="romaji">shigoto</td><td class="spanish">trabajo</td></tr>
+<tr><td class="japanese">じしょ</td><td class="romaji">jisho</td><td class="spanish">diccionario</td></tr>
+<tr><td class="japanese">した</td><td class="romaji">shita</td><td class="spanish">debajo/lengua</td></tr>
+<tr><td class="japanese">しち</td><td class="romaji">shichi</td><td class="spanish">siete</td></tr>
+<tr><td class="japanese">しま</td><td class="romaji">shima</td><td class="spanish">isla</td></tr>
+<tr><td class="japanese">します</td><td class="romaji">shimasu</td><td class="spanish">hacer</td></tr>
+<tr><td class="japanese">しゃしん</td><td class="romaji">shashin</td><td class="spanish">fotografía</td></tr>
+<tr><td class="japanese">じゅう</td><td class="romaji">jū</td><td class="spanish">diez</td></tr>
+<tr><td class="japanese">しゅくだい</td><td class="romaji">shukudai</td><td class="spanish">deberes</td></tr>
+<tr><td class="japanese">しゅふ</td><td class="romaji">shufu</td><td class="spanish">amo/a de casa</td></tr>
+<tr><td class="japanese">しょうゆ</td><td class="romaji">shōyu</td><td class="spanish">salsa de soja</td></tr>
+<tr><td class="japanese">じょせい</td><td class="romaji">josei</td><td class="spanish">mujer</td></tr>
+<tr><td class="japanese">しろ</td><td class="romaji">shiro</td><td class="spanish">blanco (sustantivo)</td></tr>
+<tr><td class="japanese">しろい</td><td class="romaji">shiroi</td><td class="spanish">blanco (adjetivo)</td></tr>
+<tr><td class="japanese">すき</td><td class="romaji">suki</td><td class="spanish">gustar</td></tr>
+<tr><td class="japanese">すし</td><td class="romaji">sushi</td><td class="spanish">sushi</td></tr>
+<tr><td class="japanese">スポーツ</td><td class="romaji">supōtsu</td><td class="spanish">deporte</td></tr>
+<tr><td class="japanese">ずるい</td><td class="romaji">zurui</td><td class="spanish">tramposo</td></tr>
+<tr><td class="japanese">せかい</td><td class="romaji">sekai</td><td class="spanish">mundo</td></tr>
+<tr><td class="japanese">せつぶん</td><td class="romaji">setsubun</td><td class="spanish">festival tradicional japonés</td></tr>
+<tr><td class="japanese">せんせい</td><td class="romaji">sensē</td><td class="spanish">profesor</td></tr>
+<tr><td class="japanese">せんぱい</td><td class="romaji">senpai</td><td class="spanish">compañero superior</td></tr>
+<tr><td class="japanese">ぜんぶ</td><td class="romaji">zenbu</td><td class="spanish">todo</td></tr>
+<tr><td class="japanese">ぞう</td><td class="romaji">zō</td><td class="spanish">elefante/vísceras</td></tr>
+<tr><td class="japanese">そうじ</td><td class="romaji">sōji</td><td class="spanish">limpieza</td></tr>
+<tr><td class="japanese">そこ</td><td class="romaji">soko</td><td class="spanish">ahí</td></tr>
+<tr><td class="japanese">そと</td><td class="romaji">soto</td><td class="spanish">fuera</td></tr>
+<tr><td class="japanese">そら</td><td class="romaji">sora</td><td class="spanish">cielo</td></tr>
+<tr><td class="group" id="g3" colspan="3"><span class="jp">た</span> T / D</td></tr>
+<tr><td class="japanese">たこ</td><td class="romaji">tako</td><td class="spanish">pulpo</td></tr>
+<tr><td class="japanese">たこやき</td><td class="romaji">takoyaki</td><td class="spanish">takoyaki</td></tr>
+<tr><td class="japanese">たぬき</td><td class="romaji">tanuki</td><td class="spanish">tanuki</td></tr>
+<tr><td class="japanese">たべ</td><td class="romaji">tabe-</td><td class="spanish">raíz verbo comer</td></tr>
+<tr><td class="japanese">たべます</td><td class="romaji">tabemasu</td><td class="spanish">comer</td></tr>
+<tr><td class="japanese">たべる</td><td class="romaji">taberu</td><td class="spanish">comer</td></tr>
+<tr><td class="japanese">たまご</td><td class="romaji">tamago</td><td class="spanish">huevo</td></tr>
+<tr><td class="japanese">だんご</td><td class="romaji">dango</td><td class="spanish">dango</td></tr>
+<tr><td class="japanese">ちいさい</td><td class="romaji">chiisai</td><td class="spanish">pequeño</td></tr>
+<tr><td class="japanese">ちかい</td><td class="romaji">chikai</td><td class="spanish">cerca</td></tr>
+<tr><td class="japanese">ちず</td><td class="romaji">chizu</td><td class="spanish">mapa</td></tr>
+<tr><td class="japanese">ちち</td><td class="romaji">chichi</td><td class="spanish">padre</td></tr>
+<tr><td class="japanese">ちゃいろ</td><td class="romaji">chairo</td><td class="spanish">marrón (sustantivo)</td></tr>
+<tr><td class="japanese">ちゃいろい</td><td class="romaji">chairoi</td><td class="spanish">marrón (adjetivo)</td></tr>
+<tr><td class="japanese">ちゅうもん</td><td class="romaji">chūmon</td><td class="spanish">pedido</td></tr>
+<tr><td class="japanese">ちょきん</td><td class="romaji">chokin</td><td class="spanish">ahorros</td></tr>
+<tr><td class="japanese">つき</td><td class="romaji">tsuki</td><td class="spanish">luna</td></tr>
+<tr><td class="japanese">つくえ</td><td class="romaji">tsukue</td><td class="spanish">escritorio</td></tr>
+<tr><td class="japanese">つづく</td><td class="romaji">tsuzuku</td><td class="spanish">continuar</td></tr>
+<tr><td class="japanese">つめたい</td><td class="romaji">tsumetai</td><td class="spanish">frío al tacto</td></tr>
+<tr><td class="japanese">て</td><td class="romaji">te</td><td class="spanish">mano</td></tr>
+<tr><td class="japanese">てがみ</td><td class="romaji">tegami</td><td class="spanish">carta</td></tr>
+<tr><td class="japanese">できます</td><td class="romaji">dekimasu</td><td class="spanish">poder / saber hacer</td></tr>
+<tr><td class="japanese">でんき</td><td class="romaji">denki</td><td class="spanish">electricidad/luz</td></tr>
+<tr><td class="japanese">てんぐ</td><td class="romaji">tengu</td><td class="spanish">tengu</td></tr>
+<tr><td class="japanese">とうきょう</td><td class="romaji">tōkyō</td><td class="spanish">Tokio</td></tr>
+<tr><td class="japanese">とうふ</td><td class="romaji">tōfu</td><td class="spanish">tofu</td></tr>
+<tr><td class="japanese">とおい</td><td class="romaji">tōi</td><td class="spanish">lejos</td></tr>
+<tr><td class="japanese">ときどき</td><td class="romaji">tokidoki</td><td class="spanish">a veces</td></tr>
+<tr><td class="japanese">とけい</td><td class="romaji">tokē</td><td class="spanish">reloj</td></tr>
+<tr><td class="japanese">とり</td><td class="romaji">tori</td><td class="spanish">pájaro</td></tr>
+<tr><td class="japanese">どろ</td><td class="romaji">doro</td><td class="spanish">barro</td></tr>
+<tr><td class="group" id="g4" colspan="3"><span class="jp">な</span> N</td></tr>
+<tr><td class="japanese">なか</td><td class="romaji">naka</td><td class="spanish">dentro</td></tr>
+<tr><td class="japanese">なつ</td><td class="romaji">natsu</td><td class="spanish">verano</td></tr>
+<tr><td class="japanese">なに</td><td class="romaji">nani</td><td class="spanish">¿qué?</td></tr>
+<tr><td class="japanese">なまえ</td><td class="romaji">namae</td><td class="spanish">nombre</td></tr>
+<tr><td class="japanese">にく</td><td class="romaji">niku</td><td class="spanish">carne</td></tr>
+<tr><td class="japanese">にし</td><td class="romaji">nishi</td><td class="spanish">oeste</td></tr>
+<tr><td class="japanese">にほん</td><td class="romaji">nihon</td><td class="spanish">Japón</td></tr>
+<tr><td class="japanese">にほんご</td><td class="romaji">nihongo</td><td class="spanish">japonés (idioma)</td></tr>
+<tr><td class="japanese">にほんじん</td><td class="romaji">nihonjin</td><td class="spanish">japonés (gentilicio)</td></tr>
+<tr><td class="japanese">にゃんこ</td><td class="romaji">nyanko</td><td class="spanish">gatito</td></tr>
+<tr><td class="japanese">にゅうもん</td><td class="romaji">nyūmon</td><td class="spanish">iniciación</td></tr>
+<tr><td class="japanese">にょじつ</td><td class="romaji">nyojitsu</td><td class="spanish">realidad</td></tr>
+<tr><td class="japanese">にわ</td><td class="romaji">niwa</td><td class="spanish">jardín</td></tr>
+<tr><td class="japanese">ぬの</td><td class="romaji">nuno</td><td class="spanish">tela</td></tr>
+<tr><td class="japanese">ねこ</td><td class="romaji">neko</td><td class="spanish">gato</td></tr>
+<tr><td class="japanese">のみ</td><td class="romaji">nomi-</td><td class="spanish">raíz verbo beber</td></tr>
+<tr><td class="japanese">のみます</td><td class="romaji">nomimasu</td><td class="spanish">beber</td></tr>
+<tr><td class="japanese">のむ</td><td class="romaji">nomu</td><td class="spanish">beber</td></tr>
+<tr><td class="japanese">のり</td><td class="romaji">nori</td><td class="spanish">alga nori</td></tr>
+<tr><td class="group" id="g5" colspan="3"><span class="jp">は</span> H / B / P</td></tr>
+<tr><td class="japanese">はいる</td><td class="romaji">hairu</td><td class="spanish">entrar</td></tr>
+<tr><td class="japanese">ばけもの</td><td class="romaji">bakemono</td><td class="spanish">monstruo</td></tr>
+<tr><td class="japanese">はち</td><td class="romaji">hachi</td><td class="spanish">ocho</td></tr>
+<tr><td class="japanese">はな</td><td class="romaji">hana</td><td class="spanish">flor/nariz</td></tr>
+<tr><td class="japanese">はなします</td><td class="romaji">hanashimasu</td><td class="spanish">hablar/conversar</td></tr>
+<tr><td class="japanese">はなぢ</td><td class="romaji">hanaji</td><td class="spanish">sangrado nasal</td></tr>
+<tr><td class="japanese">はなび</td><td class="romaji">hanabi</td><td class="spanish">fuegos artificiales</td></tr>
+<tr><td class="japanese">はなみ</td><td class="romaji">hanami</td><td class="spanish">ver florecimiento (como el de los cerezos)</td></tr>
+<tr><td class="japanese">はは</td><td class="romaji">haha</td><td class="spanish">madre</td></tr>
+<tr><td class="japanese">はやい</td><td class="romaji">hayai</td><td class="spanish">rápido/temprano</td></tr>
+<tr><td class="japanese">はる</td><td class="romaji">haru</td><td class="spanish">primavera</td></tr>
+<tr><td class="japanese">はれ</td><td class="romaji">hare</td><td class="spanish">tiempo soleado/despejado</td></tr>
+<tr><td class="japanese">ひ</td><td class="romaji">hi</td><td class="spanish">sol/día/fuego</td></tr>
+<tr><td class="japanese">ぴかぴか</td><td class="romaji">pikapika</td><td class="spanish">brillante</td></tr>
+<tr><td class="japanese">ひくい</td><td class="romaji">hikui</td><td class="spanish">bajo</td></tr>
+<tr><td class="japanese">びじん</td><td class="romaji">bijin</td><td class="spanish">persona guapa</td></tr>
+<tr><td class="japanese">ひと</td><td class="romaji">hito</td><td class="spanish">persona</td></tr>
+<tr><td class="japanese">ひま</td><td class="romaji">hima</td><td class="spanish">tiempo libre/estar libre</td></tr>
+<tr><td class="japanese">ひゃく</td><td class="romaji">hyaku</td><td class="spanish">cien</td></tr>
+<tr><td class="japanese">ひゅう</td><td class="romaji">hyū</td><td class="spanish">sonido del viento al soplar</td></tr>
+<tr><td class="japanese">びょういん</td><td class="romaji">byōin</td><td class="spanish">hospital</td></tr>
+<tr><td class="japanese">ひょうか</td><td class="romaji">hyōka</td><td class="spanish">reputación</td></tr>
+<tr><td class="japanese">ぴょんぴょん</td><td class="romaji">pyonpyon</td><td class="spanish">rebotando/saltando</td></tr>
+<tr><td class="japanese">ひらがな</td><td class="romaji">hiragana</td><td class="spanish">hiragana</td></tr>
+<tr><td class="japanese">ひる</td><td class="romaji">hiru</td><td class="spanish">mediodía</td></tr>
+<tr><td class="japanese">ふくかいちょう</td><td class="romaji">fuku kaichō</td><td class="spanish">subdelegado</td></tr>
+<tr><td class="japanese">ぶた</td><td class="romaji">buta</td><td class="spanish">cerdo</td></tr>
+<tr><td class="japanese">ふつう</td><td class="romaji">futsū</td><td class="spanish">normal</td></tr>
+<tr><td class="japanese">ふゆ</td><td class="romaji">fuyu</td><td class="spanish">invierno</td></tr>
+<tr><td class="japanese">ふるい</td><td class="romaji">furui</td><td class="spanish">viejo/antiguo</td></tr>
+<tr><td class="japanese">ぶんしょう</td><td class="romaji">bunshō</td><td class="spanish">oración</td></tr>
+<tr><td class="japanese">ぷんぷん</td><td class="romaji">punpun</td><td class="spanish">estar enfadado</td></tr>
+<tr><td class="japanese">へい</td><td class="romaji">hei</td><td class="spanish">muro/valla</td></tr>
+<tr><td class="japanese">ぺこぺこ</td><td class="romaji">pekopeko</td><td class="spanish">tener mucha hambre</td></tr>
+<tr><td class="japanese">へそ</td><td class="romaji">heso</td><td class="spanish">ombligo</td></tr>
+<tr><td class="japanese">へた</td><td class="romaji">heta</td><td class="spanish">malo/a (sin habilidad)</td></tr>
+<tr><td class="japanese">へや</td><td class="romaji">heya</td><td class="spanish">habitación</td></tr>
+<tr><td class="japanese">べんきょう</td><td class="romaji">benkyō</td><td class="spanish">estudio</td></tr>
+<tr><td class="japanese">べんきょうします</td><td class="romaji">benkyō shimasu</td><td class="spanish">estudiar</td></tr>
+<tr><td class="japanese">べんとう</td><td class="romaji">bentō</td><td class="spanish">fiambrera</td></tr>
+<tr><td class="japanese">ぼうし</td><td class="romaji">bōshi</td><td class="spanish">sombrero</td></tr>
+<tr><td class="japanese">ほか</td><td class="romaji">hoka</td><td class="spanish">otro</td></tr>
+<tr><td class="japanese">ほし</td><td class="romaji">hoshi</td><td class="spanish">estrella</td></tr>
+<tr><td class="japanese">ほそい</td><td class="romaji">hosoi</td><td class="spanish">delgado/estrecho/fino</td></tr>
+<tr><td class="japanese">ほたる</td><td class="romaji">hotaru</td><td class="spanish">luciérnaga</td></tr>
+<tr><td class="japanese">ほん</td><td class="romaji">hon</td><td class="spanish">libro</td></tr>
+<tr><td class="japanese">ぽんず</td><td class="romaji">ponzu</td><td class="spanish">salsa japonesa cítrica</td></tr>
+<tr><td class="group" id="g6" colspan="3"><span class="jp">ま</span> M</td></tr>
+<tr><td class="japanese">まいにち</td><td class="romaji">mainichi</td><td class="spanish">todos los días</td></tr>
+<tr><td class="japanese">まえ</td><td class="romaji">mae</td><td class="spanish">delante/antes</td></tr>
+<tr><td class="japanese">まち</td><td class="romaji">machi</td><td class="spanish">ciudad</td></tr>
+<tr><td class="japanese">まっちゃ</td><td class="romaji">maccha</td><td class="spanish">matcha</td></tr>
+<tr><td class="japanese">まつり</td><td class="romaji">matsuri</td><td class="spanish">festival</td></tr>
+<tr><td class="japanese">まど</td><td class="romaji">mado</td><td class="spanish">ventana</td></tr>
+<tr><td class="japanese">まほう</td><td class="romaji">mahō</td><td class="spanish">magia</td></tr>
+<tr><td class="japanese">まめまき</td><td class="romaji">mamemaki</td><td class="spanish">lanzamiento de judías (ritual de Setsubun)</td></tr>
+<tr><td class="japanese">みず</td><td class="romaji">mizu</td><td class="spanish">agua</td></tr>
+<tr><td class="japanese">みせ</td><td class="romaji">mise</td><td class="spanish">tienda</td></tr>
+<tr><td class="japanese">みち</td><td class="romaji">michi</td><td class="spanish">camino/calle</td></tr>
+<tr><td class="japanese">みどり</td><td class="romaji">midori</td><td class="spanish">verde</td></tr>
+<tr><td class="japanese">みなさん</td><td class="romaji">minasan</td><td class="spanish">todos/todo el mundo (formal)</td></tr>
+<tr><td class="japanese">みます</td><td class="romaji">mimasu</td><td class="spanish">ver/mirar</td></tr>
+<tr><td class="japanese">みみ</td><td class="romaji">mimi</td><td class="spanish">oreja/s</td></tr>
+<tr><td class="japanese">みゃく</td><td class="romaji">myaku</td><td class="spanish">pulso</td></tr>
+<tr><td class="japanese">みょうじ</td><td class="romaji">myōji</td><td class="spanish">apellido</td></tr>
+<tr><td class="japanese">みんな</td><td class="romaji">minna</td><td class="spanish">todos/todo el mundo</td></tr>
+<tr><td class="japanese">むこう</td><td class="romaji">mukō</td><td class="spanish">al otro lado/allí</td></tr>
+<tr><td class="japanese">むすこ</td><td class="romaji">musuko</td><td class="spanish">hijo</td></tr>
+<tr><td class="japanese">むすめ</td><td class="romaji">musume</td><td class="spanish">hija/chica joven</td></tr>
+<tr><td class="japanese">むらさき</td><td class="romaji">murasaki</td><td class="spanish">morado</td></tr>
+<tr><td class="japanese">め</td><td class="romaji">me</td><td class="spanish">ojo/s</td></tr>
+<tr><td class="japanese">めがね</td><td class="romaji">megane</td><td class="spanish">gafas</td></tr>
+<tr><td class="japanese">もの</td><td class="romaji">mono</td><td class="spanish">cosa</td></tr>
+<tr><td class="japanese">もも</td><td class="romaji">momo</td><td class="spanish">melocotón</td></tr>
+<tr><td class="japanese">もり</td><td class="romaji">mori</td><td class="spanish">bosque</td></tr>
+<tr><td class="group" id="g7" colspan="3"><span class="jp">や</span> Y</td></tr>
+<tr><td class="japanese">やき</td><td class="romaji">yaki</td><td class="spanish">a la parrilla</td></tr>
+<tr><td class="japanese">やきとり</td><td class="romaji">yakitori</td><td class="spanish">pollo a la parrilla en brocheta</td></tr>
+<tr><td class="japanese">やきにく</td><td class="romaji">yakiniku</td><td class="spanish">carne a la parrilla</td></tr>
+<tr><td class="japanese">やさい</td><td class="romaji">yasai</td><td class="spanish">verdura</td></tr>
+<tr><td class="japanese">やすい</td><td class="romaji">yasui</td><td class="spanish">barato</td></tr>
+<tr><td class="japanese">やすみ</td><td class="romaji">yasumi</td><td class="spanish">descanso</td></tr>
+<tr><td class="japanese">やすみのひ</td><td class="romaji">yasumi no hi</td><td class="spanish">día de descanso</td></tr>
+<tr><td class="japanese">やま</td><td class="romaji">yama</td><td class="spanish">montaña</td></tr>
+<tr><td class="japanese">ゆうれい</td><td class="romaji">yūrei</td><td class="spanish">fantasma</td></tr>
+<tr><td class="japanese">ゆき</td><td class="romaji">yuki</td><td class="spanish">nieve</td></tr>
+<tr><td class="japanese">ゆきだるま</td><td class="romaji">yukidaruma</td><td class="spanish">muñeco de nieve</td></tr>
+<tr><td class="japanese">ゆめ</td><td class="romaji">yume</td><td class="spanish">sueño</td></tr>
+<tr><td class="japanese">よい</td><td class="romaji">yoi</td><td class="spanish">bueno</td></tr>
+<tr><td class="japanese">ようかい</td><td class="romaji">yōkai</td><td class="spanish">yōkai</td></tr>
+<tr><td class="japanese">よく</td><td class="romaji">yoku</td><td class="spanish">bien/a menudo</td></tr>
+<tr><td class="japanese">よこ</td><td class="romaji">yoko</td><td class="spanish">al lado</td></tr>
+<tr><td class="japanese">よみます</td><td class="romaji">yomimasu</td><td class="spanish">leer</td></tr>
+<tr><td class="japanese">よむ</td><td class="romaji">yomu</td><td class="spanish">leer</td></tr>
+<tr><td class="japanese">よめ</td><td class="romaji">yome</td><td class="spanish">esposa</td></tr>
+<tr><td class="japanese">よる</td><td class="romaji">yoru</td><td class="spanish">noche</td></tr>
+<tr><td class="group" id="g8" colspan="3"><span class="jp">ら</span> R</td></tr>
+<tr><td class="japanese">らっぱ</td><td class="romaji">rappa</td><td class="spanish">trompeta</td></tr>
+<tr><td class="japanese">りゃくご</td><td class="romaji">ryakugo</td><td class="spanish">abreviatura</td></tr>
+<tr><td class="japanese">りゅう</td><td class="romaji">ryū</td><td class="spanish">dragón</td></tr>
+<tr><td class="japanese">りょかん</td><td class="romaji">ryokan</td><td class="spanish">posada japonesa (tradicional)</td></tr>
+<tr><td class="japanese">りょこう</td><td class="romaji">ryokō</td><td class="spanish">viaje</td></tr>
+<tr><td class="japanese">りんご</td><td class="romaji">ringo</td><td class="spanish">manzana</td></tr>
+<tr><td class="japanese">るり</td><td class="romaji">ruri</td><td class="spanish">lapislázuli</td></tr>
+<tr><td class="japanese">れい</td><td class="romaji">rei</td><td class="spanish">saludo/reverencia</td></tr>
+<tr><td class="japanese">れい (礼)</td><td class="romaji">rei</td><td class="spanish">saludo</td></tr>
+<tr><td class="japanese">れきし</td><td class="romaji">rekishi</td><td class="spanish">historia</td></tr>
+<tr><td class="japanese">ろく</td><td class="romaji">roku</td><td class="spanish">seis</td></tr>
+<tr><td class="japanese">ろくろくび</td><td class="romaji">rokurokubi</td><td class="spanish">mujer de cuello largo</td></tr>
+<tr><td class="group" id="g9" colspan="3"><span class="jp">わ</span> W</td></tr>
+<tr><td class="japanese">わたし</td><td class="romaji">watashi</td><td class="spanish">yo</td></tr>
+<tr><td class="japanese">わたしたち</td><td class="romaji">watashi tachi</td><td class="spanish">nosotros</td></tr>
+<tr><td class="japanese">わらいます</td><td class="romaji">waraimasu</td><td class="spanish">reír</td></tr>
+</tbody>
+</table>
+</section>
+</main>
+
+</div>
+</div>
+</body>
+</html>

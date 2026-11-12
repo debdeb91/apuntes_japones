@@ -1,0 +1,492 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>カタカナ · Katakana</title>
+
+<style>
+:root {
+  --bg: #f7f3ec;
+  --paper: #fffdf9;
+  --accent: #7867a8;
+  --pink: #e7a1bd;
+  --pink2: #eac0da;
+  --pale: #ffeef4;
+  --ink: #51484d;
+  --line: #62575d;
+  --muted: #887b82;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 22px;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: Arial, "Noto Sans JP", sans-serif;
+}
+
+.page {
+  max-width: 1500px;
+  margin: auto;
+  padding: 22px;
+  background: var(--paper);
+  border: 3px solid var(--line);
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  border-bottom: 4px solid var(--pink);
+  padding-bottom: 14px;
+  margin-bottom: 20px;
+}
+
+h1 {
+  margin: 0;
+  color: #8e5871;
+  font-size: clamp(28px, 4vw, 42px);
+  letter-spacing: 2px;
+}
+
+.subtitle {
+  margin: 5px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+nav {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+nav a {
+  padding: 9px 14px;
+  border: 2px solid var(--pink);
+  border-radius: 7px;
+  text-decoration: none;
+  color: #80536a;
+  font-weight: bold;
+  background: var(--pale);
+}
+
+nav a.active {
+  background: var(--pink);
+  color: white;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(280px, .9fr) minmax(500px, 1.5fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.notes {
+  display: grid;
+  gap: 12px;
+}
+
+.note, .sheet-section {
+  border: 2px solid var(--line);
+  background: white;
+  padding: 12px 14px;
+}
+
+.note h2, .section-title {
+  margin: -12px -14px 10px;
+  padding: 8px 12px;
+  background: var(--pink2);
+  font-size: 17px;
+  color: #59434e;
+}
+
+.note p, .note ul {
+  font-size: 14px;
+  line-height: 1.48;
+}
+
+.note p { margin: 7px 0; }
+
+.note ul {
+  margin: 6px 0;
+  padding-left: 20px;
+}
+
+.example {
+  background: var(--pale);
+  padding: 7px 9px;
+  margin-top: 7px;
+  border-left: 4px solid var(--pink);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.jp {
+  font-family: "Noto Sans JP", "Yu Gothic", sans-serif;
+}
+
+.charts {
+  display: grid;
+  gap: 16px;
+}
+
+.sheet-section { padding: 12px; }
+
+.section-title {
+  margin: -12px -12px 12px;
+}
+
+.kana-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+
+.combo-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+
+.kana {
+  min-height: 76px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: white;
+}
+
+.kana:nth-child(odd) {
+  background: #fff8fb;
+}
+
+.kana .char {
+  font-family: "Noto Sans JP", "Yu Gothic", sans-serif;
+  font-size: 32px;
+  line-height: 1.15;
+  color: #5b4b53;
+}
+
+.kana .romaji {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 4px;
+  font-weight: bold;
+  letter-spacing: .5px;
+}
+
+.kana.empty {
+  background: #faf7f7;
+}
+
+.combo-grid .kana {
+  min-height: 72px;
+}
+
+.combo-grid .char {
+  font-size: 29px;
+}
+
+.small-note {
+  font-size: 12px;
+  color: var(--muted);
+  margin: 8px 0 0;
+}
+
+@media(max-width: 900px) {
+  body { padding: 8px; }
+  .page { padding: 12px; }
+  .layout { grid-template-columns: 1fr; }
+  .notes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media(max-width: 560px) {
+  .notes { grid-template-columns: 1fr; }
+  .kana { min-height: 62px; }
+  .kana .char { font-size: 27px; }
+  .combo-grid .char { font-size: 24px; }
+  .kana .romaji { font-size: 10px; }
+}
+
+@media print {
+  body { padding: 0; background: white; }
+  .page { border: 0; max-width: none; }
+  .layout { grid-template-columns: .9fr 1.5fr; }
+  nav { display: none; }
+  .note, .sheet-section { break-inside: avoid; }
+}
+</style>
+</head>
+
+<body>
+<div class="page">
+
+<header>
+  <div>
+    <h1>カタカナ</h1>
+    <p class="subtitle">Silabario japonés</p>
+  </div>
+
+  <nav>
+    <a href="hiragana.html">Hiragana</a>
+    <a class="active" href="katakana.html">Katakana</a>
+    <a href="gramatica.html">Gramática</a>
+    <a href="particulas.html">Partículas</a>
+    <a href="expresiones.html">Expresiones</a>
+    <a href="palabras-hiragana.html">Palabras hiragana</a>
+    <a href="palabras-katakana.html">Palabras katakana</a>
+    <a href="paisesidiomas.html">Países e idiomas</a>
+    <a href="profesiones.html">Profesiones</a>
+    <a href="numeros.html">Números</a>
+    <a href="hiragana_practice.html">Práctica hiragana</a>
+    <a href="katakana_practice.html">Práctica katakana</a>
+    <a href="palabras.html">Práctica palabras</a>
+  </nav>
+</header>
+
+<div class="layout">
+
+<aside class="notes">
+
+<section class="note">
+<h2>Silabario</h2>
+<p>►Consonante + vocal.</p>
+<p>►46 símbolos.</p>
+<p>►Formas rectas y anguladas.</p>
+<p>►Se usa mayormente para palabras de origen no japonés (o para enfatizar).</p>
+<p>►Muchos préstamos y anglicismos, transcripciones fonéticas.</p>
+<p>►A, KA, SA, TA, NA, HA, MA, YA, RA, WA.</p>
+</section>
+
+<section class="note">
+<h2>Pronunciación</h2>
+<p><span class="jp">►ハ・ヒ・ヘ・ホ</span> se pronuncian con una h aspirada, parecida a la j española suave: /ja/ /ji/ /je/ /jo/.</p>
+<p><span class="jp">►フ</span> no es fu española, es mezcla de fu/hu, fu de soplar sin dientes.</p>
+<p><span class="jp">►ラ・リ・ル・レ・ロ</span> se pronuncia como R suave; pera, cara, loro...</p>
+</section>
+
+<section class="note">
+<h2>Alargaciones vocálicas</h2>
+<p>►Las alargaciones vocálicas se indican normalmente con el símbolo <span class="jp">ー</span> (chōonpu).</p>
+<div class="example">
+<span class="jp">ケーキ</span> - kēki - tarta/pastel<br>
+<span class="jp">コーヒー</span> - kōhī - café<br>
+<span class="jp">ラーメン</span> - rāmen - ramen<br>
+<span class="jp">タクシー</span> - takushī - taxi
+</div>
+</section>
+
+<section class="note">
+<h2>Consonantes dobles</h2>
+<p>►Se utilizará <span class="jp">ツ</span> antes de la consonante para doblarla, excepto en <span class="jp">ナ・ニ・ヌ・ネ・ノ</span> que ya está <span class="jp">ン</span>.</p>
+<p>►Cuando <span class="jp">ツ</span> se usa para doblar, se escribe con un tamaño más pequeño.</p>
+<p>►No se pronuncia como /tsu/, el sonido que hará será el de la sílaba siguiente.</p>
+<div class="example">
+<span class="jp">ベッド</span> - beddo - cama
+</div>
+</section>
+
+<section class="note">
+<h2>Tenten ゛ y maru ゜</h2>
+<p><span class="jp">►てんてん</span> - tenten - rayitas.</p>
+<p><span class="jp">►まる</span> - maru - círculo.</p>
+<div class="example">
+K → G<br>
+S → Z<br>
+T → D<br>
+H → B<br>
+H → P
+</div>
+<p>►Z: <span class="jp">ザ・ジ・ズ・ゼ・ゾ</span> /dsa/gi/dsu/dse/dso [/gi/ de Girona].</p>
+<p>►D: <span class="jp">ダ・ヂ・ヅ・デ・ド</span> /da/ji/zu/de/do (se pronuncia como Z, se usa poco).</p>
+</section>
+
+<section class="note">
+<h2>Combinaciones ヤ・ユ・ヨ</h2>
+<p>►Se usan con sílabas de i (<span class="jp">キ、シ、チ、ニ、ヒ、ミ、リ、ギ、ジ、ヂ、ビ、ピ</span>). Aunque habrá excepciones en las que no.</p>
+<p><span class="jp">►ヤ・ユ・ヨ</span> se escribirán después de la sílaba y serán más pequeñas.</p>
+<p>►Usan el sonido de /i/.</p>
+<p>►DI → <span class="jp">ヂャ・ヂュ・ヂョ</span> - ja ju jo (se pronuncia igual que Z (ji), se usa poco).</p>
+</section>
+
+<section class="note">
+<h2>Palabras japonesas en katakana</h2>
+<p>►Se pueden escribir palabras japonesas que van en hiragana para expresar exageración, resaltarlas, jerga.</p>
+<div class="example">
+Ej: <span class="jp">ヤバい</span> (<span class="jp">やばい</span>) - yabai - terrible/tremendo
+</div>
+</section>
+
+<section class="note">
+<h2>Nombres propios</h2>
+<p>►Los nombres propios se transcriben fonéticamente, se busca la aproximación.</p>
+<div class="example">María → <span class="jp">マリア</span> → Maria</div>
+<p>►Si acaba en consonante se le añade vocal débil.</p>
+<div class="example">Inés → <span class="jp">イネス</span> → Inesu</div>
+<p>►Si tiene L se pone R.</p>
+<div class="example">Lola → <span class="jp">ローラ</span> → Rōra</div>
+<p>►Si tiene dos consonantes juntas se le añade vocal débil.</p>
+<div class="example">Alberto → <span class="jp">アルベルト</span> → Aruberuto</div>
+<p>►Para separar el nombre de los apellidos se usará <span class="jp">・</span>.</p>
+<div class="example">María López Fernández → <span class="jp">マリア・ロペス・フェルナンデス</span> → Maria Ropesu Ferunandesu</div>
+</section>
+
+<section class="note">
+<h2>Sonidos que no existen: F, T, D, CH</h2>
+<p><span class="jp">►フ</span> (porque tiene vocal débil) + a/i/e/o:</p>
+<p><span class="jp">ファ</span> - fa / <span class="jp">フィ</span> - fi / <span class="jp">フェ</span> - fe / <span class="jp">フォ</span> - fo</p>
+<div class="example">Felipe → <span class="jp">フェリペ</span> → Feripe</div>
+<p>►TI/DI (al no haber con u, se usa con te):</p>
+<p><span class="jp">ティ</span> - ti / <span class="jp">ディ</span> - di</p>
+<div class="example">Martina → <span class="jp">マルティナ</span> → Marutina</div>
+<p>►TU/DU (como la e ya se usa con ti/di, se usa to):</p>
+<p><span class="jp">トゥ</span> - tu / <span class="jp">ドゥ</span> - du</p>
+<div class="example">Dulce → <span class="jp">ドゥルセ</span> → Duruse</div>
+<p>►CHE (el resto ya las tenemos):</p>
+<p><span class="jp">チェ</span> - che</p>
+<div class="example">Chema → <span class="jp">チェマ</span> → Chema</div>
+</section>
+
+<section class="note">
+<h2>Sonidos que no existen: Ñ, LL</h2>
+<p>►Ñ, se usará combinación de NI + vocal.</p>
+<p><span class="jp">ニャ</span> - nya - ña<br>
+<span class="jp">ニィ</span> - nyi - ñi<br>
+<span class="jp">ニュ</span> - nyu - ñu<br>
+<span class="jp">ニェ</span> - nye - ñe<br>
+<span class="jp">ニョ</span> - nyo - ño</p>
+<div class="example">Cañedo → <span class="jp">カニェド</span> → Kanyedo</div>
+<p>►LL, se usará combinación de RI + vocal.</p>
+<p><span class="jp">リャ</span> - rya - lla<br>
+<span class="jp">リィ</span> - ryi - lli<br>
+<span class="jp">リュ</span> - ryu - llu<br>
+<span class="jp">リェ</span> - rye - lle<br>
+<span class="jp">リョ</span> - ryo - llo</p>
+<div class="example">Vallejo → <span class="jp">バジェホ</span> → Bajeho</div>
+</section>
+
+<section class="note">
+<h2>►RR, Z, C, S, V</h2>
+<p>RR es igual que R.</p>
+<div class="example">Carrasco → <span class="jp">カラスコ</span> → Karasuko</div>
+<p>►ZA, CI, ZU, CE, ZO:</p>
+<p><span class="jp">サ</span> - sa - za / <span class="jp">シ</span> - shi - ci / <span class="jp">ス</span> - su - zu / <span class="jp">セ</span> - se - ce / <span class="jp">ソ</span> - so - zo</p>
+<div class="example">Cecilia → <span class="jp">セシリア</span> → Seshiria</div>
+<p>►SI (el resto ya las tenemos):</p>
+<p><span class="jp">シ</span> - shi - si</p>
+<div class="example">Simón → <span class="jp">シモン</span> → Shimon</div>
+<p>►V, se hará con <span class="jp">バ/ビ/ブ/ベ/ボ</span>.</p>
+<p>Cuando un nombre o apellido acaba en Z, se usará <span class="jp">ス</span>.</p>
+<div class="example">Beatriz → <span class="jp">ベアトリス</span> → Beatorisu</div>
+</section>
+
+<section class="note">
+<h2>Sonidos que no existen: WI, WE, WU, WO</h2>
+<p><span class="jp">ウィ</span> - wi<br>
+<span class="jp">ウェ</span> - we<br>
+<span class="jp">ウ</span> - wu<br>
+<span class="jp">ウォ</span> - wo</p>
+<div class="example">water → wootā → <span class="jp">ウォーター</span><br>
+web → webu → <span class="jp">ウェブ</span></div>
+</section>
+
+</aside>
+
+<main class="charts">
+
+<section class="sheet-section">
+<h2 class="section-title">Katakana básico</h2>
+<div class="kana-grid" id="basic"></div>
+</section>
+
+<section class="sheet-section">
+<h2 class="section-title">Dakuten y handakuten</h2>
+<div class="kana-grid" id="dakuten"></div>
+</section>
+
+<section class="sheet-section">
+<h2 class="section-title">Combinaciones pequeñas</h2>
+<div class="combo-grid" id="combos"></div>
+</section>
+
+<section class="sheet-section">
+<h2 class="section-title">Combinaciones extranjeras</h2>
+<div class="combo-grid" id="foreign"></div>
+<p class="small-note">Sonidos que no existen en japonés tradicional: se escriben con una vocal pequeña (ァ ィ ェ ォ) o con ゥ después de la sílaba.</p>
+</section>
+
+</main>
+</div>
+</div>
+
+<script>
+const basic = [
+['ア','A'],['イ','I'],['ウ','U'],['エ','E'],['オ','O'],
+['カ','KA'],['キ','KI'],['ク','KU'],['ケ','KE'],['コ','KO'],
+['サ','SA'],['シ','SHI'],['ス','SU'],['セ','SE'],['ソ','SO'],
+['タ','TA'],['チ','CHI'],['ツ','TSU'],['テ','TE'],['ト','TO'],
+['ナ','NA'],['ニ','NI'],['ヌ','NU'],['ネ','NE'],['ノ','NO'],
+['ハ','HA'],['ヒ','HI'],['フ','FU'],['ヘ','HE'],['ホ','HO'],
+['マ','MA'],['ミ','MI'],['ム','MU'],['メ','ME'],['モ','MO'],
+['ヤ','YA'],['',''],['ユ','YU'],['',''],['ヨ','YO'],
+['ラ','RA'],['リ','RI'],['ル','RU'],['レ','RE'],['ロ','RO'],
+['ワ','WA'],['',''],['ヲ','WO'],['',''],['ン','N']
+];
+
+const dakuten = [
+['ガ','GA'],['ギ','GI'],['グ','GU'],['ゲ','GE'],['ゴ','GO'],
+['ザ','ZA'],['ジ','JI'],['ズ','ZU'],['ゼ','ZE'],['ゾ','ZO'],
+['ダ','DA'],['ヂ','JI'],['ヅ','ZU'],['デ','DE'],['ド','DO'],
+['バ','BA'],['ビ','BI'],['ブ','BU'],['ベ','BE'],['ボ','BO'],
+['パ','PA'],['ピ','PI'],['プ','PU'],['ペ','PE'],['ポ','PO']
+];
+
+const combos = [
+['キャ','KYA'],['キュ','KYU'],['キョ','KYO'],['シャ','SHA'],
+['シュ','SHU'],['ショ','SHO'],['チャ','CHA'],['チュ','CHU'],
+['チョ','CHO'],['ニャ','NYA'],['ニュ','NYU'],['ニョ','NYO'],
+['ヒャ','HYA'],['ヒュ','HYU'],['ヒョ','HYO'],['ミャ','MYA'],
+['ミュ','MYU'],['ミョ','MYO'],['リャ','RYA'],['リュ','RYU'],
+['リョ','RYO'],['ギャ','GYA'],['ギュ','GYU'],['ギョ','GYO'],
+['ジャ','JA'],['ジュ','JU'],['ジョ','JO'],['ヂャ','JA'],
+['ヂュ','JU'],['ヂョ','JO'],['ビャ','BYA'],['ビュ','BYU'],
+['ビョ','BYO'],['ピャ','PYA'],['ピュ','PYU'],['ピョ','PYO']
+];
+
+const foreign = [
+['ファ','FA'],['フィ','FI'],['フェ','FE'],['フォ','FO'],
+['ティ','TI'],['ディ','DI'],['トゥ','TU'],['ドゥ','DU'],
+['ウィ','WI'],['ウェ','WE'],['ウォ','WO'],['チェ','CHE'],
+['シェ','SHE'],['ジェ','JE'],['ニェ','NYE'],['リェ','RYE']
+];
+
+function render(id, data) {
+  document.getElementById(id).innerHTML = data.map(([char, romaji]) => `
+    <div class="kana ${char ? '' : 'empty'}">
+      <div class="char">${char || '　'}</div>
+      <div class="romaji">${romaji || '　'}</div>
+    </div>
+  `).join('');
+}
+
+render('basic', basic);
+render('dakuten', dakuten);
+render('combos', combos);
+render('foreign', foreign);
+</script>
+
+</body>
+</html>

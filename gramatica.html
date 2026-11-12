@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ぶんぽう · Gramática</title>
+
+<style>
+:root {
+  --bg: #f7f3ec;
+  --paper: #fffdf9;
+  --accent: #7867a8;
+  --pink: #e7a1bd;
+  --pink2: #eac0da;
+  --pale: #ffeef4;
+  --ink: #51484d;
+  --line: #62575d;
+  --muted: #887b82;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  padding: 22px;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: Arial, "Noto Sans JP", sans-serif;
+}
+
+.page {
+  max-width: 1500px;
+  margin: auto;
+  padding: 22px;
+  background: var(--paper);
+  border: 3px solid var(--line);
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  border-bottom: 4px solid var(--pink);
+  padding-bottom: 14px;
+  margin-bottom: 20px;
+}
+
+h1 {
+  margin: 0;
+  color: #8e5871;
+  font-size: clamp(28px, 4vw, 42px);
+  letter-spacing: 2px;
+}
+
+.subtitle {
+  margin: 5px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+nav {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+nav a {
+  padding: 9px 14px;
+  border: 2px solid var(--pink);
+  border-radius: 7px;
+  text-decoration: none;
+  color: #80536a;
+  font-weight: bold;
+  background: var(--pale);
+}
+
+nav a.active {
+  background: var(--pink);
+  color: white;
+}
+
+.jp {
+  font-family: "Noto Sans JP", "Yu Gothic", sans-serif;
+}
+
+/* ---------- estructura general ---------- */
+.layout {
+  display: grid;
+  grid-template-columns: 230px minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.index {
+  position: sticky;
+  top: 14px;
+  border: 2px solid var(--line);
+  background: white;
+  padding: 12px 14px;
+}
+
+.index h2 {
+  margin: -12px -14px 10px;
+  padding: 8px 12px;
+  background: var(--pink2);
+  font-size: 17px;
+  color: #59434e;
+}
+
+.index .label {
+  margin: 12px 0 4px;
+  font-size: 13px;
+  font-weight: bold;
+  color: #8e5871;
+}
+
+.index .label:first-of-type { margin-top: 0; }
+
+.index a {
+  display: block;
+  padding: 4px 8px;
+  border-left: 3px solid transparent;
+  font-size: 14px;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.index a:hover,
+.index a:focus-visible {
+  background: var(--pale);
+  border-left-color: var(--pink);
+}
+
+.content {
+  display: grid;
+  gap: 28px;
+}
+
+.group {
+  display: grid;
+  gap: 16px;
+}
+
+.group-head {
+  border-bottom: 4px solid var(--pink);
+  padding-bottom: 6px;
+}
+
+.group-head h2 {
+  margin: 0;
+  color: #8e5871;
+  font-size: 22px;
+}
+
+.group-head p {
+  margin: 3px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* ---------- secciones ---------- */
+.sheet-section {
+  border: 2px solid var(--line);
+  background: white;
+  padding: 12px;
+  scroll-margin-top: 14px;
+}
+
+.section-title {
+  margin: -12px -12px 12px;
+  padding: 8px 12px;
+  background: var(--pink2);
+  font-size: 17px;
+  color: #59434e;
+}
+
+.section-title .jp { margin-left: 6px; }
+
+.sheet-section p {
+  margin: 7px 0;
+  font-size: 14px;
+  line-height: 1.48;
+}
+
+.example {
+  background: var(--pale);
+  padding: 7px 9px;
+  margin: 8px 0;
+  border-left: 4px solid var(--pink);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.sov {
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 1.6;
+}
+.sov .s { color: #3f9a5f; }
+.sov .o { color: #e0782a; }
+.sov .v { color: #4a7fd0; }
+
+.subhead {
+  margin: 14px 0 8px;
+  padding: 5px 9px;
+  background: var(--pale);
+  border-left: 4px solid var(--pink);
+  font-size: 14px;
+  font-weight: bold;
+  color: #59434e;
+}
+
+.two {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  align-items: start;
+}
+
+.groups {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 4px 16px;
+}
+
+/* ---------- tablas ---------- */
+.tbl {
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+  margin: 8px 0;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: var(--cols, 1.25fr 1fr 1.25fr);
+}
+
+.cell {
+  padding: 8px 10px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: white;
+  font-size: 14px;
+  line-height: 1.4;
+  display: flex;
+  align-items: center;
+  overflow-wrap: anywhere;
+}
+
+.row:nth-child(even) .cell { background: #fff8fb; }
+
+.cell.j {
+  font-family: "Noto Sans JP", "Yu Gothic", sans-serif;
+  font-size: 18px;
+  color: #5b4b53;
+}
+
+.cell.r {
+  color: var(--muted);
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.row.head .cell {
+  background: var(--pale);
+  font-weight: bold;
+  font-size: 13px;
+  color: #80536a;
+  font-family: Arial, sans-serif;
+}
+
+.row.key .cell { background: var(--pale); font-weight: bold; }
+.row.key .cell.r { color: #8e5871; }
+
+@media(max-width: 900px) {
+  body { padding: 8px; }
+  .page { padding: 12px; }
+  .layout, .two, .groups { grid-template-columns: 1fr; }
+  .index { position: static; }
+}
+
+@media(max-width: 560px) {
+  .row { grid-template-columns: 1fr !important; }
+  .row.head { display: none; }
+  .cell { padding: 6px 10px; border-bottom-width: 0; }
+  .row .cell:last-child { border-bottom-width: 1px; }
+  .cell.j { font-size: 16px; }
+}
+
+@media print {
+  body { padding: 0; background: white; }
+  .page { border: 0; max-width: none; }
+  nav, .index { display: none; }
+  .layout { grid-template-columns: 1fr; }
+  .sheet-section { break-inside: avoid; }
+}
+</style>
+</head>
+
+<body>
+<div class="page">
+
+<header>
+  <div>
+    <h1>ぶんぽう</h1>
+    <p class="subtitle">Gramática japonesa</p>
+  </div>
+
+  <nav>
+    <a href="hiragana.html">Hiragana</a>
+    <a href="katakana.html">Katakana</a>
+    <a class="active" href="gramatica.html">Gramática</a>
+    <a href="particulas.html">Partículas</a>
+    <a href="expresiones.html">Expresiones</a>
+    <a href="palabras-hiragana.html">Palabras hiragana</a>
+    <a href="palabras-katakana.html">Palabras katakana</a>
+    <a href="paisesidiomas.html">Países e idiomas</a>
+    <a href="profesiones.html">Profesiones</a>
+    <a href="numeros.html">Números</a>
+    <a href="hiragana_practice.html">Práctica hiragana</a>
+    <a href="katakana_practice.html">Práctica katakana</a>
+    <a href="palabras.html">Práctica palabras</a>
+  </nav>
+</header>
+
+<div class="layout">
+
+<aside class="index" aria-label="Índice">
+  <h2>Índice</h2>
+  <div class="label">La oración</div>
+  <a href="#orden">Orden de la oración</a>
+  <a href="#presente">Presente simple</a>
+  <a href="#desu">です y じゃない</a>
+  <div class="label">Partículas</div>
+  <a href="#wa">は</a>
+  <a href="#ka">か</a>
+  <a href="#no">の</a>
+  <a href="#wo">を</a>
+  <div class="label">Palabras clave</div>
+  <a href="#pronombres">Pronombres personales</a>
+  <a href="#interrogativos">Interrogativos</a>
+  <a href="#lugar">Demostrativos de lugar</a>
+  <a href="#demostrativos">Pronombres demostrativos</a>
+  <div class="label">Verbos</div>
+  <a href="#shimasu">します</a>
+  <div class="label">Conversación</div>
+  <a href="#presentarse">Presentarse</a>
+  <div class="label">Puntuación</div>
+  <a href="#comillas">Comillas 「」</a>
+</aside>
+
+<main class="content">
+
+<!-- ===================== LA ORACIÓN ===================== -->
+<div class="group">
+  <div class="group-head">
+    <h2>La oración</h2>
+    <p>Cómo se ordena una frase y cómo se conjuga el presente.</p>
+  </div>
+
+  <section class="sheet-section" id="orden">
+    <h3 class="section-title">Orden de la oración</h3>
+    <p>En japonés el verbo siempre va al final de la oración, no se conjugan por persona.</p>
+    <div class="example sov jp"><span class="s">SUJETO</span> <span class="o">OBJETO/COMPLEMENTO</span> <span class="v">VERBO</span>.</div>
+  </section>
+
+  <div class="two">
+    <section class="sheet-section" id="presente">
+      <h3 class="section-title">Presente simple</h3>
+      <div id="t-presente"></div>
+    </section>
+
+    <section class="sheet-section" id="desu">
+      <h3 class="section-title"><span class="jp" style="margin-left:0">です y じゃない</span></h3>
+      <p><span class="jp">です</span> / <span class="jp">じゃないです</span> (desu / janai desu) [soy/estoy – no soy/no estoy]. Al no tener una traducción al español, se usará como una especie de ser/estar en presente simple.</p>
+      <p><span class="jp">じゃない</span> (janai) sirve para negar sustantivos y adjetivos.</p>
+    </section>
+  </div>
+</div>
+
+<!-- ===================== PARTÍCULAS ===================== -->
+<div class="group">
+  <div class="group-head">
+    <h2>Partículas</h2>
+    <p>Pequeñas palabras que marcan la función de cada parte de la oración.</p>
+  </div>
+
+  <section class="sheet-section" id="wa">
+    <h3 class="section-title">Partícula <span class="jp">は</span></h3>
+    <p><span class="jp">は</span> (wa), partícula que presenta el tema del que hablamos, sirve para saber de quién o qué. Suele coincidir con el sujeto.</p>
+    <div id="t-wa"></div>
+  </section>
+
+  <section class="sheet-section" id="ka">
+    <h3 class="section-title">Partícula <span class="jp">か</span></h3>
+    <p><span class="jp">か</span> (ka), partícula interrogativa, se coloca a final de la oración, sustituye el signo de interrogación.</p>
+    <div id="t-ka"></div>
+  </section>
+
+  <section class="sheet-section" id="no">
+    <h3 class="section-title">Partícula <span class="jp">の</span></h3>
+    <p>Partícula <b>DE</b> posesivo/relación/tipo, no de origen. [Esp. A de B; Jap. B の A]</p>
+    <div id="t-no"></div>
+    <div class="subhead">Análisis de <span class="jp">あれはだれのかさですか</span></div>
+    <div id="t-noAn"></div>
+  </section>
+
+  <section class="sheet-section" id="wo">
+    <h3 class="section-title">Partícula <span class="jp">を</span></h3>
+    <p><span class="jp">を</span> (wo) partícula que indica el complemento directo (sustantivo), se pronuncia como /o/, en respuestas cortas se omite.</p>
+    <div class="two">
+      <div>
+        <div class="example">[En japonés: SUJETO – COMPLEMENTO DIRECTO – VERBO]<br>(Sin contexto no se puede saber el sujeto, así que se puede traducir como infinitivo)</div>
+        <div id="t-wo1"></div>
+        <div class="example">En oraciones negativas se puede sustituir el <span class="jp">を</span> (wo) por <span class="jp">は</span> (wa).</div>
+        <div id="t-wo2"></div>
+      </div>
+      <div>
+        <div class="subhead">Ejemplo con <span class="jp">おちゃ</span> (té)</div>
+        <div id="t-wo3"></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ===================== PALABRAS CLAVE ===================== -->
+<div class="group">
+  <div class="group-head">
+    <h2>Palabras clave</h2>
+    <p>Pronombres, interrogativos y demostrativos que se usan en casi todas las frases.</p>
+  </div>
+
+  <div class="two">
+    <section class="sheet-section" id="pronombres">
+      <h3 class="section-title">Pronombres personales</h3>
+      <div id="t-pronombres"></div>
+      <div class="subhead"><span class="jp">みんな / みなさん</span> · minna / minasan</div>
+      <div id="t-todos"></div>
+    </section>
+
+    <section class="sheet-section" id="interrogativos">
+      <h3 class="section-title">Interrogativos</h3>
+      <div id="t-interrog"></div>
+    </section>
+  </div>
+
+  <div class="two">
+    <section class="sheet-section" id="lugar">
+      <h3 class="section-title">Demostrativos de lugar</h3>
+      <div id="t-lugar"></div>
+      <div class="subhead">Ejemplos</div>
+      <div id="t-lugarEj"></div>
+    </section>
+
+    <section class="sheet-section" id="demostrativos">
+      <h3 class="section-title">Pronombres demostrativos</h3>
+      <div id="t-demos"></div>
+      <div class="subhead">Ejemplos</div>
+      <div id="t-demosEj"></div>
+    </section>
+  </div>
+</div>
+
+<!-- ===================== VERBOS ===================== -->
+<div class="group">
+  <div class="group-head">
+    <h2>Verbos</h2>
+    <p>El verbo hacer y cómo forma expresiones con sustantivos.</p>
+  </div>
+
+  <section class="sheet-section" id="shimasu">
+    <h3 class="section-title">Verbo <span class="jp">します</span></h3>
+    <p>Verbo hacer, se usa como hacer + sustantivo.</p>
+    <div class="groups" id="t-shimasu"></div>
+  </section>
+</div>
+
+<!-- ===================== CONVERSACIÓN ===================== -->
+<div class="group">
+  <div class="group-head">
+    <h2>Conversación</h2>
+    <p>Preguntas para conocer a alguien.</p>
+  </div>
+
+  <section class="sheet-section" id="presentarse">
+    <h3 class="section-title">Presentarse · <span class="jp" style="margin-left:0">じこしょうかい</span></h3>
+    <p>Sufijo <span class="jp">-じん</span> (-jin) para usar de gentilicio de país.</p>
+    <p>Sufijo <span class="jp">-さい</span> (-sai) después de un número indica edad.</p>
+    <p>Para preguntarle a alguien algunas cosas se pondrá <span class="jp">お</span> (prefijo de cortesía) o <span class="jp">-ご</span> (sufijo de cortesía) en algunas cosas para indicar respeto.</p>
+    <div class="groups" id="t-presentarse"></div>
+  </section>
+</div>
+
+<!-- ===================== PUNTUACIÓN ===================== -->
+<div class="group">
+  <div class="group-head">
+    <h2>Puntuación</h2>
+    <p>Signos propios del japonés.</p>
+  </div>
+
+  <section class="sheet-section" id="comillas">
+    <h3 class="section-title">Comillas <span class="jp">「」</span></h3>
+    <p>Las comillas en japonés <span class="jp">「」</span> sirven para citar, poner títulos, etc.</p>
+    <div id="t-comillas"></div>
+  </section>
+</div>
+
+</main>
+</div>
+</div>
+
+<script>
+const JRE = ['Japonés', 'Rōmaji', 'Español'];
+
+function T(rows, opts = {}) {
+  const cols = opts.cols ? ` style="--cols:${opts.cols}"` : '';
+  const kinds = opts.kinds || ['j', 'r', 'e'];
+  const out = [];
+  if (opts.header) {
+    out.push(`<div class="row head"${cols}>` + opts.header.map(h => `<div class="cell">${h}</div>`).join('') + '</div>');
+  }
+  rows.forEach((r, i) => {
+    const key = opts.key === i ? ' key' : '';
+    out.push(`<div class="row${key}"${cols}>` + r.map((c, k) =>
+      `<div class="cell ${kinds[k] || 'e'}">${c}</div>`).join('') + '</div>');
+  });
+  return '<div class="tbl">' + out.join('') + '</div>';
+}
+const $ = (id, html) => document.getElementById('t-' + id).innerHTML = html;
+
+$('presente', T([
+  ['-ます', '-masu', 'verbo+masu', 'presente afirmativo'],
+  ['-ますか', '-masuka', 'verbo+masuka', 'presente interrogativo'],
+  ['-ません', '-masen', 'verbo+masen', 'presente negativo'],
+  ['-ませんか', '-masenka', 'verbo+masenka', 'presente negativo interrogativo'],
+  ['-ましょう', '-mashou', 'verbo+mashou', 'invitación a realizar la acción (vamos a…)']
+], { cols: '.9fr .9fr 1.1fr 1.4fr', kinds: ['j', 'r', 'e', 'e'], header: ['Terminación', 'Rōmaji', 'Formación', 'Uso'] }));
+
+$('pronombres', T([
+  ['わたし', 'watashi', 'yo'],
+  ['あなた', 'anata', 'tú'],
+  ['わたしたち', 'watashi tachi', 'nosotros (la i de watashi se pronuncia muy débil)'],
+  ['あなたたち', 'anata tachi', 'vosotros']
+], { header: JRE }));
+
+$('todos', T([
+  ['みんな', 'minna', 'todos/todo el mundo (coloquial)'],
+  ['みなさん', 'minasan', 'todos/todo el mundo (formal)']
+], { header: JRE }));
+
+$('interrog', T([
+  ['どこ', 'doko', 'dónde'],
+  ['なん', 'nan', 'qué'],
+  ['だれ', 'dare', 'quién']
+], { header: JRE }));
+
+$('wa', T([
+  ['わたしはスペインじんです。', 'Watashi wa supein-jin desu.', 'Soy española.'],
+  ['やまださんはせんせいです。', 'Yamada-san wa sensei desu.', 'Yamada-san es profesor.'],
+  ['これはほんです。', 'Kore wa hon desu.', 'Esto es un libro.']
+], { header: JRE }));
+
+$('ka', T([
+  ['あなたはがくせいですか。', 'anata wa gakusei desu ka?', '¿eres estudiante?'],
+  ['はい、わたしはがくせいです', 'hai, watashi wa gakusei desu', 'sí, soy estudiante'],
+  ['いいえ、わたしはがくせいじゃないです', 'iie, watashi wa gakusei janai desu', 'no, no soy estudiante']
+], { header: JRE }));
+
+$('lugar', T([
+  ['ここ', 'koko', 'aquí'],
+  ['そこ', 'soko', 'ahí'],
+  ['あそこ', 'asoko', 'allí']
+], { header: JRE }));
+$('lugarEj', T([
+  ['やまださんはどこですか。', 'Yamada-san wa doko desu ka?', '¿Dónde está Yamada-san?'],
+  ['やまださんはここです。', 'Yamada-san wa koko desu.', 'Yamada-san está aquí.'],
+  ['やまださんはそこです。', 'Yamada-san wa soko desu.', 'Yamada-san está ahí.'],
+  ['やまださんはあそこです。', 'Yamada-san wa asoko desu.', 'Yamada-san está allí.']
+]));
+
+$('demos', T([
+  ['これ', 'kore', 'esto'],
+  ['それ', 'sore', 'eso'],
+  ['あれ', 'are', 'aquello']
+], { header: JRE }));
+$('demosEj', T([
+  ['これはなんですか。', 'Kore wa nan desu ka?', '¿Qué es esto?'],
+  ['これははなです。', 'Kore wa hana desu.', 'Esto es una flor.'],
+  ['それはいぬです。', 'Sore wa inu desu.', 'Eso es un perro.'],
+  ['あれはUFOです。', 'Are wa UFO desu.', 'Aquello es un ovni.']
+]));
+
+$('comillas', T([
+  ['わたしは「となりのトトロ」をみます。', 'watashi wa 「tonari no Totoro」 wo mimasu', 'Veo «Mi vecino Totoro».']
+], { header: JRE }));
+
+$('no', T([
+  ['わたしのあねのともだちのにほんごのほん', 'watashi no ane no tomodachi no nihongo no hon', 'el libro de japonés de la amiga de mi hermana mayor'],
+  ['あれはだれのかさですか', 'are wa dare no kasa desu ka?', '¿de quién es aquel paraguas?']
+], { header: JRE }));
+$('noAn', T([
+  ['あれ', 'demostrativo'],
+  ['は', 'partícula de tema'],
+  ['だれ', 'interrogativo, quién'],
+  ['の', 'partícula de posesión'],
+  ['かさ', 'sustantivo'],
+  ['ですか', 'desu + pregunta']
+], { cols: '1fr 2fr', kinds: ['j', 'e'], header: ['Palabra', 'Función'] }));
+
+const sh = (jp, ro, es, noun, nounRo, nounEs) => T([
+  [jp, ro, es],
+  [noun, nounRo, nounEs],
+  ['を', 'wo', 'partícula de complemento directo'],
+  ['します', 'shimasu', 'hacer']
+], { key: 0 });
+$('shimasu',
+  sh('スポーツをします', 'supōtsu wo shimasu', 'hacer deporte (hacer el deporte)', 'スポーツ', 'supōtsu', 'deporte') +
+  sh('そうじをします', 'sōji wo shimasu', 'limpiar – hacer la limpieza', 'そうじ', 'sōji', 'limpieza') +
+  sh('べんきょうをします', 'benkyō wo shimasu', 'estudiar – hacer el estudio', 'べんきょう', 'benkyō', 'estudio') +
+  sh('りょこうをします', 'ryokō wo shimasu', 'viajar – hacer el viaje', 'りょこう', 'ryokō', 'viaje'));
+
+$('wo1', T([
+  ['ビデオをみます', 'bideo wo mimasu', 'ver vídeo'],
+  ['バナナをたべます', 'banana wo tabemasu', 'comer un plátano'],
+  ['テニスをします', 'tenisu wo shimasu', 'jugar al tenis']
+], { header: JRE }));
+$('wo2', T([
+  ['さかなをたべます', 'sakana wo tabemasu', 'como pescado'],
+  ['さかなはたべません', 'sakana wa tabemasen', 'no como pescado']
+], { header: JRE }));
+$('wo3', T([
+  ['おちゃをのみます', 'ocha wo nomimasu', 'beber té'],
+  ['あなたはおちゃをのみますか。', 'anata wa ocha wo nomimasu ka?', '¿Tú bebes té?'],
+  ['おちゃをのみますか。', 'ocha wo nomimasu ka?', '¿Bebes té?'],
+  ['はい、わたしはおちゃをのみます。', 'hai, watashi wa ocha wo nomimasu', 'Sí, yo bebo té.'],
+  ['はい、のみます。', 'hai, nomimasu', 'Sí, bebo.'],
+  ['いいえ、わたしはおちゃはのみません。', 'iie, watashi wa ocha wa nomimasen', 'No, yo no bebo té.'],
+  ['いいえ、のみません。', 'iie, nomimasen', 'No, no bebo.']
+], { key: 0 }));
+
+const pq = (h, hr, he, q, qr, qe) => T([[h, hr, he], [q, qr, qe]], { key: 0 });
+$('presentarse',
+  pq('おなまえ', 'o-namae', 'nombre', 'おなまえはなんですか。', 'o-namae wa nan desu ka?', '¿cómo te llamas?') +
+  pq('おくに', 'o-kuni', 'país', 'おくにはどこですか。', 'o-kuni wa doko desu ka?', '¿de qué país eres?') +
+  pq('おしごと', 'o-shigoto', 'profesión/trabajo', 'おしごとはなんですか。', 'o-shigoto wa nan desu ka?', '¿a qué te dedicas?') +
+  pq('ごしゅっしん', 'go-shusshin', 'lugar de procedencia', 'ごしゅっしんはどこですか。', 'go-shusshin wa doko desu ka?', '¿de dónde eres?') +
+  pq('ごかぞく', 'go-kazoku', 'familia', 'ごかぞくはなんにんですか。', 'go-kazoku wa nan-nin desu ka?', '¿cuántas personas sois en tu familia?') +
+  pq('ごりょうしん', 'go-ryōshin', 'padres', 'ごりょうしんはどちらですか。', 'go-ryōshin wa dochira desu ka?', '¿de dónde son tus padres?') +
+  pq('ごしょくぎょう', 'go-shokugyō', 'profesión/ocupación', 'ごしょくぎょうはなんですか。', 'go-shokugyō wa nan desu ka?', '¿cuál es tu profesión?') +
+  pq('ごしゅみ', 'go-shumi', 'aficiones', 'ごしゅみはなんですか。', 'go-shumi wa nan desu ka?', '¿cuáles son tus aficiones?') +
+  T([['なんさいですか。', 'nansai desu ka?', '¿cuántos años tienes?']], { key: 0 }) +
+  T([['なにごができますか。', 'nani-go ga dekimasu ka?', '¿qué idiomas sabes hablar?']], { key: 0 }));
+</script>
+
+</body>
+</html>

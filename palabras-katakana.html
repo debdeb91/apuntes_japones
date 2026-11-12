@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>カタカナのたんご · Palabras en katakana</title>
+
+<style>
+:root {
+  --bg: #f7f3ec;
+  --paper: #fffdf9;
+  --accent: #7867a8;
+  --pink: #e7a1bd;
+  --pink2: #eac0da;
+  --pale: #ffeef4;
+  --ink: #51484d;
+  --line: #62575d;
+  --muted: #887b82;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 22px;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: Arial, "Noto Sans JP", sans-serif;
+}
+
+.page {
+  max-width: 1500px;
+  margin: auto;
+  padding: 22px;
+  background: var(--paper);
+  border: 3px solid var(--line);
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  border-bottom: 4px solid var(--pink);
+  padding-bottom: 14px;
+  margin-bottom: 20px;
+}
+
+h1 {
+  margin: 0;
+  color: #8e5871;
+  font-size: clamp(28px, 4vw, 42px);
+  letter-spacing: 2px;
+}
+
+.subtitle {
+  margin: 5px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.layout-old {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  align-items: start;
+}
+
+.charts {
+  display: grid;
+  gap: 16px;
+}
+
+.sheet-section {
+  border: 2px solid var(--line);
+  background: white;
+  padding: 12px;
+}
+
+.section-title {
+  margin: -12px -12px 12px;
+  padding: 8px 12px;
+  background: var(--pink2);
+  font-size: 17px;
+  color: #59434e;
+}
+
+.jp {
+  font-family: "Noto Sans JP", "Yu Gothic", sans-serif;
+}
+
+.word-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+
+.word-table th,
+.word-table td {
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 10px 7px;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.word-table th {
+  background: var(--pale);
+  color: #80536a;
+  font-size: 13px;
+}
+
+.word-table td {
+  background: white;
+  font-size: 14px;
+}
+
+.word-table tbody tr:nth-child(odd) td {
+  background: #fff8fb;
+}
+
+.word-table .japanese {
+  font-family: "Noto Sans JP", "Yu Gothic", sans-serif;
+  font-size: 20px;
+  color: #5b4b53;
+}
+
+.word-table .romaji {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: .2px;
+}
+
+.word-table .spanish {
+  color: var(--ink);
+}
+
+@media(max-width: 900px) {
+  body { padding: 8px; }
+  .page { padding: 12px; }
+  .layout { grid-template-columns: 1fr; }
+}
+
+@media(max-width: 560px) {
+  .word-table th,
+  .word-table td {
+    padding: 8px 4px;
+    font-size: 12px;
+  }
+
+  .word-table .japanese {
+    font-size: 17px;
+  }
+
+  .word-table .romaji {
+    font-size: 10px;
+  }
+}
+
+@media print {
+  body { padding: 0; background: white; }
+  .page { border: 0; max-width: none; }
+  .layout { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sheet-section { break-inside: avoid; }
+}
+
+nav {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+nav a {
+  padding: 9px 14px;
+  border: 2px solid var(--pink);
+  border-radius: 7px;
+  text-decoration: none;
+  color: #80536a;
+  font-weight: bold;
+  background: var(--pale);
+}
+
+nav a.active {
+  background: var(--pink);
+  color: white;
+}
+
+@media print { nav { display: none; } }
+
+.layout.single { grid-template-columns: minmax(0, 1fr); }
+.word-table.left td { text-align: left; }
+.word-table.left td.japanese { text-align: left; }
+.word-table td.group {
+  background: var(--pink2) !important;
+  color: #59434e;
+  font-weight: bold;
+  text-align: left;
+  padding: 7px 10px;
+}
+.word-table td.group .jp { font-size: 17px; margin-right: 6px; }
+
+html { scroll-behavior: smooth; }
+
+.layout {
+  display: grid;
+  grid-template-columns: 230px minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.index {
+  position: sticky;
+  top: 14px;
+  max-height: calc(100vh - 28px);
+  overflow: auto;
+  border: 2px solid var(--line);
+  background: white;
+  padding: 12px 14px;
+}
+
+.index h2 {
+  margin: -12px -14px 10px;
+  padding: 8px 12px;
+  background: var(--pink2);
+  font-size: 17px;
+  color: #59434e;
+}
+
+.index .count {
+  margin: 0 0 10px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.index .chips {
+  display: grid;
+  grid-template-columns: repeat(var(--n, 2), minmax(0, 1fr));
+  gap: 6px;
+}
+
+.index .chips a {
+  display: block;
+  padding: 7px 4px;
+  border: 2px solid var(--pink);
+  border-radius: 7px;
+  background: var(--pale);
+  color: #80536a;
+  font-weight: bold;
+  font-size: 14px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.index .chips a:hover,
+.index .chips a:focus-visible {
+  background: var(--pink);
+  color: white;
+}
+
+.index .chips small {
+  display: block;
+  font-size: 11px;
+  font-weight: normal;
+  opacity: .85;
+}
+
+.word-table.left td,
+.word-table.left td.japanese { text-align: left; }
+.word-table.left th { text-align: left; }
+.word-table td.group { scroll-margin-top: 14px; }
+
+@media(max-width: 900px) {
+  .layout { grid-template-columns: 1fr; }
+  .index { position: static; max-height: none; }
+  .index .chips { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+}
+
+@media print {
+  .index { display: none; }
+  .layout { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+
+<body>
+<div class="page">
+
+<header>
+  <div>
+    <h1>カタカナのたんご</h1>
+    <p class="subtitle">Palabras en katakana</p>
+  </div>
+
+  <nav>
+    <a href="hiragana.html">Hiragana</a>
+    <a href="katakana.html">Katakana</a>
+    <a href="gramatica.html">Gramática</a>
+    <a href="particulas.html">Partículas</a>
+    <a href="expresiones.html">Expresiones</a>
+    <a href="palabras-hiragana.html">Palabras hiragana</a>
+    <a class="active" href="palabras-katakana.html">Palabras katakana</a>
+    <a href="paisesidiomas.html">Países e idiomas</a>
+    <a href="profesiones.html">Profesiones</a>
+    <a href="numeros.html">Números</a>
+    <a href="hiragana_practice.html">Práctica hiragana</a>
+    <a href="katakana_practice.html">Práctica katakana</a>
+    <a href="palabras.html">Práctica palabras</a>
+  </nav>
+</header>
+
+<div class="layout">
+
+<aside class="index" aria-label="Índice">
+  <h2>Índice</h2>
+  <p class="count">64 palabras · por inicial del rōmaji</p>
+  <div class="chips" style="--n:4">
+    <a href="#ka">A</a>
+    <a href="#kb">B</a>
+    <a href="#kd">D</a>
+    <a href="#ke">E</a>
+    <a href="#kg">G</a>
+    <a href="#kh">H</a>
+    <a href="#kj">J</a>
+    <a href="#kk">K</a>
+    <a href="#km">M</a>
+    <a href="#kn">N</a>
+    <a href="#ko">O</a>
+    <a href="#kp">P</a>
+    <a href="#kr">R</a>
+    <a href="#ks">S</a>
+    <a href="#kt">T</a>
+    <a href="#kw">W</a>
+  </div>
+</aside>
+
+<main>
+<section class="sheet-section">
+<h2 class="section-title">Palabras</h2>
+
+<table class="word-table left">
+<colgroup><col style="width:28%"><col style="width:24%"><col></colgroup>
+<thead>
+<tr><th>Katakana</th><th>Rōmaji</th><th>Traducción</th></tr>
+</thead>
+<tbody>
+<tr><td class="group" id="ka" colspan="3"><span class="jp">A</span></td></tr>
+<tr><td class="japanese">アルバイト</td><td class="romaji">arubaito</td><td class="spanish">trabajo a tiempo parcial</td></tr>
+<tr><td class="group" id="kb" colspan="3"><span class="jp">B</span></td></tr>
+<tr><td class="japanese">バッグ</td><td class="romaji">baggu</td><td class="spanish">bolso</td></tr>
+<tr><td class="japanese">バックパック</td><td class="romaji">bakkupakku</td><td class="spanish">mochila / backpack</td></tr>
+<tr><td class="japanese">バナナ</td><td class="romaji">banana</td><td class="spanish">banana - plátano</td></tr>
+<tr><td class="japanese">バウムクーヘン</td><td class="romaji">baumukūhen</td><td class="spanish">bizcocho alemán</td></tr>
+<tr><td class="japanese">ベッド</td><td class="romaji">beddo</td><td class="spanish">bed - cama</td></tr>
+<tr><td class="japanese">ビデオ</td><td class="romaji">bideo</td><td class="spanish">video - vídeo</td></tr>
+<tr><td class="japanese">ボードゲーム</td><td class="romaji">bōdo gēmu</td><td class="spanish">juego de mesa</td></tr>
+<tr><td class="japanese">ボール</td><td class="romaji">bōru</td><td class="spanish">pelota</td></tr>
+<tr><td class="group" id="kd" colspan="3"><span class="jp">D</span></td></tr>
+<tr><td class="japanese">ドア</td><td class="romaji">doa</td><td class="spanish">door - puerta</td></tr>
+<tr><td class="japanese">ドキドキ</td><td class="romaji">dokidoki</td><td class="spanish">latidos del corazón/nervios</td></tr>
+<tr><td class="group" id="ke" colspan="3"><span class="jp">E</span></td></tr>
+<tr><td class="japanese">エアコン</td><td class="romaji">eakon</td><td class="spanish">aire acondicionado</td></tr>
+<tr><td class="group" id="kg" colspan="3"><span class="jp">G</span></td></tr>
+<tr><td class="japanese">ガラス</td><td class="romaji">garasu</td><td class="spanish">vidrio / cristal</td></tr>
+<tr><td class="group" id="kh" colspan="3"><span class="jp">H</span></td></tr>
+<tr><td class="japanese">ハロウィン</td><td class="romaji">harowin</td><td class="spanish">Halloween</td></tr>
+<tr><td class="japanese">ホテル</td><td class="romaji">hoteru</td><td class="spanish">hotel</td></tr>
+<tr><td class="japanese">ホワイトボード</td><td class="romaji">howaitobōdo</td><td class="spanish">pizarra blanca</td></tr>
+<tr><td class="group" id="kj" colspan="3"><span class="jp">J</span></td></tr>
+<tr><td class="japanese">ジュース</td><td class="romaji">jūsu</td><td class="spanish">zumo</td></tr>
+<tr><td class="group" id="kk" colspan="3"><span class="jp">K</span></td></tr>
+<tr><td class="japanese">カード</td><td class="romaji">kādo</td><td class="spanish">carta / tarjeta</td></tr>
+<tr><td class="japanese">カップ</td><td class="romaji">kappu</td><td class="spanish">taza</td></tr>
+<tr><td class="japanese">カラオケ</td><td class="romaji">karaoke</td><td class="spanish">karaoke</td></tr>
+<tr><td class="japanese">カレンダー</td><td class="romaji">karendā</td><td class="spanish">calendario</td></tr>
+<tr><td class="japanese">カステラ</td><td class="romaji">kasutera</td><td class="spanish">bizcocho japonés - castella</td></tr>
+<tr><td class="japanese">ケーキ</td><td class="romaji">kēki</td><td class="spanish">cake - tarta/pastel</td></tr>
+<tr><td class="japanese">キーボード</td><td class="romaji">kībōdo</td><td class="spanish">teclado</td></tr>
+<tr><td class="japanese">コーヒー</td><td class="romaji">kōhī</td><td class="spanish">coffee - café</td></tr>
+<tr><td class="japanese">コンビニ</td><td class="romaji">konbini</td><td class="spanish">tienda de conveniencia</td></tr>
+<tr><td class="japanese">クラスメイト</td><td class="romaji">kurasumeito</td><td class="spanish">compañero/a de clase</td></tr>
+<tr><td class="japanese">キャンドル</td><td class="romaji">kyandoru</td><td class="spanish">vela</td></tr>
+<tr><td class="group" id="km" colspan="3"><span class="jp">M</span></td></tr>
+<tr><td class="japanese">マンガ</td><td class="romaji">manga</td><td class="spanish">manga</td></tr>
+<tr><td class="japanese">マウス</td><td class="romaji">mausu</td><td class="spanish">ratón (de ordenador)</td></tr>
+<tr><td class="japanese">メニュー</td><td class="romaji">menyū</td><td class="spanish">menú</td></tr>
+<tr><td class="group" id="kn" colspan="3"><span class="jp">N</span></td></tr>
+<tr><td class="japanese">ネックレス</td><td class="romaji">nekkuresu</td><td class="spanish">collar</td></tr>
+<tr><td class="group" id="ko" colspan="3"><span class="jp">O</span></td></tr>
+<tr><td class="japanese">オムライス</td><td class="romaji">omuraisu</td><td class="spanish">tortilla con arroz - omelette + rice</td></tr>
+<tr><td class="japanese">オレンジ</td><td class="romaji">orenji</td><td class="spanish">naranja</td></tr>
+<tr><td class="group" id="kp" colspan="3"><span class="jp">P</span></td></tr>
+<tr><td class="japanese">パン</td><td class="romaji">pan</td><td class="spanish">pan</td></tr>
+<tr><td class="japanese">パティシエ</td><td class="romaji">patishie</td><td class="spanish">pastelero/a</td></tr>
+<tr><td class="japanese">ペン</td><td class="romaji">pen</td><td class="spanish">pen - bolígrafo</td></tr>
+<tr><td class="japanese">ペットボトル</td><td class="romaji">petto botoru</td><td class="spanish">botella de plástico</td></tr>
+<tr><td class="japanese">ピアノ</td><td class="romaji">piano</td><td class="spanish">piano</td></tr>
+<tr><td class="japanese">ピーシー</td><td class="romaji">pīshī</td><td class="spanish">ordenador - personal computer</td></tr>
+<tr><td class="japanese">ポスター</td><td class="romaji">posutā</td><td class="spanish">póster</td></tr>
+<tr><td class="japanese">ポテチ</td><td class="romaji">potechi</td><td class="spanish">patatas fritas de bolsa (coloquial)</td></tr>
+<tr><td class="japanese">ポテトチップス</td><td class="romaji">poteto chippusu</td><td class="spanish">patatas fritas de bolsa (chips)</td></tr>
+<tr><td class="group" id="kr" colspan="3"><span class="jp">R</span></td></tr>
+<tr><td class="japanese">ラーメン</td><td class="romaji">rāmen</td><td class="spanish">ramen</td></tr>
+<tr><td class="japanese">レシート</td><td class="romaji">reshīto</td><td class="spanish">recibo</td></tr>
+<tr><td class="japanese">レストラン</td><td class="romaji">resutoran</td><td class="spanish">restaurante</td></tr>
+<tr><td class="group" id="ks" colspan="3"><span class="jp">S</span></td></tr>
+<tr><td class="japanese">サングラス</td><td class="romaji">sangurasu</td><td class="spanish">gafas de sol</td></tr>
+<tr><td class="japanese">サンキュー</td><td class="romaji">sankyū</td><td class="spanish">thank you - gracias (3san9kyū)</td></tr>
+<tr><td class="japanese">セーター</td><td class="romaji">sētā</td><td class="spanish">sweater - suéter</td></tr>
+<tr><td class="japanese">シャワー</td><td class="romaji">shawā</td><td class="spanish">ducha</td></tr>
+<tr><td class="japanese">ショック</td><td class="romaji">shokku</td><td class="spanish">shock</td></tr>
+<tr><td class="japanese">ソファ</td><td class="romaji">sofa</td><td class="spanish">sofá</td></tr>
+<tr><td class="japanese">スイッチ</td><td class="romaji">suicchi</td><td class="spanish">interruptor</td></tr>
+<tr><td class="japanese">スマホ</td><td class="romaji">sumaho</td><td class="spanish">smartphone</td></tr>
+<tr><td class="japanese">スプーン</td><td class="romaji">supūn</td><td class="spanish">cuchara</td></tr>
+<tr><td class="group" id="kt" colspan="3"><span class="jp">T</span></td></tr>
+<tr><td class="japanese">タクシー</td><td class="romaji">takushī</td><td class="spanish">taxi</td></tr>
+<tr><td class="japanese">テーブル</td><td class="romaji">tēburu</td><td class="spanish">table - mesa</td></tr>
+<tr><td class="japanese">テニス</td><td class="romaji">tenisu</td><td class="spanish">tennis - tenis</td></tr>
+<tr><td class="japanese">テレビ</td><td class="romaji">terebi</td><td class="spanish">televisión</td></tr>
+<tr><td class="japanese">テスト</td><td class="romaji">tesuto</td><td class="spanish">test / examen</td></tr>
+<tr><td class="japanese">Tシャツ</td><td class="romaji">tīshatsu</td><td class="spanish">camiseta de manga corta</td></tr>
+<tr><td class="japanese">ティッシュ</td><td class="romaji">tisshu</td><td class="spanish">pañuelos</td></tr>
+<tr><td class="japanese">トイレ</td><td class="romaji">toire</td><td class="spanish">aseo</td></tr>
+<tr><td class="group" id="kw" colspan="3"><span class="jp">W</span></td></tr>
+<tr><td class="japanese">ワイン</td><td class="romaji">wain</td><td class="spanish">vino</td></tr>
+</tbody>
+</table>
+</section>
+</main>
+
+</div>
+</div>
+</body>
+</html>
