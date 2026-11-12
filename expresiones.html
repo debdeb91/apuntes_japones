@@ -60,7 +60,7 @@ h1 {
   font-size: 14px;
 }
 
-.layout {
+.layout-old {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 20px;
@@ -202,6 +202,87 @@ nav a.active {
   padding: 7px 10px;
 }
 .word-table td.group .jp { font-size: 17px; margin-right: 6px; }
+
+html { scroll-behavior: smooth; }
+
+.layout {
+  display: grid;
+  grid-template-columns: 230px minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.index {
+  position: sticky;
+  top: 14px;
+  max-height: calc(100vh - 28px);
+  overflow: auto;
+  border: 2px solid var(--line);
+  background: white;
+  padding: 12px 14px;
+}
+
+.index h2 {
+  margin: -12px -14px 10px;
+  padding: 8px 12px;
+  background: var(--pink2);
+  font-size: 17px;
+  color: #59434e;
+}
+
+.index .count {
+  margin: 0 0 10px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.index .chips {
+  display: grid;
+  grid-template-columns: repeat(var(--n, 2), minmax(0, 1fr));
+  gap: 6px;
+}
+
+.index .chips a {
+  display: block;
+  padding: 7px 4px;
+  border: 2px solid var(--pink);
+  border-radius: 7px;
+  background: var(--pale);
+  color: #80536a;
+  font-weight: bold;
+  font-size: 14px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.index .chips a:hover,
+.index .chips a:focus-visible {
+  background: var(--pink);
+  color: white;
+}
+
+.index .chips small {
+  display: block;
+  font-size: 11px;
+  font-weight: normal;
+  opacity: .85;
+}
+
+.word-table.left td,
+.word-table.left td.japanese { text-align: left; }
+.word-table.left th { text-align: left; }
+.word-table td.group { scroll-margin-top: 14px; }
+
+@media(max-width: 900px) {
+  .layout { grid-template-columns: 1fr; }
+  .index { position: static; max-height: none; }
+  .index .chips { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+}
+
+@media print {
+  .index { display: none; }
+  .layout { grid-template-columns: 1fr; }
+}
 </style>
 </head>
 
@@ -231,7 +312,25 @@ nav a.active {
   </nav>
 </header>
 
-<main class="layout single">
+<div class="layout">
+
+<aside class="index" aria-label="Índice">
+  <h2>Índice</h2>
+  <p class="count">66 expresiones</p>
+  <div class="chips" style="--n:2">
+    <a href="#g0"><span class="jp">あ</span><small>A</small></a>
+    <a href="#g1"><span class="jp">か</span><small>K / G</small></a>
+    <a href="#g2"><span class="jp">さ</span><small>S / Z</small></a>
+    <a href="#g3"><span class="jp">た</span><small>T / D</small></a>
+    <a href="#g4"><span class="jp">な</span><small>N</small></a>
+    <a href="#g5"><span class="jp">は</span><small>H / B / P</small></a>
+    <a href="#g6"><span class="jp">ま</span><small>M</small></a>
+    <a href="#g7"><span class="jp">や</span><small>Y</small></a>
+    <a href="#g9"><span class="jp">わ</span><small>W</small></a>
+  </div>
+</aside>
+
+<main>
 <section class="sheet-section">
 <h2 class="section-title">Expresiones · <span class="jp">ひょうげん</span></h2>
 
@@ -241,7 +340,7 @@ nav a.active {
 <tr><th>Hiragana</th><th>Rōmaji</th><th>Traducción</th></tr>
 </thead>
 <tbody>
-<tr><td class="japanese">(なまえ)〜さんはいますか</td><td class="romaji">(namae)-san wa imasu ka?</td><td class="spanish">¿está (nombre)-san?</td></tr>
+<tr><td class="group" id="g0" colspan="3"><span class="jp">あ</span> A</td></tr>
 <tr><td class="japanese">あいさつ</td><td class="romaji">aisatsu</td><td class="spanish">saludos</td></tr>
 <tr><td class="japanese">あのう</td><td class="romaji">anō</td><td class="spanish">eh.../disculpa...</td></tr>
 <tr><td class="japanese">ありがとう</td><td class="romaji">arigatō</td><td class="spanish">gracias</td></tr>
@@ -257,6 +356,7 @@ nav a.active {
 <tr><td class="japanese">おはよう（ございます）</td><td class="romaji">ohayō (gozaimasu)</td><td class="spanish">buenos días</td></tr>
 <tr><td class="japanese">おやすみなさい</td><td class="romaji">oyasuminasai</td><td class="spanish">buenas noches, que descanses (antes de dormir)</td></tr>
 <tr><td class="japanese">おつかれさまでした！</td><td class="romaji">otsukaresama deshita</td><td class="spanish">buen trabajo</td></tr>
+<tr><td class="group" id="g1" colspan="3"><span class="jp">か</span> K / G</td></tr>
 <tr><td class="japanese">かいてください</td><td class="romaji">kaite kudasai</td><td class="spanish">escribe, por favor</td></tr>
 <tr><td class="japanese">かっぱの かわ ながれ</td><td class="romaji">kappa no kawa nagare</td><td class="spanish">“hasta un kappa se deja llevar por la corriente del río”, hasta los expertos pueden cometer errores</td></tr>
 <tr><td class="japanese">きいてください</td><td class="romaji">kiite kudasai</td><td class="spanish">escucha, por favor</td></tr>
@@ -268,6 +368,7 @@ nav a.active {
 <tr><td class="japanese">これはなんですか。</td><td class="romaji">kore wa nan desu ka?</td><td class="spanish">¿qué es esto?</td></tr>
 <tr><td class="japanese">こんにちは</td><td class="romaji">konnichiwa</td><td class="spanish">buenas tardes</td></tr>
 <tr><td class="japanese">こんばんは</td><td class="romaji">konbanwa</td><td class="spanish">buenas noches</td></tr>
+<tr><td class="group" id="g2" colspan="3"><span class="jp">さ</span> S / Z</td></tr>
 <tr><td class="japanese">さようなら</td><td class="romaji">sayōnara</td><td class="spanish">adiós / hasta siempre (dramático)</td></tr>
 <tr><td class="japanese">しずかにしてください</td><td class="romaji">shizuka ni shite kudasai</td><td class="spanish">silencio, por favor</td></tr>
 <tr><td class="japanese">しつもんがありますか。</td><td class="romaji">shitsumon ga arimasu ka?</td><td class="spanish">¿tienes alguna pregunta?</td></tr>
@@ -280,13 +381,17 @@ nav a.active {
 <tr><td class="japanese">せんせい、カタカナはむずかしいですよ!</td><td class="romaji">sensei, katakana wa muzukashii desu yo</td><td class="spanish">sensei, ¡el katakana es difícil!</td></tr>
 <tr><td class="japanese">せんせい、しつもんがあります</td><td class="romaji">sensei, shitsumon ga arimasu</td><td class="spanish">profesor/a, tengo una pregunta</td></tr>
 <tr><td class="japanese">そうですか？</td><td class="romaji">sō desu ka?</td><td class="spanish">¿ah, sí?</td></tr>
+<tr><td class="group" id="g3" colspan="3"><span class="jp">た</span> T / D</td></tr>
 <tr><td class="japanese">だいじょうぶですよ!</td><td class="romaji">daijōbu desu yo</td><td class="spanish">¡no te preocupes!</td></tr>
 <tr><td class="japanese">ただいま</td><td class="romaji">tadaima</td><td class="spanish">¡he llegado! (cuando llegas a tu casa)</td></tr>
 <tr><td class="japanese">てんぐになる</td><td class="romaji">tengu ni naru</td><td class="spanish">“volverse un tengu”, creerse superior, volverse presumido</td></tr>
 <tr><td class="japanese">どういたしまして</td><td class="romaji">doitashimashite</td><td class="spanish">de nada (muy formal)</td></tr>
 <tr><td class="japanese">どうぞ</td><td class="romaji">dōzo</td><td class="spanish">toma (dar algo)</td></tr>
 <tr><td class="japanese">どうぞよろしく</td><td class="romaji">dōzo yoroshiku</td><td class="spanish">encantado/a, mucho gusto</td></tr>
+<tr><td class="group" id="g4" colspan="3"><span class="jp">な</span> N</td></tr>
+<tr><td class="japanese">(なまえ)〜さんはいますか</td><td class="romaji">(namae)-san wa imasu ka?</td><td class="spanish">¿está (nombre)-san?</td></tr>
 <tr><td class="japanese">のみましょう</td><td class="romaji">nomimashou</td><td class="spanish">vamos a beber</td></tr>
+<tr><td class="group" id="g5" colspan="3"><span class="jp">は</span> H / B / P</td></tr>
 <tr><td class="japanese">はい</td><td class="romaji">hai</td><td class="spanish">¡sí! / dime</td></tr>
 <tr><td class="japanese">はい、います</td><td class="romaji">hai, imasu</td><td class="spanish">sí, está</td></tr>
 <tr><td class="japanese">はい、げんき</td><td class="romaji">hai, genki</td><td class="spanish">sí, estoy bien</td></tr>
@@ -295,15 +400,18 @@ nav a.active {
 <tr><td class="japanese">はなしてください</td><td class="romaji">hanashite kudasai</td><td class="spanish">habla, por favor</td></tr>
 <tr><td class="japanese">ひさしぶり（です）</td><td class="romaji">hisashiburi (desu)</td><td class="spanish">¡cuánto tiempo sin verte! (hace mucho tiempo)</td></tr>
 <tr><td class="japanese">ペアではなしてください</td><td class="romaji">pea de hanashite kudasai</td><td class="spanish">por favor, hablad en parejas</td></tr>
+<tr><td class="group" id="g6" colspan="3"><span class="jp">ま</span> M</td></tr>
 <tr><td class="japanese">まあまあです</td><td class="romaji">māmā desu</td><td class="spanish">más o menos</td></tr>
 <tr><td class="japanese">まだです</td><td class="romaji">mada desu</td><td class="spanish">todavía no</td></tr>
 <tr><td class="japanese">またね！</td><td class="romaji">mata ne!</td><td class="spanish">¡nos vemos!</td></tr>
 <tr><td class="japanese">みてください</td><td class="romaji">mite kudasai</td><td class="spanish">mira, por favor</td></tr>
 <tr><td class="japanese">もういちどおねがいします</td><td class="romaji">mō ichido onegai shimasu</td><td class="spanish">una vez más, por favor</td></tr>
+<tr><td class="group" id="g7" colspan="3"><span class="jp">や</span> Y</td></tr>
 <tr><td class="japanese">やばい (ヤバい)</td><td class="romaji">yabai</td><td class="spanish">terrible/tremendo</td></tr>
 <tr><td class="japanese">よかったです</td><td class="romaji">yokatta desu</td><td class="spanish">menos mal/qué bien/me alegro</td></tr>
 <tr><td class="japanese">よろしく おねがい します</td><td class="romaji">yoroshiku onegai shimasu</td><td class="spanish">espero que nos llevemos bien</td></tr>
 <tr><td class="japanese">よんでください</td><td class="romaji">yonde kudasai</td><td class="spanish">lee, por favor</td></tr>
+<tr><td class="group" id="g9" colspan="3"><span class="jp">わ</span> W</td></tr>
 <tr><td class="japanese">わかりました</td><td class="romaji">wakarimashita</td><td class="spanish">lo he entendido</td></tr>
 <tr><td class="japanese">わかりましたか。</td><td class="romaji">wakarimashita ka?</td><td class="spanish">¿lo has entendido?</td></tr>
 <tr><td class="japanese">わたし は____です</td><td class="romaji">watashi wa ____ desu</td><td class="spanish">me llamo ___</td></tr>
@@ -312,6 +420,7 @@ nav a.active {
 </section>
 </main>
 
+</div>
 </div>
 </body>
 </html>
