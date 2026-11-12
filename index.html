@@ -3,10 +3,182 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="refresh" content="0; url=hiragana.html">
-<title>Japonés</title>
+<title>にほんご · Apuntes de japonés</title>
+
+<style>
+:root {
+  --bg: #f7f3ec;
+  --paper: #fffdf9;
+  --pink: #e7a1bd;
+  --pink2: #eac0da;
+  --pale: #ffeef4;
+  --ink: #51484d;
+  --line: #62575d;
+  --muted: #887b82;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 22px;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: Arial, "Noto Sans JP", sans-serif;
+}
+
+.page {
+  max-width: 1100px;
+  margin: auto;
+  padding: 22px;
+  background: var(--paper);
+  border: 3px solid var(--line);
+}
+
+header {
+  border-bottom: 4px solid var(--pink);
+  padding-bottom: 14px;
+  margin-bottom: 22px;
+}
+
+h1 {
+  margin: 0;
+  color: #8e5871;
+  font-size: clamp(30px, 5vw, 46px);
+  letter-spacing: 2px;
+}
+
+.subtitle {
+  margin: 5px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.jp { font-family: "Noto Sans JP", "Yu Gothic", sans-serif; }
+
+.group {
+  border: 2px solid var(--line);
+  background: white;
+  padding: 12px;
+  margin-bottom: 18px;
+}
+
+.group h2 {
+  margin: -12px -12px 12px;
+  padding: 8px 12px;
+  background: var(--pink2);
+  font-size: 17px;
+  color: #59434e;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 10px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 14px 12px;
+  border: 2px solid var(--pink);
+  border-radius: 9px;
+  background: var(--pale);
+  color: inherit;
+  text-decoration: none;
+}
+
+.card:hover,
+.card:focus-visible {
+  background: var(--pink);
+  color: white;
+}
+
+.card .big {
+  font-size: 24px;
+  font-weight: bold;
+  color: #5b4b53;
+}
+
+.card .name {
+  font-weight: bold;
+  color: #80536a;
+}
+
+.card .desc {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.card:hover .big,
+.card:hover .name,
+.card:hover .desc,
+.card:focus-visible .big,
+.card:focus-visible .name,
+.card:focus-visible .desc { color: white; }
+
+@media(max-width: 700px) {
+  body { padding: 8px; }
+  .page { padding: 12px; }
+  .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media(max-width: 420px) {
+  .cards { grid-template-columns: 1fr; }
+}
+</style>
 </head>
+
 <body>
-<p><a href="hiragana.html">Entrar</a></p>
+<div class="page">
+
+<header>
+  <h1>にほんご</h1>
+  <p class="subtitle">Apuntes de japonés · menú</p>
+</header>
+
+<main>
+
+<section class="group">
+<h2>Silabarios · もじ</h2>
+<div class="cards">
+<a class="card" href="hiragana.html"><span class="jp big">ひらがな</span><span class="name">Hiragana</span><span class="desc">Silabario japonés</span></a>
+<a class="card" href="katakana.html"><span class="jp big">カタカナ</span><span class="name">Katakana</span><span class="desc">Silabario japonés</span></a>
+</div>
+</section>
+
+<section class="group">
+<h2>Gramática · ぶんぽう</h2>
+<div class="cards">
+<a class="card" href="gramatica.html"><span class="jp big">ぶんぽう</span><span class="name">Gramática</span><span class="desc">Gramática japonesa</span></a>
+<a class="card" href="particulas.html"><span class="jp big">じょし</span><span class="name">Partículas</span><span class="desc">は・か・の・を…</span></a>
+<a class="card" href="expresiones.html"><span class="jp big">ひょうげん</span><span class="name">Expresiones</span><span class="desc">Frases y saludos</span></a>
+</div>
+</section>
+
+<section class="group">
+<h2>Vocabulario · たんご</h2>
+<div class="cards">
+<a class="card" href="palabras-hiragana.html"><span class="jp big">ひらがなのたんご</span><span class="name">Palabras hiragana</span><span class="desc">Con índice</span></a>
+<a class="card" href="palabras-katakana.html"><span class="jp big">カタカナのたんご</span><span class="name">Palabras katakana</span><span class="desc">Préstamos y anglicismos</span></a>
+<a class="card" href="paisesidiomas.html"><span class="jp big">くにとことば</span><span class="name">Países e idiomas</span><span class="desc">Con índice</span></a>
+<a class="card" href="profesiones.html"><span class="jp big">しょくぎょう</span><span class="name">Profesiones</span><span class="desc">Con índice</span></a>
+<a class="card" href="numeros.html"><span class="jp big">かず</span><span class="name">Números</span><span class="desc">Contar en japonés</span></a>
+</div>
+</section>
+
+<section class="group">
+<h2>Práctica · れんしゅう</h2>
+<div class="cards">
+<a class="card" href="hiragana_practice.html"><span class="jp big">ひらがな</span><span class="name">Práctica hiragana</span><span class="desc">Escribe con el lápiz</span></a>
+<a class="card" href="katakana_practice.html"><span class="jp big">カタカナ</span><span class="name">Práctica katakana</span><span class="desc">Escribe con el lápiz</span></a>
+<a class="card" href="palabras.html"><span class="jp big">ことば</span><span class="name">Práctica palabras</span><span class="desc">Palabras, expresiones y frases</span></a>
+</div>
+</section>
+
+</main>
+
+</div>
 </body>
 </html>
