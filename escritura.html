@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>かきかた · Hoja de escritura</title><style>:root{--bg:#f7f3ec;--paper:#fffdf9;--accent:#7867a8;--pink:#e7a1bd;--pink2:#eac0da;--pale:#ffeef4;--ink:#51484d;--line:#62575d;--muted:#887b82}
+*{box-sizing:border-box}
+body{margin:0;padding:22px;background:var(--bg);color:var(--ink);font-family:Arial,"Noto Sans JP",sans-serif;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.page{max-width:1500px;margin:auto;padding:22px;background:var(--paper);border:3px solid var(--line)}
+header{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;border-bottom:4px solid var(--pink);padding-bottom:14px;margin-bottom:20px}
+h1{margin:0;color:#8e5871;font-size:clamp(28px,4vw,42px);letter-spacing:2px;font-family:"Noto Sans JP","Yu Gothic",Arial,sans-serif}
+.subtitle{margin:5px 0 0;color:var(--muted);font-size:14px}
+nav{display:flex;gap:8px;flex-wrap:wrap}
+nav a,button,select{padding:9px 14px;border:2px solid var(--pink);border-radius:7px;color:#80536a;font:bold 14px Arial,sans-serif;background:var(--pale);text-decoration:none;min-height:40px}
+nav a.active,.primary{background:var(--pink)!important;color:#fff!important}
+button{cursor:pointer;touch-action:manipulation}
+.controls{display:flex;flex-wrap:wrap;gap:9px;align-items:center}
+.controls label{font-weight:bold;color:var(--muted);font-size:14px}
+.note{font-size:13px;color:var(--muted);margin:12px 0 0;line-height:1.5}
+.st{display:flex;justify-content:space-between;align-items:baseline;margin:26px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--pink2)}
+.st h2{font-size:18px;margin:0;color:#8e5871}.st span{font-size:12px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.pair{border:2px solid var(--line);background:#fff;min-width:0}
+.pair.wide{grid-column:span 2}
+.lbl{margin:0;padding:6px 10px;background:var(--pale);border-bottom:2px solid var(--line);font-size:11px;font-weight:bold;letter-spacing:.5px;color:var(--muted)}
+.halves{display:grid;grid-template-columns:1fr 1fr}
+.wide .halves{grid-template-columns:1fr}
+.cell{aspect-ratio:1.1/1;display:flex;align-items:center;justify-content:center;background:#fff;min-width:0}
+.cell+.cell{border-left:1px solid var(--line)}
+.wide .cell{aspect-ratio:4.4/1}.wide .cell+.cell{border-left:0;border-top:1px solid var(--line)}
+.cell.given{background:var(--pink2)}
+.p{font-size:clamp(16px,3.2vw,24px);font-weight:bold;text-align:center;padding:4px;color:#59434e;overflow-wrap:anywhere}
+.p.k{font-family:"Noto Sans JP","Yu Gothic","Meiryo",sans-serif;font-size:clamp(24px,4.5vw,38px)}
+canvas{display:block;width:100%;height:100%;touch-action:none;cursor:crosshair}
+.tools{display:flex;gap:6px;padding:7px;border-top:1px solid var(--line)}
+.mini{min-height:30px;padding:4px 9px;font-size:12px}
+.ans{padding:8px;text-align:center;font-size:15px;background:var(--pale);border-top:1px solid var(--line)}
+.ans small{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+footer{margin-top:24px;color:var(--muted);font-size:12px}
+#ct{position:fixed;right:16px;bottom:18px;z-index:9;width:54px;height:54px;padding:0;border-radius:50%;background:var(--pink);color:#fff;font-size:22px;box-shadow:0 3px 12px #00000030}
+#cp{position:fixed;right:12px;bottom:82px;z-index:8;width:min(370px,calc(100vw - 24px));max-height:68vh;overflow:auto;background:var(--paper);border:3px solid var(--line);padding:12px}
+#cp[hidden]{display:none}
+.ch{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;color:#8e5871}
+.tabs{display:grid;grid-template-columns:repeat(2,1fr);gap:5px;margin-bottom:10px}
+.tabs button{min-height:34px;padding:5px;font-size:12px}
+.tabs .on{background:var(--pink);color:#fff}
+#cg{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}
+.ci{background:var(--pale);border:1px solid var(--line);padding:4px 1px;text-align:center}
+.ci b{display:block;font:400 22px "Noto Sans JP","Yu Gothic",sans-serif}
+.ci i{font-style:normal;font-size:10px;color:var(--muted)}
+@media(min-width:650px){.grid{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:950px){.grid{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:900px){body{padding:8px}.page{padding:12px}}
+</style>
+<style>
+.wcontrols{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 12px}
+.wcontrols select,.wcontrols button{font:inherit;padding:7px 10px;border:2px solid #62575d;background:#fff;border-radius:7px;color:inherit}
+.wcontrols button{cursor:pointer}.wcontrols .primary{background:#e7a1bd;color:#fff;border-color:#e7a1bd;font-weight:bold}
+.wnote{color:#887b82;font-size:13px;margin:0 0 14px}
+.wsheet{border:2px solid #62575d;background:#fff;padding:8px}
+.wtitle{margin:0 0 8px;padding:4px 8px;font-size:15px;color:#59434e;background:#eac0da}
+.wkana{margin:0 0 10px}
+.wkana .rom{font-size:12px;color:#887b82;margin:0 0 2px}
+.wline{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));border-top:1px solid #62575d;border-left:1px solid #62575d}
+.wcell{position:relative;aspect-ratio:1;border-right:1px solid #62575d;border-bottom:1px solid #62575d;display:flex;align-items:center;justify-content:center;
+ background:
+  linear-gradient(to right,transparent calc(50% - .5px),#d9cfd4 calc(50% - .5px),#d9cfd4 calc(50% + .5px),transparent calc(50% + .5px)),
+  linear-gradient(to bottom,transparent calc(50% - .5px),#d9cfd4 calc(50% - .5px),#d9cfd4 calc(50% + .5px),transparent calc(50% + .5px));
+ font-family:"Noto Sans JP","Yu Gothic","Hiragino Sans",sans-serif;font-size:clamp(20px,5.2vw,46px);line-height:1;color:#292725;user-select:none}
+.wcell.big{font-weight:bold}
+.wcell.ghost{opacity:.22}
+.wcell.two{font-size:clamp(14px,3.4vw,30px)}
+.wcell canvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none}
+@media(max-width:600px){.wline{grid-template-columns:repeat(6,minmax(0,1fr))}.wcell.x7,.wcell.x8,.wcell.x9,.wcell.x10{display:none}}
+@media print{
+ body{background:#fff;padding:0}.page{border:0;padding:0;max-width:none}
+ header,.wcontrols,.wnote{display:none}.wsheet{border:0;padding:0}.wkana{break-inside:avoid}
+ .wcell{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+</style>
+</head>
+<body>
+<div class="page">
+<header><div><h1>かきかた</h1><p class="subtitle">Hoja de escritura · para escribir con el lápiz o imprimir</p></div><nav>
+    <a href="index.html">Inicio</a>
+    <a href="hiragana.html">Hiragana</a>
+    <a href="katakana.html">Katakana</a>
+    <a href="gramatica.html">Gramática</a>
+    <a href="particulas.html">Partículas</a>
+    <a href="expresiones.html">Expresiones</a>
+    <a href="palabras-hiragana.html">Palabras hiragana</a>
+    <a href="palabras-katakana.html">Palabras katakana</a>
+    <a href="paisesidiomas.html">Países e idiomas</a>
+    <a href="profesiones.html">Profesiones</a>
+    <a href="numeros.html">Números</a>
+    <a href="hiragana_practice.html">Práctica hiragana</a>
+    <a href="katakana_practice.html">Práctica katakana</a>
+    <a href="palabras.html">Práctica palabras</a>
+    <a class="active" href="escritura.html">Escritura</a>
+  </nav></header>
+
+<div class="wcontrols">
+  <label for="script">Silabario:</label>
+  <select id="script"><option value="hiragana">Hiragana</option><option value="katakana">Katakana</option></select>
+  <label for="grp">Fila:</label>
+  <select id="grp"></select>
+  <button id="clr">Borrar todo</button>
+  <button class="primary" id="prt">Imprimir</button>
+</div>
+<p class="wnote">En cada letra: la primera línea tiene el modelo y tres copias de calco; las otras dos, un modelo claro para calcar. Escribe con el Apple Pencil (o el dedo/ratón) en las casillas vacías.</p>
+
+<main id="sheet" class="wsheet"></main>
+</div>
+
+<script>
+const DATA={"hiragana": [{"sec": "Básico", "label": "あ行", "items": [["あ", "a"], ["い", "i"], ["う", "u"], ["え", "e"], ["お", "o"]]}, {"sec": "Básico", "label": "か行", "items": [["か", "ka"], ["き", "ki"], ["く", "ku"], ["け", "ke"], ["こ", "ko"]]}, {"sec": "Básico", "label": "さ行", "items": [["さ", "sa"], ["し", "shi"], ["す", "su"], ["せ", "se"], ["そ", "so"]]}, {"sec": "Básico", "label": "た行", "items": [["た", "ta"], ["ち", "chi"], ["つ", "tsu"], ["て", "te"], ["と", "to"]]}, {"sec": "Básico", "label": "な行", "items": [["な", "na"], ["に", "ni"], ["ぬ", "nu"], ["ね", "ne"], ["の", "no"]]}, {"sec": "Básico", "label": "は行", "items": [["は", "ha"], ["ひ", "hi"], ["ふ", "fu"], ["へ", "he"], ["ほ", "ho"]]}, {"sec": "Básico", "label": "ま行", "items": [["ま", "ma"], ["み", "mi"], ["む", "mu"], ["め", "me"], ["も", "mo"]]}, {"sec": "Básico", "label": "や行", "items": [["や", "ya"], ["ゆ", "yu"], ["よ", "yo"]]}, {"sec": "Básico", "label": "ら行", "items": [["ら", "ra"], ["り", "ri"], ["る", "ru"], ["れ", "re"], ["ろ", "ro"]]}, {"sec": "Básico", "label": "わ行", "items": [["わ", "wa"], ["を", "wo"], ["ん", "n"]]}, {"sec": "Dakuten ゛ y handakuten ゜", "label": "が … ご", "items": [["が", "ga"], ["ぎ", "gi"], ["ぐ", "gu"], ["げ", "ge"], ["ご", "go"]]}, {"sec": "Dakuten ゛ y handakuten ゜", "label": "ざ … ぞ", "items": [["ざ", "za"], ["じ", "ji"], ["ず", "zu"], ["ぜ", "ze"], ["ぞ", "zo"]]}, {"sec": "Dakuten ゛ y handakuten ゜", "label": "だ … ど", "items": [["だ", "da"], ["ぢ", "ji"], ["づ", "zu"], ["で", "de"], ["ど", "do"]]}, {"sec": "Dakuten ゛ y handakuten ゜", "label": "ば … ぼ", "items": [["ば", "ba"], ["び", "bi"], ["ぶ", "bu"], ["べ", "be"], ["ぼ", "bo"]]}, {"sec": "Dakuten ゛ y handakuten ゜", "label": "ぱ … ぽ", "items": [["ぱ", "pa"], ["ぴ", "pi"], ["ぷ", "pu"], ["ぺ", "pe"], ["ぽ", "po"]]}, {"sec": "Combinaciones ゃ・ゅ・ょ", "label": "きゃ … しょ", "items": [["きゃ", "kya"], ["きゅ", "kyu"], ["きょ", "kyo"], ["しゃ", "sha"], ["しゅ", "shu"], ["しょ", "sho"]]}, {"sec": "Combinaciones ゃ・ゅ・ょ", "label": "ちゃ … にょ", "items": [["ちゃ", "cha"], ["ちゅ", "chu"], ["ちょ", "cho"], ["にゃ", "nya"], ["にゅ", "nyu"], ["にょ", "nyo"]]}, {"sec": "Combinaciones ゃ・ゅ・ょ", "label": "ひゃ … みょ", "items": [["ひゃ", "hya"], ["ひゅ", "hyu"], ["ひょ", "hyo"], ["みゃ", "mya"], ["みゅ", "myu"], ["みょ", "myo"]]}, {"sec": "Combinaciones ゃ・ゅ・ょ", "label": "りゃ … ぎょ", "items": [["りゃ", "rya"], ["りゅ", "ryu"], ["りょ", "ryo"], ["ぎゃ", "gya"], ["ぎゅ", "gyu"], ["ぎょ", "gyo"]]}, {"sec": "Combinaciones ゃ・ゅ・ょ", "label": "じゃ … ぢょ", "items": [["じゃ", "ja"], ["じゅ", "ju"], ["じょ", "jo"], ["ぢゃ", "ja"], ["ぢゅ", "ju"], ["ぢょ", "jo"]]}, {"sec": "Combinaciones ゃ・ゅ・ょ", "label": "びゃ … ぴょ", "items": [["びゃ", "bya"], ["びゅ", "byu"], ["びょ", "byo"], ["ぴゃ", "pya"], ["ぴゅ", "pyu"], ["ぴょ", "pyo"]]}], "katakana": [{"sec": "Básico", "label": "ア行", "items": [["ア", "a"], ["イ", "i"], ["ウ", "u"], ["エ", "e"], ["オ", "o"]]}, {"sec": "Básico", "label": "カ行", "items": [["カ", "ka"], ["キ", "ki"], ["ク", "ku"], ["ケ", "ke"], ["コ", "ko"]]}, {"sec": "Básico", "label": "サ行", "items": [["サ", "sa"], ["シ", "shi"], ["ス", "su"], ["セ", "se"], ["ソ", "so"]]}, {"sec": "Básico", "label": "タ行", "items": [["タ", "ta"], ["チ", "chi"], ["ツ", "tsu"], ["テ", "te"], ["ト", "to"]]}, {"sec": "Básico", "label": "ナ行", "items": [["ナ", "na"], ["ニ", "ni"], ["ヌ", "nu"], ["ネ", "ne"], ["ノ", "no"]]}, {"sec": "Básico", "label": "ハ行", "items": [["ハ", "ha"], ["ヒ", "hi"], ["フ", "fu"], ["ヘ", "he"], ["ホ", "ho"]]}, {"sec": "Básico", "label": "マ行", "items": [["マ", "ma"], ["ミ", "mi"], ["ム", "mu"], ["メ", "me"], ["モ", "mo"]]}, {"sec": "Básico", "label": "ヤ行", "items": [["ヤ", "ya"], ["ユ", "yu"], ["ヨ", "yo"]]}, {"sec": "Básico", "label": "ラ行", "items": [["ラ", "ra"], ["リ", "ri"], ["ル", "ru"], ["レ", "re"], ["ロ", "ro"]]}, {"sec": "Básico", "label": "ワ行", "items": [["ワ", "wa"], ["ヲ", "wo"], ["ン", "n"]]}, {"sec": "Dakuten ゛ y handakuten ゜", "label": "ガ … ゴ", "items": [["ガ", "ga"], ["ギ", "gi"], ["グ", "gu"], ["ゲ", "ge"], ["ゴ", "go"]]}, {"sec": "Dakuten ゛ y handakuten ゜", "label": "ザ … ゾ", "items": [["ザ", "za"], ["ジ", "ji"], ["ズ", "zu"], ["ゼ", "ze"], ["ゾ", "zo"]]}, {"sec": "Dakuten ゛ y handakuten ゜", "label": "ダ … ド", "items": [["ダ", "da"], ["ヂ", "ji"], ["ヅ", "zu"], ["デ", "de"], ["ド", "do"]]}, {"sec": "Dakuten ゛ y handakuten ゜", "label": "バ … ボ", "items": [["バ", "ba"], ["ビ", "bi"], ["ブ", "bu"], ["ベ", "be"], ["ボ", "bo"]]}, {"sec": "Dakuten ゛ y handakuten ゜", "label": "パ … ポ", "items": [["パ", "pa"], ["ピ", "pi"], ["プ", "pu"], ["ペ", "pe"], ["ポ", "po"]]}, {"sec": "Dakuten ゛ y handakuten ゜", "label": "ヴ", "items": [["ヴ", "vu"]]}, {"sec": "Combinaciones ャ・ュ・ョ", "label": "キャ … ショ", "items": [["キャ", "kya"], ["キュ", "kyu"], ["キョ", "kyo"], ["シャ", "sha"], ["シュ", "shu"], ["ショ", "sho"]]}, {"sec": "Combinaciones ャ・ュ・ョ", "label": "チャ … ニョ", "items": [["チャ", "cha"], ["チュ", "chu"], ["チョ", "cho"], ["ニャ", "nya"], ["ニュ", "nyu"], ["ニョ", "nyo"]]}, {"sec": "Combinaciones ャ・ュ・ョ", "label": "ヒャ … ミョ", "items": [["ヒャ", "hya"], ["ヒュ", "hyu"], ["ヒョ", "hyo"], ["ミャ", "mya"], ["ミュ", "myu"], ["ミョ", "myo"]]}, {"sec": "Combinaciones ャ・ュ・ョ", "label": "リャ … ギョ", "items": [["リャ", "rya"], ["リュ", "ryu"], ["リョ", "ryo"], ["ギャ", "gya"], ["ギュ", "gyu"], ["ギョ", "gyo"]]}, {"sec": "Combinaciones ャ・ュ・ョ", "label": "ジャ … ヂョ", "items": [["ジャ", "ja"], ["ジュ", "ju"], ["ジョ", "jo"], ["ヂャ", "ja"], ["ヂュ", "ju"], ["ヂョ", "jo"]]}, {"sec": "Combinaciones ャ・ュ・ョ", "label": "ビャ … ピョ", "items": [["ビャ", "bya"], ["ビュ", "byu"], ["ビョ", "byo"], ["ピャ", "pya"], ["ピュ", "pyu"], ["ピョ", "pyo"]]}, {"sec": "Sonidos extranjeros", "label": "イェ … ヴィ", "items": [["イェ", "ye"], ["ウィ", "wi"], ["ウェ", "we"], ["ウォ", "wo"], ["ヴァ", "va"], ["ヴィ", "vi"]]}, {"sec": "Sonidos extranjeros", "label": "ヴェ … ティ", "items": [["ヴェ", "ve"], ["ヴォ", "vo"], ["シェ", "she"], ["ジェ", "je"], ["チェ", "che"], ["ティ", "ti"]]}, {"sec": "Sonidos extranjeros", "label": "トゥ … ツェ", "items": [["トゥ", "tu"], ["ディ", "di"], ["ドゥ", "du"], ["ツァ", "tsa"], ["ツィ", "tsi"], ["ツェ", "tse"]]}, {"sec": "Sonidos extranjeros", "label": "ツォ … フュ", "items": [["ツォ", "tso"], ["ファ", "fa"], ["フィ", "fi"], ["フェ", "fe"], ["フォ", "fo"], ["フュ", "fyu"]]}, {"sec": "Sonidos extranjeros", "label": "クァ … クォ", "items": [["クァ", "kwa"], ["クィ", "kwi"], ["クェ", "kwe"], ["クォ", "kwo"]]}]};
+const $=id=>document.getElementById(id);
+const sheet=$("sheet"),sc=$("script"),gs=$("grp");
+let cvs=[];
+function el(t,c,x){const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
+function pen(c){
+  const x=c.getContext("2d");let d=false,l=null;
+  const fit=()=>{const r=c.getBoundingClientRect(),p=Math.max(1,devicePixelRatio||1);c.width=r.width*p;c.height=r.height*p;x.setTransform(p,0,0,p,0,0);x.lineWidth=2.6;x.lineCap=x.lineJoin="round";x.strokeStyle=x.fillStyle="#292725"};
+  requestAnimationFrame(fit);
+  const pt=e=>{const r=c.getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top}};
+  c.onpointerdown=e=>{e.preventDefault();c.setPointerCapture(e.pointerId);d=true;l=pt(e);x.beginPath();x.arc(l.x,l.y,.9,0,7);x.fill()};
+  c.onpointermove=e=>{if(!d)return;e.preventDefault();const p=pt(e);x.beginPath();x.moveTo(l.x,l.y);x.lineTo(p.x,p.y);x.stroke();l=p};
+  c.onpointerup=c.onpointercancel=c.onlostpointercapture=()=>{d=false};
+  c.oncontextmenu=e=>e.preventDefault();
+  c._clear=()=>x.clearRect(0,0,c.width,c.height);cvs.push(c);
+}
+function cell(kind,ch,n){
+  const c=el("div","wcell x"+n+(kind==="model"?" big":kind==="ghost"?" ghost":"")+(ch&&ch.length>1?" two":""));
+  if(kind==="blank"){const cv=el("canvas");c.appendChild(cv);pen(cv)}else c.textContent=ch;
+  return c;
+}
+function render(){
+  sheet.innerHTML="";cvs=[];
+  const g=DATA[sc.value][+gs.value];
+  sheet.appendChild(el("h2","wtitle",(sc.value==="hiragana"?"Hiragana":"Katakana")+" · "+g.sec+" · "+g.label));
+  g.items.forEach(([k,r])=>{
+    const w=el("div","wkana");w.appendChild(el("p","rom",k+" = "+r));
+    for(let row=0;row<3;row++){
+      const line=el("div","wline");
+      for(let i=1;i<=10;i++){
+        let kind="blank";
+        if(row===0){ if(i===1)kind="model"; else if(i<=4)kind="ghost"; }
+        else if(i===1)kind="ghost";
+        line.appendChild(cell(kind,k,i));
+      }
+      w.appendChild(line);
+    }
+    sheet.appendChild(w);
+  });
+}
+function fillGroups(){
+  gs.innerHTML=DATA[sc.value].map((g,i)=>`<option value="${i}">${g.sec} · ${g.label}</option>`).join("");
+}
+sc.onchange=()=>{fillGroups();render()};
+gs.onchange=render;
+$("clr").onclick=()=>cvs.forEach(c=>c._clear());
+$("prt").onclick=()=>window.print();
+fillGroups();render();
+</script>
+</body>
+</html>
