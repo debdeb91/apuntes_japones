@@ -64,7 +64,7 @@ footer{margin-top:24px;color:var(--muted);font-size:12px}
   linear-gradient(to bottom,transparent calc(50% - .5px),#d9cfd4 calc(50% - .5px),#d9cfd4 calc(50% + .5px),transparent calc(50% + .5px));
  font-family:"Noto Sans JP","Yu Gothic","Hiragino Sans",sans-serif;font-size:clamp(20px,5.2vw,46px);line-height:1;color:#292725;user-select:none}
 .wcell.big{font-weight:bold}
-.wcell.ghost{opacity:.22}
+.wcell.ghost{color:rgba(41,39,37,.22)}
 .wcell.two{font-size:clamp(14px,3.4vw,30px)}
 .wcell canvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none}
 .wnav{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:14px 0 0}
@@ -107,7 +107,7 @@ footer{margin-top:24px;color:var(--muted);font-size:12px}
   <button id="clr">Borrar todo</button>
   <button class="primary" id="prt">Imprimir</button>
 </div>
-<p class="wnote">En cada letra: la primera línea tiene el modelo y tres copias de calco; las otras dos, un modelo claro para calcar. Escribe con el Apple Pencil (o el dedo/ratón) en las casillas vacías.</p>
+<p class="wnote">En cada letra, la primera casilla en negro es el modelo (no se escribe en ella). El resto de casillas se pueden escribir: las grises sirven para calcar y las vacías para practicar. Usa el Apple Pencil (o el dedo/ratón).</p>
 
 <main id="sheet" class="wsheet"></main>
 
@@ -137,7 +137,8 @@ function pen(c){
 }
 function cell(kind,ch,n){
   const c=el("div","wcell x"+n+(kind==="model"?" big":kind==="ghost"?" ghost":"")+(ch&&ch.length>1?" two":""));
-  if(kind==="blank"){const cv=el("canvas");c.appendChild(cv);pen(cv)}else c.textContent=ch;
+  if(kind!=="model")c.textContent=kind==="ghost"?ch:"";
+  if(kind!=="model"){const cv=el("canvas");c.appendChild(cv);pen(cv)}else c.textContent=ch;
   return c;
 }
 function render(){
