@@ -67,10 +67,15 @@ footer{margin-top:24px;color:var(--muted);font-size:12px}
 .wcell.ghost{opacity:.22}
 .wcell.two{font-size:clamp(14px,3.4vw,30px)}
 .wcell canvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none}
+.wnav{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:14px 0 0}
+.wnav button{font:inherit;padding:9px 16px;border:2px solid #62575d;background:#fff;border-radius:7px;color:inherit;cursor:pointer}
+.wnav button:hover:not(:disabled){background:#e7a1bd;border-color:#e7a1bd;color:#fff}
+.wnav button:disabled{opacity:.35;cursor:default}
+.wnav span{font-size:13px;color:#887b82;text-align:center}
 @media(max-width:600px){.wline{grid-template-columns:repeat(6,minmax(0,1fr))}.wcell.x7,.wcell.x8,.wcell.x9,.wcell.x10{display:none}}
 @media print{
  body{background:#fff;padding:0}.page{border:0;padding:0;max-width:none}
- header,.wcontrols,.wnote{display:none}.wsheet{border:0;padding:0}.wkana{break-inside:avoid}
+ header,.wcontrols,.wnote,.wnav{display:none}.wsheet{border:0;padding:0}.wkana{break-inside:avoid}
  .wcell{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
 </style>
 </head>
@@ -105,6 +110,12 @@ footer{margin-top:24px;color:var(--muted);font-size:12px}
 <p class="wnote">En cada letra: la primera línea tiene el modelo y tres copias de calco; las otras dos, un modelo claro para calcar. Escribe con el Apple Pencil (o el dedo/ratón) en las casillas vacías.</p>
 
 <main id="sheet" class="wsheet"></main>
+
+<div class="wnav">
+  <button id="prev" type="button">← Anterior</button>
+  <span id="pos"></span>
+  <button id="next" type="button">Siguiente →</button>
+</div>
 </div>
 
 <script>
@@ -155,7 +166,28 @@ sc.onchange=()=>{fillGroups();render()};
 gs.onchange=render;
 $("clr").onclick=()=>cvs.forEach(c=>c._clear());
 $("prt").onclick=()=>window.print();
-fillGroups();render();
+const ORDER=["hiragana","katakana"];
+function cur(){let n=0;for(const s of ORDER){if(s===sc.value)return n+ +gs.value;n+=DATA[s].length}return 0}
+function total(){return ORDER.reduce((a,s)=>a+DATA[s].length,0)}
+function go(n){
+  let k=n;
+  for(const s of ORDER){
+    if(k<DATA[s].length){sc.value=s;fillGroups();gs.value=k;break}
+    k-=DATA[s].length;
+  }
+  render();updNav();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function updNav(){
+  const n=cur(),T=total();
+  $("prev").disabled=n===0;$("next").disabled=n===T-1;
+  $("pos").textContent=(sc.value==="hiragana"?"Hiragana":"Katakana")+" · "+DATA[sc.value][+gs.value].label+"  ("+(n+1)+" / "+T+")";
+}
+$("prev").onclick=()=>go(cur()-1);
+$("next").onclick=()=>go(cur()+1);
+sc.onchange=()=>{fillGroups();render();updNav()};
+gs.onchange=()=>{render();updNav()};
+fillGroups();render();updNav();
 </script>
 </body>
 </html>
