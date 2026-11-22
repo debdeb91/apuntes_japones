@@ -322,6 +322,7 @@ nav a.active {
     <a href="paisesidiomas.html">Países e idiomas</a>
     <a href="profesiones.html">Profesiones</a>
     <a href="numeros.html">Números</a>
+    <a href="extras.html">Extras</a>
     <a href="hiragana_practice.html">Práctica hiragana</a>
     <a href="katakana_practice.html">Práctica katakana</a>
     <a href="palabras.html">Práctica palabras</a>
@@ -342,6 +343,9 @@ nav a.active {
   <a href="#ka">か</a>
   <a href="#no">の</a>
   <a href="#wo">を</a>
+  <a href="#ga">が</a>
+  <a href="#mo">も</a>
+  <a href="#to">と</a>
   <div class="label">Palabras clave</div>
   <a href="#pronombres">Pronombres personales</a>
   <a href="#interrogativos">Interrogativos</a>
@@ -349,6 +353,7 @@ nav a.active {
   <a href="#demostrativos">Pronombres demostrativos</a>
   <div class="label">Verbos</div>
   <a href="#shimasu">します</a>
+  <a href="#dekimasu">できます</a>
   <div class="label">Conversación</div>
   <a href="#presentarse">Presentarse</a>
   <div class="label">Puntuación</div>
@@ -366,6 +371,7 @@ nav a.active {
 
   <section class="sheet-section" id="orden">
     <h3 class="section-title">Orden de la oración</h3>
+    <p>El japonés es una lengua aglutinante; con palabras base (o su raíz) + nueva terminación (o sufijo) se crean conceptos nuevos.</p>
     <p>En japonés el verbo siempre va al final de la oración, no se conjugan por persona.</p>
     <div class="example sov jp"><span class="s">SUJETO</span> <span class="o">OBJETO/COMPLEMENTO</span> <span class="v">VERBO</span>.</div>
   </section>
@@ -427,6 +433,24 @@ nav a.active {
       </div>
     </div>
   </section>
+
+  <section class="sheet-section" id="ga">
+    <h3 class="section-title">Partícula <span class="jp">が</span></h3>
+    <p><span class="jp">が</span> (ga) indica el sujeto de la oración, introduce información nueva e identifica o enfatiza quién o qué realiza la acción.</p>
+    <div id="t-ga"></div>
+  </section>
+
+  <section class="sheet-section" id="mo">
+    <h3 class="section-title">Partícula <span class="jp">も</span></h3>
+    <p><span class="jp">も</span> (mo) significa «también». Se utiliza en lugar de <span class="jp">は</span> cuando se añade algo o alguien más a una información ya mencionada.</p>
+    <div id="t-mo"></div>
+  </section>
+
+  <section class="sheet-section" id="to">
+    <h3 class="section-title">Partícula <span class="jp">と</span></h3>
+    <p><span class="jp">と</span> (to) significa «y». Se utiliza para unir dos o más sustantivos en una enumeración completa.</p>
+    <div id="t-to"></div>
+  </section>
 </div>
 
 <!-- ===================== PALABRAS CLAVE ===================== -->
@@ -476,8 +500,14 @@ nav a.active {
 
   <section class="sheet-section" id="shimasu">
     <h3 class="section-title">Verbo <span class="jp">します</span></h3>
-    <p>Verbo hacer, se usa como hacer + sustantivo.</p>
+    <p>Verbo hacer. Se usa como sustantivo + <span class="jp">を</span> + verbo; <span class="jp">を</span> toma la función de complemento directo (en negación se puede usar <span class="jp">は</span>).</p>
     <div class="groups" id="t-shimasu"></div>
+  </section>
+
+  <section class="sheet-section" id="dekimasu">
+    <h3 class="section-title">Verbo <span class="jp">できます</span></h3>
+    <p>Verbo que se usa para decir que se puede/se sabe hacer algo. Estructura: sustantivo + <span class="jp">が</span> + <span class="jp">できます</span> (en negación se usará <span class="jp">は</span>).</p>
+    <div class="groups" id="t-dekimasu"></div>
   </section>
 </div>
 
@@ -555,9 +585,23 @@ $('todos', T([
 ], { header: JRE }));
 
 $('interrog', T([
-  ['どこ', 'doko', 'dónde'],
-  ['なん', 'nan', 'qué'],
-  ['だれ', 'dare', 'quién']
+  ['どこ', 'doko', 'dónde (lugar)'],
+  ['どちら', 'dochira', 'cuál/de dónde (forma educada)'],
+  ['なん', 'nan', 'qué (antes de determinadas palabras)'],
+  ['なに', 'nani', 'qué (preguntar por cosas o información)'],
+  ['だれ', 'dare', 'quién (persona)'],
+  ['どなた', 'donata', 'quién (forma educada)'],
+  ['いつ', 'itsu', 'cuándo (momento o fecha)'],
+  ['どう', 'dō', 'cómo (manera o estado)'],
+  ['どうして', 'dōshite', 'por qué (motivo)'],
+  ['なぜ', 'naze', 'por qué (motivo, algo más formal)'],
+  ['どれ', 'dore', 'cuál (entre varias opciones)'],
+  ['どの', 'dono', 'cuál (delante de un sustantivo)'],
+  ['いくら', 'ikura', 'cuánto (precio o dinero)'],
+  ['いくつ', 'ikutsu', 'cuántos (cantidad)/cuántos años'],
+  ['なんさい', 'nansai', 'cuántos años (edad)'],
+  ['なんじ', 'nanji', 'qué hora'],
+  ['なんようび', 'nan\'yōbi', 'qué día de la semana']
 ], { header: JRE }));
 
 $('wa', T([
@@ -570,6 +614,23 @@ $('ka', T([
   ['あなたはがくせいですか。', 'anata wa gakusei desu ka?', '¿eres estudiante?'],
   ['はい、わたしはがくせいです', 'hai, watashi wa gakusei desu', 'sí, soy estudiante'],
   ['いいえ、わたしはがくせいじゃないです', 'iie, watashi wa gakusei janai desu', 'no, no soy estudiante']
+], { header: JRE }));
+
+$('ga', T([
+  ['Indicar el sujeto', 'ねこがいます', 'neko ga imasu', 'hay un gato'],
+  ['Introducir información nueva', 'これがほんです', 'kore ga hon desu', 'esto es un libro'],
+  ['Identificar o enfatizar', 'だれがせんせいですか', 'dare ga sensei desu ka', '¿quién es el profesor?'],
+  ['Responder identificando', 'フランチェスカさんがせんせいです', 'Furanchesuka-san ga sensei desu', 'Francesca es la profesora']
+], { cols: '1.1fr 1.4fr 1.4fr 1.1fr', kinds: ['e', 'j', 'r', 'e'], header: ['Uso', 'Japonés', 'Rōmaji', 'Español'] }));
+
+$('mo', T([
+  ['わたしはがくせいです。', 'watashi wa gakusei desu.', 'soy estudiante.'],
+  ['わたしもがくせいです。', 'watashi mo gakusei desu.', 'yo también soy estudiante.']
+], { header: JRE }));
+
+$('to', T([
+  ['わたしはスペインごとえいごができます。', 'watashi wa supeingo to eigo ga dekimasu.', 'sé español e inglés.'],
+  ['りんごとバナナをたべます。', 'ringo to banana wo tabemasu.', 'como manzanas y plátanos.']
 ], { header: JRE }));
 
 $('lugar', T([
@@ -613,17 +674,24 @@ $('noAn', T([
   ['ですか', 'desu + pregunta']
 ], { cols: '1fr 2fr', kinds: ['j', 'e'], header: ['Palabra', 'Función'] }));
 
-const sh = (jp, ro, es, noun, nounRo, nounEs) => T([
-  [jp, ro, es],
-  [noun, nounRo, nounEs],
-  ['を', 'wo', 'partícula de complemento directo'],
-  ['します', 'shimasu', 'hacer']
+const sh4 = (n, nr, forms) => T([
+  [n + 'をします', nr + ' wo shimasu', forms[0]],
+  [n + 'をしません', nr + ' wo shimasen', forms[1]],
+  [n + 'をしました', nr + ' wo shimashita', forms[2]],
+  [n + 'をしませんでした', nr + ' wo shimasen deshita', forms[3]]
 ], { key: 0 });
 $('shimasu',
-  sh('スポーツをします', 'supōtsu wo shimasu', 'hacer deporte (hacer el deporte)', 'スポーツ', 'supōtsu', 'deporte') +
-  sh('そうじをします', 'sōji wo shimasu', 'limpiar – hacer la limpieza', 'そうじ', 'sōji', 'limpieza') +
-  sh('べんきょうをします', 'benkyō wo shimasu', 'estudiar – hacer el estudio', 'べんきょう', 'benkyō', 'estudio') +
-  sh('りょこうをします', 'ryokō wo shimasu', 'viajar – hacer el viaje', 'りょこう', 'ryokō', 'viaje'));
+  sh4('スポーツ', 'supōtsu', ['hacer deporte', 'no hacer deporte', 'hice deporte', 'no hice deporte']) +
+  sh4('そうじ', 'sōji', ['limpiar', 'no limpiar', 'limpié', 'no limpié']) +
+  sh4('べんきょう', 'benkyō', ['estudiar', 'no estudiar', 'estudié', 'no estudié']) +
+  sh4('りょこう', 'ryokō', ['viajar', 'no viajar', 'viajé', 'no viajé']));
+
+const dk = (f, fr, fe, ex, exr, exe) => T([[f, fr, fe], [ex, exr, exe]], { key: 0 });
+$('dekimasu',
+  dk('できます', 'dekimasu', 'puedo/sé hacer', 'にほんごができます', 'nihongo ga dekimasu', 'Sé japonés') +
+  dk('できません', 'dekimasen', 'no puedo/no sé hacer', 'にほんごはできません', 'nihongo wa dekimasen', 'No sé japonés') +
+  dk('できました', 'dekimashita', 'pude/lo conseguí', 'にほんごができました', 'nihongo ga dekimashita', 'Conseguí hablar japonés') +
+  dk('できませんでした', 'dekimasen deshita', 'no pude', 'にほんごはできませんでした', 'nihongo wa dekimasen deshita', 'No conseguí hablar japonés'));
 
 $('wo1', T([
   ['ビデオをみます', 'bideo wo mimasu', 'ver vídeo'],
