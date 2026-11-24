@@ -1,0 +1,343 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ファイル · Archivos</title>
+
+<style>
+:root {
+  --bg: #f7f3ec;
+  --paper: #fffdf9;
+  --accent: #7867a8;
+  --pink: #e7a1bd;
+  --pink2: #eac0da;
+  --pale: #ffeef4;
+  --ink: #51484d;
+  --line: #62575d;
+  --muted: #887b82;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 22px;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: Arial, "Noto Sans JP", sans-serif;
+}
+
+.page {
+  max-width: 1500px;
+  margin: auto;
+  padding: 22px;
+  background: var(--paper);
+  border: 3px solid var(--line);
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  border-bottom: 4px solid var(--pink);
+  padding-bottom: 14px;
+  margin-bottom: 20px;
+}
+
+h1 {
+  margin: 0;
+  color: #8e5871;
+  font-size: clamp(28px, 4vw, 42px);
+  letter-spacing: 2px;
+}
+
+.subtitle {
+  margin: 5px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  align-items: start;
+}
+
+.charts {
+  display: grid;
+  gap: 16px;
+}
+
+.sheet-section {
+  border: 2px solid var(--line);
+  background: white;
+  padding: 12px;
+}
+
+.section-title {
+  margin: -12px -12px 12px;
+  padding: 8px 12px;
+  background: var(--pink2);
+  font-size: 17px;
+  color: #59434e;
+}
+
+.jp {
+  font-family: "Noto Sans JP", "Yu Gothic", sans-serif;
+}
+
+.word-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+
+.word-table th,
+.word-table td {
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 10px 7px;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.word-table th {
+  background: var(--pale);
+  color: #80536a;
+  font-size: 13px;
+}
+
+.word-table td {
+  background: white;
+  font-size: 14px;
+}
+
+.word-table tbody tr:nth-child(odd) td {
+  background: #fff8fb;
+}
+
+.word-table .japanese {
+  font-family: "Noto Sans JP", "Yu Gothic", sans-serif;
+  font-size: 20px;
+  color: #5b4b53;
+}
+
+.word-table .romaji {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: .2px;
+}
+
+.word-table .spanish {
+  color: var(--ink);
+}
+
+@media(max-width: 900px) {
+  body { padding: 8px; }
+  .page { padding: 12px; }
+  .layout { grid-template-columns: 1fr; }
+}
+
+@media(max-width: 560px) {
+  .word-table th,
+  .word-table td {
+    padding: 8px 4px;
+    font-size: 12px;
+  }
+
+  .word-table .japanese {
+    font-size: 17px;
+  }
+
+  .word-table .romaji {
+    font-size: 10px;
+  }
+}
+
+@media print {
+  body { padding: 0; background: white; }
+  .page { border: 0; max-width: none; }
+  .layout { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sheet-section { break-inside: avoid; }
+}
+
+nav {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+nav a {
+  padding: 9px 14px;
+  border: 2px solid var(--pink);
+  border-radius: 7px;
+  text-decoration: none;
+  color: #80536a;
+  font-weight: bold;
+  background: var(--pale);
+}
+
+nav a.active {
+  background: var(--pink);
+  color: white;
+}
+
+@media print { nav { display: none; } }
+</style>
+<style>
+.fbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 10px}
+.fbar input{flex:1;min-width:180px;font:inherit;padding:8px 10px;border:2px solid #62575d;border-radius:7px;background:#fff;color:inherit}
+.fcrumb{font-size:14px;margin:0 0 10px;color:#887b82}
+.fcrumb a{color:#80536a;font-weight:bold;cursor:pointer;text-decoration:underline}
+.flist{display:grid;gap:8px}
+.fitem{display:flex;align-items:center;gap:12px;padding:10px 12px;border:2px solid #eac0da;background:#ffeef4;border-radius:9px;color:inherit;text-decoration:none}
+.fitem:hover,.fitem:focus-visible{background:#e7a1bd;border-color:#e7a1bd;color:#fff}
+.fitem:hover .fsize,.fitem:focus-visible .fsize{color:#fff}
+.fbadge{flex:none;min-width:52px;text-align:center;font-size:12px;font-weight:bold;padding:5px 6px;border-radius:6px;background:#fff;border:2px solid #62575d;color:#59434e}
+.fname{flex:1;min-width:0;overflow-wrap:anywhere;font-weight:bold}
+.fsize{flex:none;font-size:13px;color:#887b82}
+.fmsg{padding:14px;border:2px dashed #eac0da;border-radius:9px;color:#6b5a63;background:#fff}
+.fhelp{font-size:13px;color:#887b82;margin:14px 0 0;line-height:1.5}
+.fhelp code{background:#ffeef4;padding:1px 5px;border-radius:4px}
+</style>
+</head>
+
+<body>
+<div class="page">
+
+<header>
+  <div>
+    <h1>ファイル</h1>
+    <p class="subtitle">Archivos · libro y PDFs</p>
+  </div>
+
+  <nav>
+    <a href="index.html">Inicio</a>
+    <a href="hiragana.html">Hiragana</a>
+    <a href="katakana.html">Katakana</a>
+    <a href="gramatica.html">Gramática</a>
+    <a href="particulas.html">Partículas</a>
+    <a href="expresiones.html">Expresiones</a>
+    <a href="palabras-hiragana.html">Palabras hiragana</a>
+    <a href="palabras-katakana.html">Palabras katakana</a>
+    <a href="paisesidiomas.html">Países e idiomas</a>
+    <a href="profesiones.html">Profesiones</a>
+    <a href="numeros.html">Números</a>
+    <a href="extras.html">Extras</a>
+    <a href="hiragana_practice.html">Práctica hiragana</a>
+    <a href="katakana_practice.html">Práctica katakana</a>
+    <a href="palabras.html">Práctica palabras</a>
+    <a href="escritura.html">Escritura</a>
+    <a class="active" href="archivos.html">Archivos</a>
+  </nav>
+</header>
+
+<main class="layout" style="grid-template-columns:minmax(0,900px)">
+
+<div class="charts">
+<section class="sheet-section">
+<h2 class="section-title">Archivos · <span class="jp">ファイル</span></h2>
+
+<div class="fbar"><input id="q" type="search" placeholder="Buscar archivo…" aria-label="Buscar archivo"></div>
+<div class="fcrumb" id="crumb"></div>
+<div class="flist" id="list"><div class="fmsg">Cargando…</div></div>
+
+<p class="fhelp">Para añadir archivos: sube tus PDFs (o el libro) a la carpeta <code>archivos/</code> del repositorio de GitHub (puedes crear subcarpetas, por ejemplo <code>archivos/libro/</code>). Aparecerán aquí solos en uno o dos minutos. Tamaño máximo recomendado: 25 MB por archivo.</p>
+</section>
+</div>
+
+</main>
+
+<script>
+const ROOT = "archivos";
+// Lista manual de reserva (por si GitHub no responde): { name: "libro.pdf", size: 1234567 }
+const MANUAL = [];
+
+const $ = id => document.getElementById(id);
+const list = $("list"), crumb = $("crumb"), q = $("q");
+let path = ROOT, items = [];
+
+function repoInfo() {
+  const h = location.hostname, seg = location.pathname.split("/").filter(Boolean);
+  if (h.endsWith(".github.io") && seg.length) return { owner: h.split(".")[0], repo: seg[0] };
+  return null;
+}
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const enc = p => p.split("/").map(encodeURIComponent).join("/");
+function fmt(n) {
+  if (n == null) return "";
+  if (n < 1024) return n + " B";
+  if (n < 1048576) return (n / 1024).toFixed(0) + " KB";
+  return (n / 1048576).toFixed(1) + " MB";
+}
+function ext(name) { const m = name.match(/\.([A-Za-z0-9]+)$/); return m ? m[1].toUpperCase() : "FILE"; }
+
+function draw() {
+  const term = q.value.trim().toLowerCase();
+  const rows = items.filter(i => !term || i.name.toLowerCase().includes(term));
+  // crumb
+  const parts = path.split("/"), links = [];
+  parts.forEach((p, i) => {
+    const sub = parts.slice(0, i + 1).join("/");
+    const label = i === 0 ? "Archivos" : p;
+    links.push(i === parts.length - 1 ? "<b>" + esc(label) + "</b>" : '<a data-p="' + esc(sub) + '">' + esc(label) + "</a>");
+  });
+  crumb.innerHTML = links.join(" / ");
+  crumb.querySelectorAll("a[data-p]").forEach(a => a.onclick = () => load(a.dataset.p));
+  if (!rows.length) {
+    list.innerHTML = '<div class="fmsg">' + (items.length ? "No hay archivos que coincidan." : "Todavía no hay archivos en esta carpeta.") + "</div>";
+    return;
+  }
+  list.innerHTML = "";
+  rows.forEach(i => {
+    const a = document.createElement("a");
+    a.className = "fitem";
+    if (i.dir) {
+      a.href = "#"; a.onclick = e => { e.preventDefault(); load(i.path); };
+      a.innerHTML = '<span class="fbadge">CARPETA</span><span class="fname">' + esc(i.name) + '</span><span class="fsize"></span>';
+    } else {
+      a.href = enc(i.path); a.target = "_blank"; a.rel = "noopener";
+      a.innerHTML = '<span class="fbadge">' + esc(ext(i.name)) + '</span><span class="fname">' + esc(i.name) + '</span><span class="fsize">' + fmt(i.size) + "</span>";
+    }
+    list.appendChild(a);
+  });
+}
+
+async function load(p) {
+  path = p; q.value = "";
+  list.innerHTML = '<div class="fmsg">Cargando…</div>';
+  const info = repoInfo();
+  try {
+    if (!info) throw new Error("local");
+    const r = await fetch("https://api.github.com/repos/" + info.owner + "/" + info.repo + "/contents/" + enc(p));
+    if (r.status === 404) { items = []; return draw(); }
+    if (!r.ok) throw new Error("api " + r.status);
+    const data = await r.json();
+    items = data
+      .filter(x => !/^(LEEME\.txt|README\.md|\.gitkeep)$/i.test(x.name))
+      .map(x => ({ name: x.name, path: x.path, size: x.size, dir: x.type === "dir" }))
+      .sort((a, b) => (b.dir - a.dir) || a.name.localeCompare(b.name, "es", { numeric: true }));
+    draw();
+  } catch (e) {
+    items = p === ROOT ? MANUAL.map(m => ({ name: m.name, path: ROOT + "/" + m.name, size: m.size, dir: false })) : [];
+    draw();
+    if (!items.length && p === ROOT) {
+      list.innerHTML = '<div class="fmsg">No he podido leer la carpeta de archivos (¿estás viendo la página en tu ordenador sin internet?). En la web publicada la lista se carga sola.</div>';
+    }
+  }
+}
+q.oninput = draw;
+load(ROOT);
+</script>
+
+</div>
+</body>
+</html>

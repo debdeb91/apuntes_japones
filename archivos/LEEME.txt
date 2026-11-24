@@ -1,0 +1,3 @@
+Carpeta de archivos de la web.
+Sube aquí tus PDFs, el libro, etc. (puedes crear subcarpetas).
+Aparecerán solos en la página "Archivos". Este fichero no se muestra.
