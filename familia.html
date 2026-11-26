@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -61,7 +60,7 @@ h1 {
   font-size: 14px;
 }
 
-.layout {
+.layout-old {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 20px;
@@ -191,7 +190,101 @@ nav a.active {
 }
 
 @media print { nav { display: none; } }
+
+.layout.single { grid-template-columns: minmax(0, 1fr); }
+.word-table.left td { text-align: left; }
+.word-table.left td.japanese { text-align: left; }
+.word-table td.group {
+  background: var(--pink2) !important;
+  color: #59434e;
+  font-weight: bold;
+  text-align: left;
+  padding: 7px 10px;
+}
+.word-table td.group .jp { font-size: 17px; margin-right: 6px; }
+
+html { scroll-behavior: smooth; }
+
+.layout {
+  display: grid;
+  grid-template-columns: 230px minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.index {
+  position: sticky;
+  top: 14px;
+  max-height: calc(100vh - 28px);
+  overflow: auto;
+  border: 2px solid var(--line);
+  background: white;
+  padding: 12px 14px;
+}
+
+.index h2 {
+  margin: -12px -14px 10px;
+  padding: 8px 12px;
+  background: var(--pink2);
+  font-size: 17px;
+  color: #59434e;
+}
+
+.index .count {
+  margin: 0 0 10px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.index .chips {
+  display: grid;
+  grid-template-columns: repeat(var(--n, 2), minmax(0, 1fr));
+  gap: 6px;
+}
+
+.index .chips a {
+  display: block;
+  padding: 7px 4px;
+  border: 2px solid var(--pink);
+  border-radius: 7px;
+  background: var(--pale);
+  color: #80536a;
+  font-weight: bold;
+  font-size: 14px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.index .chips a:hover,
+.index .chips a:focus-visible {
+  background: var(--pink);
+  color: white;
+}
+
+.index .chips small {
+  display: block;
+  font-size: 11px;
+  font-weight: normal;
+  opacity: .85;
+}
+
+.word-table.left td,
+.word-table.left td.japanese { text-align: left; }
+.word-table.left th { text-align: left; }
+.word-table td.group { scroll-margin-top: 14px; }
+
+@media(max-width: 900px) {
+  .layout { grid-template-columns: 1fr; }
+  .index { position: static; max-height: none; }
+  .index .chips { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+}
+
+@media print {
+  .index { display: none; }
+  .layout { grid-template-columns: 1fr; }
+}
 </style>
+<style>.word-table td.ico{font-size:28px;text-align:center;padding:2px 6px;line-height:1.1}</style>
 </head>
 
 <body>
@@ -200,7 +293,7 @@ nav a.active {
 <header>
   <div>
     <h1>かぞく</h1>
-    <p class="subtitle">Familia</p>
+    <p class="subtitle">Familia · la mía y la de otras personas</p>
   </div>
 
   <nav>
@@ -225,90 +318,109 @@ nav a.active {
   </nav>
 </header>
 
-<main class="layout" style="grid-template-columns:minmax(0,820px)">
+<div class="layout">
 
-<div class="charts">
+<aside class="index" aria-label="Índice">
+  <h2>Índice</h2>
+  <p class="count">60 palabras</p>
+  <div class="chips" style="--n:2">
+    <a href="#g0"><span class="jp">👨‍👩‍👧</span><small>Padres</small></a>
+    <a href="#g1"><span class="jp">👫</span><small>Hermanos</small></a>
+    <a href="#g2"><span class="jp">👴</span><small>Abuelos</small></a>
+    <a href="#g3"><span class="jp">🧔</span><small>Tíos y primos</small></a>
+    <a href="#g4"><span class="jp">💑</span><small>Pareja</small></a>
+    <a href="#g5"><span class="jp">👶</span><small>Hijos</small></a>
+    <a href="#g6"><span class="jp">🧒</span><small>Nietos y sobrinos</small></a>
+    <a href="#g7"><span class="jp">🏠</span><small>La familia</small></a>
+    <a href="#g8"><span class="jp">🤝</span><small>Familia política</small></a>
+  </div>
+</aside>
 
+<main>
 <section class="sheet-section">
-<h2 class="section-title">Familia · かぞく</h2>
+<h2 class="section-title">Familia · <span class="jp">かぞく</span></h2>
 
-<table class="word-table">
+<table class="word-table left">
+<colgroup><col style="width:64px"><col style="width:30%"><col style="width:26%"><col></colgroup>
 <thead>
-<tr>
-  <th>Hiragana</th>
-  <th>Rōmaji</th>
-  <th>Español</th>
-</tr>
+<tr><th></th><th>Hiragana</th><th>Rōmaji</th><th>Español</th></tr>
 </thead>
 <tbody>
-<tr><td class="japanese">ちち</td><td class="romaji">chichi</td><td class="spanish">(mi) padre</td></tr>
-<tr><td class="japanese">はは</td><td class="romaji">haha</td><td class="spanish">(mi) madre</td></tr>
-<tr><td class="japanese">あに</td><td class="romaji">ani</td><td class="spanish">(mi) hermano mayor</td></tr>
-<tr><td class="japanese">あね</td><td class="romaji">ane</td><td class="spanish">(mi) hermana mayor</td></tr>
-<tr><td class="japanese">おとうと</td><td class="romaji">otōto</td><td class="spanish">(mi) hermano menor</td></tr>
-<tr><td class="japanese">いもうと</td><td class="romaji">imōto</td><td class="spanish">(mi) hermana menor</td></tr>
-<tr><td class="japanese">そふ</td><td class="romaji">sofu</td><td class="spanish">(mi) abuelo</td></tr>
-<tr><td class="japanese">そぼ</td><td class="romaji">sobo</td><td class="spanish">(mi) abuela</td></tr>
-<tr><td class="japanese">おじ</td><td class="romaji">oji</td><td class="spanish">(mi) tío</td></tr>
-<tr><td class="japanese">おば</td><td class="romaji">oba</td><td class="spanish">(mi) tía</td></tr>
-<tr><td class="japanese">おっと</td><td class="romaji">otto</td><td class="spanish">(mi) marido</td></tr>
-<tr><td class="japanese">つま</td><td class="romaji">tsuma</td><td class="spanish">(mi) esposa</td></tr>
-<tr><td class="japanese">むすこ</td><td class="romaji">musuko</td><td class="spanish">(mi) hijo</td></tr>
-<tr><td class="japanese">むすめ</td><td class="romaji">musume</td><td class="spanish">(mi) hija</td></tr>
-<tr><td class="japanese">おとうさん</td><td class="romaji">otōsan</td><td class="spanish">padre (de otra persona)</td></tr>
-<tr><td class="japanese">おかあさん</td><td class="romaji">okāsan</td><td class="spanish">madre (de otra persona)</td></tr>
-<tr><td class="japanese">おにいさん</td><td class="romaji">onīsan</td><td class="spanish">hermano mayor (de otra persona)</td></tr>
-<tr><td class="japanese">おねえさん</td><td class="romaji">onēsan</td><td class="spanish">hermana mayor (de otra persona)</td></tr>
-<tr><td class="japanese">おとうとさん</td><td class="romaji">otōtosan</td><td class="spanish">hermano menor (de otra persona)</td></tr>
-<tr><td class="japanese">いもうとさん</td><td class="romaji">imōtosan</td><td class="spanish">hermana menor (de otra persona)</td></tr>
-<tr><td class="japanese">おじいさん</td><td class="romaji">ojīsan</td><td class="spanish">abuelo (de otra persona)</td></tr>
-<tr><td class="japanese">おばあさん</td><td class="romaji">obāsan</td><td class="spanish">abuela (de otra persona)</td></tr>
-<tr><td class="japanese">おじさん</td><td class="romaji">ojisan</td><td class="spanish">tío (de otra persona)</td></tr>
-<tr><td class="japanese">おばさん</td><td class="romaji">obasan</td><td class="spanish">tía (de otra persona)</td></tr>
-<tr><td class="japanese">ごしゅじん</td><td class="romaji">goshujin</td><td class="spanish">marido (de otra persona)</td></tr>
-<tr><td class="japanese">おくさん</td><td class="romaji">okusan</td><td class="spanish">esposa (de otra persona)</td></tr>
-<tr><td class="japanese">むすこさん</td><td class="romaji">musuko-san</td><td class="spanish">hijo (de otra persona)</td></tr>
-<tr><td class="japanese">むすめさん</td><td class="romaji">musume-san</td><td class="spanish">hija (de otra persona)</td></tr>
-<tr><td class="japanese">おこさん</td><td class="romaji">okosan</td><td class="spanish">hijo/a (de otra persona)</td></tr>
-<tr><td class="japanese">ひとりっこ</td><td class="romaji">hitorikko</td><td class="spanish">hijo único</td></tr>
-<tr><td class="japanese">いとこ</td><td class="romaji">itoko</td><td class="spanish">primo/prima</td></tr>
-<tr><td class="japanese">まご</td><td class="romaji">mago</td><td class="spanish">nieto/nieta</td></tr>
-<tr><td class="japanese">おまごさん</td><td class="romaji">omago-san</td><td class="spanish">nieto/nieta (de otra persona)</td></tr>
-<tr><td class="japanese">りょうしん</td><td class="romaji">ryōshin</td><td class="spanish">(mi) padres</td></tr>
-<tr><td class="japanese">ごりょうしん</td><td class="romaji">goryōshin</td><td class="spanish">padres (de otra persona)</td></tr>
-<tr><td class="japanese">かぞく</td><td class="romaji">kazoku</td><td class="spanish">(mi) familia</td></tr>
-<tr><td class="japanese">ごかぞく</td><td class="romaji">gokazoku</td><td class="spanish">familia (de otra persona)</td></tr>
-<tr><td class="japanese">きょうだい</td><td class="romaji">kyōdai</td><td class="spanish">(mi) hermanos</td></tr>
-<tr><td class="japanese">ごきょうだい</td><td class="romaji">gokyōdai</td><td class="spanish">hermanos (de otra persona)</td></tr>
-<tr><td class="japanese">しまい</td><td class="romaji">shimai</td><td class="spanish">(mi) hermanas</td></tr>
-<tr><td class="japanese">ごしまい</td><td class="romaji">goshimai</td><td class="spanish">hermanas (de otra persona)</td></tr>
-<tr><td class="japanese">こども</td><td class="romaji">kodomo</td><td class="spanish">(mi) hijo/a</td></tr>
-<tr><td class="japanese">おい</td><td class="romaji">oi</td><td class="spanish">(mi) sobrino</td></tr>
-<tr><td class="japanese">おいごさん</td><td class="romaji">oigo-san</td><td class="spanish">sobrino (de otra persona)</td></tr>
-<tr><td class="japanese">めい</td><td class="romaji">mei</td><td class="spanish">(mi) sobrina</td></tr>
-<tr><td class="japanese">めいごさん</td><td class="romaji">meigo-san</td><td class="spanish">sobrina (de otra persona)</td></tr>
-<tr><td class="japanese">ふうふ</td><td class="romaji">fūfu</td><td class="spanish">matrimonio</td></tr>
-<tr><td class="japanese">おや</td><td class="romaji">oya</td><td class="spanish">padre/madre</td></tr>
-<tr><td class="japanese">ごふぼ</td><td class="romaji">gofubo</td><td class="spanish">padres (forma respetuosa)</td></tr>
-<tr><td class="japanese">ふたご</td><td class="romaji">futago</td><td class="spanish">gemelos</td></tr>
-<tr><td class="japanese">ぎけい</td><td class="romaji">gikei</td><td class="spanish">(mi) cuñado mayor</td></tr>
-<tr><td class="japanese">ぎてい</td><td class="romaji">gitei</td><td class="spanish">(mi) cuñado menor</td></tr>
-<tr><td class="japanese">ぎし</td><td class="romaji">gishi</td><td class="spanish">(mi) cuñada mayor</td></tr>
-<tr><td class="japanese">ぎまい</td><td class="romaji">gimai</td><td class="spanish">(mi) cuñada menor</td></tr>
-<tr><td class="japanese">ぎふ</td><td class="romaji">gifu</td><td class="spanish">(mi) suegro</td></tr>
-<tr><td class="japanese">ぎぼ</td><td class="romaji">gibo</td><td class="spanish">(mi) suegra</td></tr>
-<tr><td class="japanese">おしゅうとさん</td><td class="romaji">oshūto-san</td><td class="spanish">suegro (de otra persona)</td></tr>
-<tr><td class="japanese">おしゅうとめさん</td><td class="romaji">oshūtome-san</td><td class="spanish">suegra (de otra persona)</td></tr>
-<tr><td class="japanese">むすめむこ</td><td class="romaji">musumemuko</td><td class="spanish">yerno</td></tr>
-<tr><td class="japanese">よめ</td><td class="romaji">yome</td><td class="spanish">nuera</td></tr>
+<tr><td class="group" id="g0" colspan="4"><span class="jp">👨‍👩‍👧</span> Padres</td></tr>
+<tr><td class="ico">👨</td><td class="japanese">ちち</td><td class="romaji">chichi</td><td class="spanish">(mi) padre</td></tr>
+<tr><td class="ico">👩</td><td class="japanese">はは</td><td class="romaji">haha</td><td class="spanish">(mi) madre</td></tr>
+<tr><td class="ico">👨</td><td class="japanese">おとうさん</td><td class="romaji">otōsan</td><td class="spanish">padre (de otra persona)</td></tr>
+<tr><td class="ico">👩</td><td class="japanese">おかあさん</td><td class="romaji">okāsan</td><td class="spanish">madre (de otra persona)</td></tr>
+<tr><td class="ico">👫</td><td class="japanese">りょうしん</td><td class="romaji">ryōshin</td><td class="spanish">(mi) padres</td></tr>
+<tr><td class="ico">👫</td><td class="japanese">ごりょうしん</td><td class="romaji">goryōshin</td><td class="spanish">padres (de otra persona)</td></tr>
+<tr><td class="ico">👨‍👩‍👧</td><td class="japanese">おや</td><td class="romaji">oya</td><td class="spanish">padre/madre</td></tr>
+<tr><td class="ico">👨‍👩‍👧</td><td class="japanese">ごふぼ</td><td class="romaji">gofubo</td><td class="spanish">padres (forma respetuosa)</td></tr>
+<tr><td class="group" id="g1" colspan="4"><span class="jp">👫</span> Hermanos</td></tr>
+<tr><td class="ico">🧑</td><td class="japanese">あに</td><td class="romaji">ani</td><td class="spanish">(mi) hermano mayor</td></tr>
+<tr><td class="ico">👩</td><td class="japanese">あね</td><td class="romaji">ane</td><td class="spanish">(mi) hermana mayor</td></tr>
+<tr><td class="ico">👦</td><td class="japanese">おとうと</td><td class="romaji">otōto</td><td class="spanish">(mi) hermano menor</td></tr>
+<tr><td class="ico">👧</td><td class="japanese">いもうと</td><td class="romaji">imōto</td><td class="spanish">(mi) hermana menor</td></tr>
+<tr><td class="ico">🧑</td><td class="japanese">おにいさん</td><td class="romaji">onīsan</td><td class="spanish">hermano mayor (de otra persona)</td></tr>
+<tr><td class="ico">👩</td><td class="japanese">おねえさん</td><td class="romaji">onēsan</td><td class="spanish">hermana mayor (de otra persona)</td></tr>
+<tr><td class="ico">👦</td><td class="japanese">おとうとさん</td><td class="romaji">otōtosan</td><td class="spanish">hermano menor (de otra persona)</td></tr>
+<tr><td class="ico">👧</td><td class="japanese">いもうとさん</td><td class="romaji">imōtosan</td><td class="spanish">hermana menor (de otra persona)</td></tr>
+<tr><td class="ico">👬</td><td class="japanese">きょうだい</td><td class="romaji">kyōdai</td><td class="spanish">(mi) hermanos</td></tr>
+<tr><td class="ico">👬</td><td class="japanese">ごきょうだい</td><td class="romaji">gokyōdai</td><td class="spanish">hermanos (de otra persona)</td></tr>
+<tr><td class="ico">👭</td><td class="japanese">しまい</td><td class="romaji">shimai</td><td class="spanish">(mi) hermanas</td></tr>
+<tr><td class="ico">👭</td><td class="japanese">ごしまい</td><td class="romaji">goshimai</td><td class="spanish">hermanas (de otra persona)</td></tr>
+<tr><td class="ico">🧒</td><td class="japanese">ひとりっこ</td><td class="romaji">hitorikko</td><td class="spanish">hijo único</td></tr>
+<tr><td class="ico">👯</td><td class="japanese">ふたご</td><td class="romaji">futago</td><td class="spanish">gemelos</td></tr>
+<tr><td class="group" id="g2" colspan="4"><span class="jp">👴</span> Abuelos</td></tr>
+<tr><td class="ico">👴</td><td class="japanese">そふ</td><td class="romaji">sofu</td><td class="spanish">(mi) abuelo</td></tr>
+<tr><td class="ico">👵</td><td class="japanese">そぼ</td><td class="romaji">sobo</td><td class="spanish">(mi) abuela</td></tr>
+<tr><td class="ico">👴</td><td class="japanese">おじいさん</td><td class="romaji">ojīsan</td><td class="spanish">abuelo (de otra persona)</td></tr>
+<tr><td class="ico">👵</td><td class="japanese">おばあさん</td><td class="romaji">obāsan</td><td class="spanish">abuela (de otra persona)</td></tr>
+<tr><td class="group" id="g3" colspan="4"><span class="jp">🧔</span> Tíos y primos</td></tr>
+<tr><td class="ico">🧔</td><td class="japanese">おじ</td><td class="romaji">oji</td><td class="spanish">(mi) tío</td></tr>
+<tr><td class="ico">👩‍🦰</td><td class="japanese">おば</td><td class="romaji">oba</td><td class="spanish">(mi) tía</td></tr>
+<tr><td class="ico">🧔</td><td class="japanese">おじさん</td><td class="romaji">ojisan</td><td class="spanish">tío (de otra persona)</td></tr>
+<tr><td class="ico">👩‍🦰</td><td class="japanese">おばさん</td><td class="romaji">obasan</td><td class="spanish">tía (de otra persona)</td></tr>
+<tr><td class="ico">🧑‍🤝‍🧑</td><td class="japanese">いとこ</td><td class="romaji">itoko</td><td class="spanish">primo/prima</td></tr>
+<tr><td class="group" id="g4" colspan="4"><span class="jp">💑</span> Pareja</td></tr>
+<tr><td class="ico">🤵</td><td class="japanese">おっと</td><td class="romaji">otto</td><td class="spanish">(mi) marido</td></tr>
+<tr><td class="ico">👰</td><td class="japanese">つま</td><td class="romaji">tsuma</td><td class="spanish">(mi) esposa</td></tr>
+<tr><td class="ico">🤵</td><td class="japanese">ごしゅじん</td><td class="romaji">goshujin</td><td class="spanish">marido (de otra persona)</td></tr>
+<tr><td class="ico">👰</td><td class="japanese">おくさん</td><td class="romaji">okusan</td><td class="spanish">esposa (de otra persona)</td></tr>
+<tr><td class="ico">💑</td><td class="japanese">ふうふ</td><td class="romaji">fūfu</td><td class="spanish">matrimonio</td></tr>
+<tr><td class="group" id="g5" colspan="4"><span class="jp">👶</span> Hijos</td></tr>
+<tr><td class="ico">👦</td><td class="japanese">むすこ</td><td class="romaji">musuko</td><td class="spanish">(mi) hijo</td></tr>
+<tr><td class="ico">👧</td><td class="japanese">むすめ</td><td class="romaji">musume</td><td class="spanish">(mi) hija</td></tr>
+<tr><td class="ico">👦</td><td class="japanese">むすこさん</td><td class="romaji">musuko-san</td><td class="spanish">hijo (de otra persona)</td></tr>
+<tr><td class="ico">👧</td><td class="japanese">むすめさん</td><td class="romaji">musume-san</td><td class="spanish">hija (de otra persona)</td></tr>
+<tr><td class="ico">🧒</td><td class="japanese">おこさん</td><td class="romaji">okosan</td><td class="spanish">hijo/a (de otra persona)</td></tr>
+<tr><td class="ico">🧒</td><td class="japanese">こども</td><td class="romaji">kodomo</td><td class="spanish">(mi) hijo/a</td></tr>
+<tr><td class="group" id="g6" colspan="4"><span class="jp">🧒</span> Nietos y sobrinos</td></tr>
+<tr><td class="ico">👶</td><td class="japanese">まご</td><td class="romaji">mago</td><td class="spanish">nieto/nieta</td></tr>
+<tr><td class="ico">👶</td><td class="japanese">おまごさん</td><td class="romaji">omago-san</td><td class="spanish">nieto/nieta (de otra persona)</td></tr>
+<tr><td class="ico">👦</td><td class="japanese">おい</td><td class="romaji">oi</td><td class="spanish">(mi) sobrino</td></tr>
+<tr><td class="ico">👦</td><td class="japanese">おいごさん</td><td class="romaji">oigo-san</td><td class="spanish">sobrino (de otra persona)</td></tr>
+<tr><td class="ico">👧</td><td class="japanese">めい</td><td class="romaji">mei</td><td class="spanish">(mi) sobrina</td></tr>
+<tr><td class="ico">👧</td><td class="japanese">めいごさん</td><td class="romaji">meigo-san</td><td class="spanish">sobrina (de otra persona)</td></tr>
+<tr><td class="group" id="g7" colspan="4"><span class="jp">🏠</span> La familia</td></tr>
+<tr><td class="ico">👨‍👩‍👧‍👦</td><td class="japanese">かぞく</td><td class="romaji">kazoku</td><td class="spanish">(mi) familia</td></tr>
+<tr><td class="ico">👨‍👩‍👧‍👦</td><td class="japanese">ごかぞく</td><td class="romaji">gokazoku</td><td class="spanish">familia (de otra persona)</td></tr>
+<tr><td class="group" id="g8" colspan="4"><span class="jp">🤝</span> Familia política</td></tr>
+<tr><td class="ico">🧑</td><td class="japanese">ぎけい</td><td class="romaji">gikei</td><td class="spanish">(mi) cuñado mayor</td></tr>
+<tr><td class="ico">👦</td><td class="japanese">ぎてい</td><td class="romaji">gitei</td><td class="spanish">(mi) cuñado menor</td></tr>
+<tr><td class="ico">👩</td><td class="japanese">ぎし</td><td class="romaji">gishi</td><td class="spanish">(mi) cuñada mayor</td></tr>
+<tr><td class="ico">👧</td><td class="japanese">ぎまい</td><td class="romaji">gimai</td><td class="spanish">(mi) cuñada menor</td></tr>
+<tr><td class="ico">👴</td><td class="japanese">ぎふ</td><td class="romaji">gifu</td><td class="spanish">(mi) suegro</td></tr>
+<tr><td class="ico">👵</td><td class="japanese">ぎぼ</td><td class="romaji">gibo</td><td class="spanish">(mi) suegra</td></tr>
+<tr><td class="ico">👴</td><td class="japanese">おしゅうとさん</td><td class="romaji">oshūto-san</td><td class="spanish">suegro (de otra persona)</td></tr>
+<tr><td class="ico">👵</td><td class="japanese">おしゅうとめさん</td><td class="romaji">oshūtome-san</td><td class="spanish">suegra (de otra persona)</td></tr>
+<tr><td class="ico">🤵</td><td class="japanese">むすめむこ</td><td class="romaji">musumemuko</td><td class="spanish">yerno</td></tr>
+<tr><td class="ico">👰</td><td class="japanese">よめ</td><td class="romaji">yome</td><td class="spanish">nuera</td></tr>
 </tbody>
 </table>
 </section>
-
-</div>
-
 </main>
 
+</div>
 </div>
 </body>
 </html>
