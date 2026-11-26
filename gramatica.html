@@ -322,6 +322,7 @@ nav a.active {
     <a href="paisesidiomas.html">Países e idiomas</a>
     <a href="profesiones.html">Profesiones</a>
     <a href="numeros.html">Números</a>
+    <a href="familia.html">Familia</a>
     <a href="extras.html">Extras</a>
     <a href="hiragana_practice.html">Práctica hiragana</a>
     <a href="katakana_practice.html">Práctica katakana</a>
@@ -357,6 +358,12 @@ nav a.active {
   <a href="#dekimasu">できます</a>
   <div class="label">Conversación</div>
   <a href="#presentarse">Presentarse</a>
+  <div class="label">Sufijos y prefijos</div>
+  <a href="#sufijos">Sufijos</a>
+  <a href="#prefijos">Prefijos</a>
+  <div class="label">Familia y contadores</div>
+  <a href="#familia">Mi familia</a>
+  <a href="#contadores">Contadores 〜にん</a>
   <div class="label">Puntuación</div>
   <a href="#comillas">Comillas 「」</a>
 </aside>
@@ -528,6 +535,45 @@ nav a.active {
   </section>
 </div>
 
+<!-- ===================== SUFIJOS Y PREFIJOS ===================== -->
+<div class="group">
+  <div class="group-head">
+    <h2>Sufijos y prefijos</h2>
+    <p>Pequeñas piezas que se añaden a una palabra para cambiar o matizar su significado.</p>
+  </div>
+
+  <section class="sheet-section" id="sufijos">
+    <h3 class="section-title">Sufijos</h3>
+    <div id="t-sufijos"></div>
+  </section>
+
+  <section class="sheet-section" id="prefijos">
+    <h3 class="section-title">Prefijos</h3>
+    <div id="t-prefijos"></div>
+  </section>
+</div>
+
+<!-- ===================== FAMILIA Y CONTADORES ===================== -->
+<div class="group">
+  <div class="group-head">
+    <h2>Familia y contadores</h2>
+    <p>Hablar de la familia y contar personas.</p>
+  </div>
+
+  <section class="sheet-section" id="familia">
+    <h3 class="section-title">Mi familia · <span class="jp" style="margin-left:0">かぞく</span></h3>
+    <p>Cuando se habla de la familia propia se usará la forma humilde; cuando es la ajena, la forma respetuosa (<span class="jp">お-</span> / <span class="jp">-さん</span>).</p>
+    <p>Para decir los integrantes de mi familia:</p>
+    <div id="t-familia"></div>
+  </section>
+
+  <section class="sheet-section" id="contadores">
+    <h3 class="section-title">Contadores · <span class="jp" style="margin-left:0">〜にん</span></h3>
+    <p>Contador de personas: <span class="jp">-にん</span> (-nin). Para preguntar cuántas personas hay: <span class="jp">なんにんですか。</span></p>
+    <div id="t-contadores"></div>
+  </section>
+</div>
+
 <!-- ===================== PUNTUACIÓN ===================== -->
 <div class="group">
   <div class="group-head">
@@ -657,6 +703,52 @@ $('demosEj', T([
   ['それはいぬです。', 'Sore wa inu desu.', 'Eso es un perro.'],
   ['あれはUFOです。', 'Are wa UFO desu.', 'Aquello es un ovni.']
 ]));
+
+$('sufijos', T([
+  ['-いん', '-in', 'miembro o trabajador de una institución/organización'],
+  ['-か', '-ka', 'especialista o profesional de un campo, artes'],
+  ['-し', '-shi', 'título profesional o persona cualificada en una especialidad'],
+  ['-さん', '-san', 'tratamiento de cortesía para personas'],
+  ['-じん', '-jin', 'persona de una nacionalidad o procedencia'],
+  ['-ご', '-go', 'idioma o lengua'],
+  ['-せい', '-sei', 'estudiante']
+], { header: ['Sufijo', 'Rōmaji', 'Significado'] }));
+
+$('prefijos', T([
+  ['ふ-', 'fu-', 'no-/contrario a una cualidad'],
+  ['む-', 'mu-', 'sin-/ausencia de'],
+  ['ひ-', 'hi-', 'no perteneciente a una categoría'],
+  ['み-', 'mi-', 'todavía no-/sin haber llegado a'],
+  ['さい-', 'sai-', 'repetición/de nuevo; lo máximo'],
+  ['ちょう-', 'chō-', 'súper-/ultra-'],
+  ['ぜん-', 'zen-', 'todo-/completo'],
+  ['まい-', 'mai-', 'cada-/todos los'],
+  ['はん-', 'han-', 'medio-/semi-'],
+  ['だい-', 'dai-', 'grande-/gran'],
+  ['おお-', 'ō-', 'grande-/intenso'],
+  ['しょう-', 'shō-', 'pequeño-/menor'],
+  ['しん-', 'shin-', 'nuevo-/nueva'],
+  ['まっ-', "ma'-", 'completamente-/muy'],
+  ['お-', 'o-', 'prefijo de cortesía'],
+  ['ご-', 'go-', 'prefijo de cortesía']
+], { header: ['Prefijo', 'Rōmaji', 'Significado'] }));
+
+$('familia', T([
+  ['わたしのかぞくは_と_とわたしです。', 'watashi no kazoku wa _ to _ to watashi desu.', '*watashi siempre en último lugar']
+], { header: JRE }));
+
+$('contadores', T([
+  ['ひとり', 'hitori', 'una persona (irregular)'],
+  ['ふたり', 'futari', 'dos personas (irregular)'],
+  ['さんにん', 'sannin', 'tres personas'],
+  ['よにん', 'yonin', 'cuatro personas (se elimina ん de よん)'],
+  ['ごにん', 'gonin', 'cinco personas'],
+  ['ろくにん', 'rokunin', 'seis personas'],
+  ['ななにん', 'nananin', 'siete personas'],
+  ['はちにん', 'hachinin', 'ocho personas'],
+  ['きゅうにん', 'kyūnin', 'nueve personas'],
+  ['じゅうにん', 'jūnin', 'diez personas']
+], { header: JRE }));
 
 $('comillas', T([
   ['わたしは「となりのトトロ」をみます。', 'watashi wa 「tonari no Totoro」 wo mimasu', 'Veo «Mi vecino Totoro».']
