@@ -284,6 +284,16 @@ html { scroll-behavior: smooth; }
   .layout { grid-template-columns: 1fr; }
 }
 </style>
+<style>
+[hidden]{display:none!important}
+.side{position:sticky;top:14px;align-self:start}
+.side .search{display:block;width:100%;box-sizing:border-box;padding:9px 11px;margin:0 0 10px;border:2px solid #62575d;border-radius:8px;background:#fff;color:inherit;font:inherit;font-size:14px}
+.side .search:focus{outline:2px solid #e7a1bd;outline-offset:1px}
+.side .index{position:static;max-height:calc(100vh - 78px)}
+.nores{padding:14px;margin:10px 0 0;border:2px dashed #eac0da;border-radius:9px;color:#6b5a63;background:#fff}
+@media(max-width:900px){.side{position:static}.side .index{max-height:none}}
+@media print{.side{display:none}}
+</style>
 </head>
 
 <body>
@@ -319,6 +329,8 @@ html { scroll-behavior: smooth; }
 
 <div class="layout">
 
+<div class="side">
+<input class="search" id="q" type="search" placeholder="Buscar…" aria-label="Buscar" autocomplete="off">
 <aside class="index" aria-label="Índice">
   <h2>Índice</h2>
   <p class="count">313 palabras</p>
@@ -335,6 +347,7 @@ html { scroll-behavior: smooth; }
     <a href="#g9"><span class="jp">わ</span><small>W</small></a>
   </div>
 </aside>
+</div>
 
 <main>
 <section class="sheet-section">
@@ -676,5 +689,37 @@ html { scroll-behavior: smooth; }
 
 </div>
 </div>
+<script>
+(function () {
+  var q = document.getElementById("q"); if (!q) return;
+  var norm = function (s) {
+    return s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+      .replace(/[\u30a1-\u30f6]/g, function (c) { return String.fromCharCode(c.charCodeAt(0) - 96); })
+      .replace(/\s+/g, " ").trim();
+  };
+  var rows = Array.prototype.slice.call(document.querySelectorAll("tbody tr"));
+  var info = rows.map(function (r) { return { r: r, g: !!r.querySelector("td.group"), t: norm(r.textContent) }; });
+  var count = document.querySelector(".index .count");
+  var total = info.filter(function (i) { return !i.g; }).length;
+  var label = count ? count.textContent : "";
+  var noun = label.replace(/^\d+\s*/, "");
+  var table = document.querySelector("tbody").closest("table");
+  var none = document.createElement("p"); none.className = "nores"; none.textContent = "No hay resultados."; none.hidden = true;
+  (table.closest(".tablewrap") || table).insertAdjacentElement("afterend", none);
+  function run() {
+    var term = norm(q.value), shown = 0, cur = null, curHas = false;
+    function close() { if (cur) { cur.r.hidden = !curHas; var a = document.querySelector('.index .chips a[href="#' + cur.r.querySelector("td.group").id + '"]'); if (a) a.hidden = !curHas; } }
+    info.forEach(function (i) {
+      if (i.g) { close(); cur = i; curHas = false; return; }
+      var ok = !term || i.t.indexOf(term) !== -1;
+      i.r.hidden = !ok; if (ok) { shown++; curHas = true; }
+    });
+    close();
+    none.hidden = shown !== 0;
+    if (count) count.textContent = term ? shown + " de " + total + " " + noun : label;
+  }
+  q.addEventListener("input", run);
+})();
+</script>
 </body>
 </html>

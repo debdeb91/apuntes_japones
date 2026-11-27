@@ -299,6 +299,16 @@ nav a.active {
   .sheet-section { break-inside: avoid; }
 }
 </style>
+<style>
+[hidden]{display:none!important}
+.side{position:sticky;top:14px;align-self:start}
+.side .search{display:block;width:100%;box-sizing:border-box;padding:9px 11px;margin:0 0 10px;border:2px solid #62575d;border-radius:8px;background:#fff;color:inherit;font:inherit;font-size:14px}
+.side .search:focus{outline:2px solid #e7a1bd;outline-offset:1px}
+.side .index{position:static;max-height:calc(100vh - 78px)}
+.nores{padding:14px;margin:10px 0 0;border:2px dashed #eac0da;border-radius:9px;color:#6b5a63;background:#fff}
+@media(max-width:900px){.side{position:static}.side .index{max-height:none}}
+@media print{.side{display:none}}
+</style>
 </head>
 
 <body>
@@ -334,6 +344,8 @@ nav a.active {
 
 <div class="layout">
 
+<div class="side">
+<input class="search" id="q" type="search" placeholder="Buscar…" aria-label="Buscar" autocomplete="off">
 <aside class="index" aria-label="Índice">
   <h2>Índice</h2>
   <div class="label">La oración</div>
@@ -367,6 +379,7 @@ nav a.active {
   <div class="label">Puntuación</div>
   <a href="#comillas">Comillas 「」</a>
 </aside>
+</div>
 
 <main class="content">
 
@@ -819,5 +832,38 @@ $('presentarse',
   T([['なにごができますか。', 'nani-go ga dekimasu ka?', '¿qué idiomas sabes hablar?']], { key: 0 }));
 </script>
 
+<script>
+(function () {
+  var q = document.getElementById("q"); if (!q) return;
+  var norm = function (s) {
+    return s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+      .replace(/[\u30a1-\u30f6]/g, function (c) { return String.fromCharCode(c.charCodeAt(0) - 96); })
+      .replace(/\s+/g, " ").trim();
+  };
+  var none = document.createElement("p"); none.className = "nores"; none.textContent = "No hay resultados."; none.hidden = true;
+  var main = document.querySelector("main"); main.appendChild(none);
+  function run() {
+    var term = norm(q.value), anyShown = false;
+    var secs = Array.prototype.slice.call(document.querySelectorAll(".sheet-section"));
+    secs.forEach(function (s) { s.hidden = !!term && norm(s.textContent).indexOf(term) === -1; if (!s.hidden) anyShown = true; });
+    Array.prototype.slice.call(document.querySelectorAll("main .group")).forEach(function (g) {
+      g.hidden = !!term && !g.querySelector(".sheet-section:not([hidden])");
+    });
+    var links = Array.prototype.slice.call(document.querySelectorAll('.index a[href^="#"]'));
+    links.forEach(function (a) {
+      var el = document.getElementById(a.getAttribute("href").slice(1));
+      var sec = el && (el.classList.contains("sheet-section") ? el : el.closest(".sheet-section"));
+      a.hidden = !!term && (!sec || sec.hidden);
+    });
+    Array.prototype.slice.call(document.querySelectorAll(".index .label")).forEach(function (l) {
+      var n = l.nextElementSibling, has = false;
+      while (n && !n.classList.contains("label")) { if (n.tagName === "A" && !n.hidden) has = true; n = n.nextElementSibling; }
+      l.hidden = !!term && !has;
+    });
+    none.hidden = !term || anyShown;
+  }
+  q.addEventListener("input", run);
+})();
+</script>
 </body>
 </html>
